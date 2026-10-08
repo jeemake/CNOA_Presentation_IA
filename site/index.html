@@ -1,0 +1,1458 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Artisan augmenté</title>
+<meta name="description" content="L'IA en agence d'architecture : présentation à l'Ordre des Architectes de Côte d'Ivoire (OACI), atelier pratique du 9 octobre 2026.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@300;400;500;600&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<link rel="icon" href="assets/img/oaci.png">
+<link rel="stylesheet" href="style.css">
+<script type="importmap">
+{ "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js" } }
+</script>
+</head>
+<body>
+
+<header class="bar">
+  <a class="bar__mark accent" href="#top" aria-label="Retour en haut"><img src="assets/img/oaci.png" alt="" width="215" height="83">Artisan augmenté</a>
+  <nav aria-label="Parcours">
+    <a href="#intervenants">Intervenants</a>
+    <a href="#lexique"><span>01</span>Lexique</a>
+    <a href="#parti"><span>02</span>Prompt et parti</a>
+    <a href="#agence"><span>03</span>Process</a>
+    <a href="#production"><span>04</span>Production</a>
+    <a href="#cas-pratiques">Cas pratiques</a>
+    <a href="#deontologie"><span>05</span>Déontologie</a>
+    <a href="#cloture"><span>06</span>Démo</a>
+  </nav>
+</header>
+
+<main id="top">
+
+<!-- ═════════ Hero ═════════ -->
+<section id="accueil" class="hero" aria-labelledby="h-hero">
+  <canvas class="hero__pattern" id="pattern" aria-hidden="true"></canvas>
+  <div>
+    <div class="hero__event">
+      <img src="assets/img/oaci.png" alt="Ordre des Architectes de Côte d'Ivoire" width="215" height="83">
+      <p><b>Présentation à l'OACI</b>Atelier pratique, session 2. Vendredi 9 octobre 2026, 15 h à 18 h, amphithéâtre de l'OACI.</p>
+    </div>
+    <h1 id="h-hero">L'IA en agence d'architecture<span class="hero__sign accent" aria-hidden="true">l'artisan augmenté</span></h1>
+    <p class="lede" style="margin-top:1.6rem">Créer ses outils, maîtriser ses process, signer en conscience.</p>
+    <div class="hero__meta">
+      <strong>Ange Djoké, Jean-Marc Don Mello, Gaston Koffi</strong>
+      <span>Ordre des Architectes de Côte d'Ivoire, formation continue</span>
+    </div>
+  </div>
+  <div class="hero__stage" id="stage" tabindex="0" role="group" aria-label="Le déroulé de la présentation en maquette 3D. Glissez pour tourner, choisissez un étage pour y aller.">
+    <div class="floor-labels" id="floorLabels"></div>
+    <div class="hero__hint">
+      <span>Chaque étage est une partie</span>
+      <button type="button" id="rotL" class="press" aria-label="Tourner à gauche"><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><path d="M9 2 4 7l5 5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+      <button type="button" id="rotR" class="press" aria-label="Tourner à droite"><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><path d="m5 2 5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+    </div>
+  </div>
+</section>
+
+<!-- ═════════ Intervenants ═════════ -->
+<section id="intervenants" aria-labelledby="h-spk">
+  <h2 id="h-spk">Les intervenants</h2>
+  <p class="lede" style="margin-top:1.2rem">Deux architectes et un ingénieur, trois manières d'outiller l'agence. Ouvrez une fiche pour découvrir chaque parcours.</p>
+  <div class="speakers__grid" id="speakers"></div>
+</section>
+
+<dialog class="profile" id="profile" aria-labelledby="pName">
+  <div class="profile__in">
+    <button class="profile__close press" type="button" id="pClose" aria-label="Fermer la fiche"><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><path d="M3 3l8 8M11 3l-8 8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></button>
+    <div class="profile__side" id="pSide">
+      <img class="profile__portrait" id="pImg" alt="" width="512" height="512">
+      <div class="profile__scene" id="pScene"><p id="pSceneHint">Glissez pour manipuler</p></div>
+    </div>
+    <div class="profile__body">
+      <div>
+        <h3 id="pName"></h3>
+        <p class="profile__role" id="pRole"></p>
+      </div>
+      <p id="pBio"></p>
+      <ul class="profile__facts" id="pFacts"></ul>
+      <div>
+        <p class="small" style="margin-bottom:0.6rem">Son intervention</p>
+        <div class="profile__topics" id="pTopics"></div>
+      </div>
+      <div class="profile__actions">
+        <a class="profile__link press" id="pLink" target="_blank" rel="noopener">Voir le profil LinkedIn</a>
+        <button type="button" id="pPrev" class="press">Précédent</button>
+        <button type="button" id="pNext" class="press">Suivant</button>
+      </div>
+    </div>
+  </div>
+</dialog>
+
+<!-- ═════════ Déjà dans les applis du quotidien ═════════ -->
+<section class="daily" aria-labelledby="h-daily">
+  <h2 id="h-daily">Vous utilisez déjà l'IA, tous les jours</h2>
+  <ul class="daily__list">
+    <li><b>Yango, Heetch</b><span>Course au plus proche, itinéraire recalculé dans les bouchons d'Abidjan, coursier choisi selon le temps de préparation.</span></li>
+    <li><b>TikTok, Facebook, Instagram</b><span>Le fil est choisi selon les likes, les partages et le temps passé à regarder.</span></li>
+    <li><b>Wave, Orange Money</b><span>Fraude filtrée à chaque paiement, micro-crédit scoré sur l'historique d'usage.</span></li>
+    <li><b>WhatsApp Business</b><span>De nombreuses PME ivoiriennes y branchent des agents conversationnels qui répondent aux clients.</span></li>
+    <li><b>Google Maps</b><span>L'heure d'arrivée se recalcule avec le trafic en direct.</span></li>
+  </ul>
+</section>
+
+<!-- ═════════ 01 Lexique ═════════ -->
+<section id="lexique" class="lex" aria-labelledby="h-lex">
+  <div>
+    <span class="chapter">01</span>
+    <h2 id="h-lex">Le lexique minimum</h2>
+    <p class="lede" style="margin-top:1.2rem">Cinq mots pour ne plus se faire vendre du vent.</p>
+    <div class="lex__terms" role="tablist" aria-label="Termes" id="lexTerms"></div>
+  </div>
+  <div class="lex__panel" id="lexPanel" role="tabpanel" aria-live="polite">
+    <div class="lex__icon" id="lexIcon" aria-hidden="true"></div>
+    <div class="lex__word" id="lexWord"></div>
+    <p class="lex__def" id="lexDef"></p>
+    <p class="lex__analogy" id="lexAna"></p>
+  </div>
+</section>
+
+<!-- ═════════ 02 Prompt et parti ═════════ -->
+<section id="parti" class="parti" aria-labelledby="h-parti">
+  <div class="split">
+    <div class="copy">
+      <span class="chapter">02</span>
+      <h2 id="h-parti">Le prompt devient le parti</h2>
+      <p class="lede">L'IA accélère le tracé. Le levier se déplace : cadrer compte plus que dessiner.</p>
+      <p class="formula"><span>Intention</span><i>+</i><span>contraintes</span><i>+</i><span>critères de visa</span></p>
+      <div class="builder">
+        <div class="builder__row"><span>Site et climat</span><div class="seg" data-key="site"></div></div>
+        <div class="builder__row"><span>Matériaux</span><div class="seg" data-key="mat"></div></div>
+        <div class="builder__row"><span>Espaces</span><div class="seg" data-key="esp"></div></div>
+        <div class="builder__row"><span>Ambiance</span><div class="seg" data-key="amb"></div></div>
+        <div class="builder__row"><span>Intention</span><div class="seg" data-key="int"></div></div>
+        <div class="prompt-out" aria-live="polite"><p id="promptText"></p><button type="button" id="copyPrompt" class="press">Copier le prompt</button></div>
+      </div>
+    </div>
+    <figure class="loop loop--tower" data-loop>
+      <video muted loop playsinline preload="metadata" poster="assets/img/tour-iso.webp" aria-label="Tour illustrée en vue axonométrique : les palmiers des terrasses bougent dans la brise.">
+        <source src="assets/video/tour.mp4" type="video/mp4">
+      </video>
+      <button class="loop__toggle press" type="button" aria-label="Mettre en pause"></button>
+    </figure>
+  </div>
+</section>
+
+<!-- ═════════ Créer ses outils ═════════ -->
+<section class="tools" aria-labelledby="h-tools">
+  <h2 id="h-tools">Créer ses propres outils, la renaissance de la production</h2>
+  <p class="lede">De Vinci inventait ses instruments. Le maître maçon façonne sa terre. Aujourd'hui, chacun peut bâtir les outils de son métier.</p>
+  <div class="tools__pair">
+    <figure><div class="card3d" data-tilt><img src="assets/img/vinci.webp" alt="Autoportrait de Léonard de Vinci à la sanguine" loading="lazy" width="898" height="1400"></div><figcaption class="accent">Léonard de Vinci</figcaption></figure>
+    <figure><div class="card3d" data-tilt><img src="assets/img/macon.webp" alt="Un maître maçon devant une case en terre au toit de chaume" loading="lazy" width="896" height="1152"></div><figcaption class="accent">Maître maçon</figcaption></figure>
+  </div>
+</section>
+
+<!-- ═════════ 03 Réorganiser l'agence ═════════ -->
+<section id="agence" aria-labelledby="h-agence">
+  <div class="split">
+    <div class="copy">
+      <span class="chapter">03</span>
+      <h2 id="h-agence">De la hiérarchie à l'intelligence</h2>
+      <p class="lede">L'agence d'architecture à l'ère agentique : une pile de couches, tenue par une boucle humaine.</p>
+      <div class="layer-info" aria-live="polite">
+        <h3 id="layerTitle">Intelligence layer</h3>
+        <p id="layerText">Elle orchestre : elle lit le world model, appelle les bons outils et rend compte.</p>
+      </div>
+      <div>
+        <p class="small">La boucle humaine, garante des valeurs, du visa et de la qualité :</p>
+        <div class="roles"><span>ICs</span><span>DRIs</span><span>Player-coaches</span><span>Direction</span></div>
+      </div>
+      <p class="small">Un éditeur qualité humain évite les « zombie designs ».</p>
+    </div>
+    <div class="stack" id="stack">
+      <div class="stack__inner">
+        <div class="stack__ring" aria-hidden="true"></div>
+        <button class="plate" data-l="4" type="button"><span><b>Interfaces</b>livrables</span></button>
+        <button class="plate" data-l="3" type="button"><span><b>Outils</b>design, BIM, coût, carbone, réglementation</span></button>
+        <button class="plate plate--brain" data-l="2" type="button"><span><b>Intelligence layer</b>orchestre</span></button>
+        <button class="plate plate--world" data-l="1" type="button"><span><b>World model</b>brief, contraintes, décisions, coûts, normes</span></button>
+        <button class="plate plate--client" data-l="0" type="button"><span><b>Client</b>usages et exigences projet</span></button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═════════ Automatiser le processus ═════════ -->
+<section aria-labelledby="h-auto" style="padding-top:0">
+  <div class="split">
+    <div class="process-media">
+      <h2 id="h-auto">Automatiser le processus</h2>
+      <p class="lede">Douze pièces du projet, reliées par un même modèle. Touchez une pièce pour voir ce qu'elle devient.</p>
+      <figure class="loop loop--team" data-loop>
+        <video muted loop playsinline preload="metadata" poster="assets/img/atelier-plans.webp" aria-label="Deux architectes penchés sur un grand plan ; leurs mains suivent un tracé à côté des maquettes d'étude.">
+          <source src="assets/video/atelier-plans.mp4" type="video/mp4">
+        </video>
+        <button class="loop__toggle press" type="button" aria-label="Mettre en pause"></button>
+      </figure>
+    </div>
+    <div class="hub" id="hub">
+      <svg id="hubLines" aria-hidden="true"></svg>
+      <div class="hub__core" aria-live="polite"><div><b id="hubTitle">IA</b><span id="hubText">Un modèle, douze pièces.</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═════════ Difficulté ═════════ -->
+<section class="diff" aria-labelledby="h-diff" style="background:var(--lime)">
+  <div class="diff__head">
+    <div>
+      <h2 id="h-diff">Comment mesure-t-on la difficulté d'un projet ?</h2>
+      <p class="lede" style="margin-top:1rem" id="diffLede">Pour un humain, elle monte avec la taille et la complexité.</p>
+    </div>
+    <div class="toggle" id="diffToggle" role="group" aria-label="Point de vue">
+      <span class="toggle__thumb" aria-hidden="true"></span>
+      <button type="button" aria-pressed="true">Pour un humain</button>
+      <button type="button" aria-pressed="false">Pour l'IA</button>
+    </div>
+  </div>
+  <div class="chart" id="chart">
+    <svg aria-hidden="true">
+      <g id="axHuman">
+        <line class="axis" x1="50%" y1="2%" x2="50%" y2="98%"/>
+        <line class="axis" x1="2%" y1="50%" x2="98%" y2="50%"/>
+        <line class="guide" x1="6%" y1="94%" x2="94%" y2="6%"/>
+        <text class="axlabel" x="51%" y="4%">Grand</text>
+        <text class="axlabel" x="51%" y="98%">Petit</text>
+        <text class="axlabel" x="2%" y="48%">Simple</text>
+        <text class="axlabel" x="98%" y="48%" text-anchor="end">Complexe</text>
+      </g>
+      <g id="axAI" opacity="0">
+        <line class="axis" x1="2%" y1="50%" x2="98%" y2="50%"/>
+        <text class="axlabel" x="2%" y="24%" style="fill:var(--laterite)">Déterministe : automatisable</text>
+        <text class="axlabel" x="98%" y="24%" text-anchor="end" style="fill:var(--ink)">Ambigu : goût et jugement</text>
+      </g>
+    </svg>
+    <p class="chart__note" id="noteL" style="left:2%;opacity:0">Contraintes explicites : précédents, normes, specs de performance, budget serré, résultat vérifiable.</p>
+    <p class="chart__note" id="noteR" style="right:2%;text-align:right;opacity:0">Détails uniques, programme flou, budget souple : le domaine de l'architecte.</p>
+  </div>
+</section>
+
+<!-- ═════════ 04 Production : graphe ═════════ -->
+<section id="production" class="prod" aria-labelledby="h-prod">
+  <div class="prod__head">
+    <div>
+      <span class="chapter">04</span>
+      <h2 id="h-prod">Architecte, agents et collaborateurs</h2>
+      <p class="lede" style="margin-top:1rem">Mêmes métiers, nouveau levier de délégation. L'architecte reste au centre.</p>
+    </div>
+    <div class="toggle toggle--dark" id="prodToggle" role="group" aria-label="Époque">
+      <span class="toggle__thumb" aria-hidden="true"></span>
+      <button type="button" aria-pressed="false">Avant</button>
+      <button type="button" aria-pressed="true">Maintenant</button>
+    </div>
+  </div>
+  <div class="graph" id="graph">
+    <canvas id="graphCanvas" role="img" aria-label="Graphe des intervenants d'un projet autour de l'architecte. Avant : collaborateurs, bureaux d'études, entreprises, acteurs de l'immobilier. Maintenant : les mêmes, plus un modèle de projet et des agents IA qui les relient."></canvas>
+    <div class="graph__info" aria-live="polite"><b id="gTitle">Architecte</b><span id="gText">Au centre du projet, il signe et arbitre.</span></div>
+    <div class="graph__legend" id="gLegend"></div>
+    <div class="graph__hint">Survolez un nœud, glissez pour le déplacer</div>
+  </div>
+  <div class="lab"><b>Laboratoire interne.</b> Prévoir environ 5 à 10 % du temps, ou du budget logiciel, pour concevoir et tester ses outils.</div>
+</section>
+
+<!-- ═════════ Cas pratique : Ange Djoké ═════════ -->
+<section id="cas-pratiques" class="case case--ange" aria-labelledby="h-ange">
+  <h2 id="h-ange" style="max-width:20ch">Concevoir et rendre avec l'IA</h2>
+  <div class="case__by"><img src="assets/img/ange.webp" alt="" width="480" height="504"><span>Cas pratique présenté par <b>Ange Djoké</b>, architecte et modérateur de l'atelier.</span></div>
+  <div class="topics"><span>Rendus images et vidéos</span><span>Présentations</span><span>Conception de projets assistée par IA</span></div>
+  <div class="pipe" id="pipe">
+    <ol class="pipe__steps" role="tablist" aria-label="Étapes">
+      <li><button role="tab" aria-selected="true" aria-controls="pipeStage"><span>01</span><b>Esquisse</b><small>Le trait de l'architecte, à la main.</small></button></li>
+      <li><button role="tab" aria-selected="false" aria-controls="pipeStage" tabindex="-1"><span>02</span><b>Rendu</b><small>L'IA propose une image réaliste à partir de l'esquisse.</small></button></li>
+      <li><button role="tab" aria-selected="false" aria-controls="pipeStage" tabindex="-1"><span>03</span><b>Animation</b><small>Une boucle vidéo donne vie au dessin.</small></button></li>
+      <li><button role="tab" aria-selected="false" aria-controls="pipeStage" tabindex="-1"><span>04</span><b>Présentation</b><small>Planches, slides ou site interactif, comme cette page.</small></button></li>
+    </ol>
+    <div class="pipe__stage" id="pipeStage" role="tabpanel" aria-live="polite">
+      <img class="pipe__layer" data-on="true" src="assets/img/esquisse-hd.webp" alt="Esquisse axonométrique d'une maison avec pergola et jardin" width="1200" height="750" loading="lazy">
+      <img class="pipe__layer" src="assets/img/rendu.webp" alt="Rendu réaliste de la même maison généré par IA à partir de l'esquisse" width="1200" height="750" loading="lazy">
+      <video class="pipe__layer" muted loop playsinline preload="none" poster="assets/img/esquisse.webp" aria-label="Boucle vidéo de l'esquisse : les arbres bougent, l'ombre de la pergola glisse."><source src="assets/video/esquisse.mp4" type="video/mp4"></video>
+      <img class="pipe__layer" src="assets/img/tour-iso.webp" alt="Planche de présentation : tour illustrée en axonométrie" width="864" height="1184" loading="lazy" style="object-fit:contain;background:#EDEBE6">
+      <span class="pipe__cap" id="pipeCap">Esquisse à la main</span>
+    </div>
+  </div>
+</section>
+
+<!-- ═════════ Cas pratique : Gaston Koffi ═════════ -->
+<section class="case" aria-labelledby="h-case">
+  <h2 id="h-case" style="max-width:20ch">Gérer l'APD et le DCE avec Claude</h2>
+  <div class="case__by"><img src="assets/img/gaston.webp" alt="" width="496" height="504"><span>Cas pratique présenté par <b>Gaston Koffi</b> : Revit, Excel, Word, plugins métier et contrôle de dossier.</span></div>
+  <ol class="chain">
+    <li><b>APD</b><span>Plans et métrés</span></li>
+    <li><b>Maquette Revit</b><span>Annotations et quantités</span></li>
+    <li><b>DCE</b><span>CCTP, DPGF et contrôle</span></li>
+  </ol>
+  <div class="tabs" id="caseTabs">
+    <div role="tablist" aria-label="Démonstrations">
+      <button role="tab" id="t0" aria-controls="p0" aria-selected="true">La donnée d'abord</button>
+      <button role="tab" id="t1" aria-controls="p1" aria-selected="false" tabindex="-1">Annotations Revit</button>
+      <button role="tab" id="t2" aria-controls="p2" aria-selected="false" tabindex="-1">Excel et Word</button>
+      <button role="tab" id="t3" aria-controls="p3" aria-selected="false" tabindex="-1">Plugins métier</button>
+      <button role="tab" id="t4" aria-controls="p4" aria-selected="false" tabindex="-1">Contrôle du dossier</button>
+    </div>
+    <div role="tabpanel" id="p0" aria-labelledby="t0">
+      <h3>L'IA repose sur votre donnée</h3>
+      <p>Il vous faut un bon gabarit de projet, qui prend en compte votre base de production.</p>
+      <div class="grid2">
+        <div><b>Donnée fiable</b><span>L'IA ne produit un résultat juste qu'à partir d'une maquette bien renseignée.</span></div>
+        <div><b>Gabarit de projet</b><span>Paramètres, nommage, vues et nomenclatures définis une fois, repris sur chaque projet.</span></div>
+        <div><b>Base de production</b><span>Vos familles, bibliothèques et ouvrages types intégrés au gabarit dès le départ.</span></div>
+      </div>
+    </div>
+    <div role="tabpanel" id="p1" aria-labelledby="t1" hidden>
+      <h3>MCP Revit-Claude : les annotations</h3>
+      <ol>
+        <li>Ouvrir la vue en plan APD du projet fil rouge.</li>
+        <li>Demander : « Étiquette les portes et les pièces de cette vue. »</li>
+        <li>Claude pilote Revit : étiquettes, cotes, textes.</li>
+        <li>Repérer les éléments non étiquetés et les corriger.</li>
+      </ol>
+      <div class="key"><b>Message clé</b>Une consigne en français, une vue annotée en quelques secondes.</div>
+    </div>
+    <div role="tabpanel" id="p2" aria-labelledby="t2" hidden>
+      <h3>Claude dans Excel et Word</h3>
+      <ol>
+        <li>Partir des quantités extraites du modèle.</li>
+        <li>Générer le DPGF dans Excel, au format du cabinet.</li>
+        <li>Rédiger un extrait de CCTP dans Word.</li>
+        <li>Appliquer la charte : en-tête, styles, pied de page.</li>
+      </ol>
+      <div class="key"><b>Message clé</b>Les pièces écrites sortent directement conformes à la charte du cabinet.</div>
+    </div>
+    <div role="tabpanel" id="p3" aria-labelledby="t3" hidden>
+      <h3>Des plugins métier développés avec Claude</h3>
+      <div class="grid2">
+        <div><span class="badge">En direct</span><b>Calepinage de menuiserie</b><span>Portes et fenêtres repérées, calepinées, prêtes à coter.</span></div>
+        <div><span class="badge">En direct</span><b>Nommage de fichier</b><span>Tout le dossier DCE renommé selon la convention.</span></div>
+        <div><span class="badge badge--muted">Présenté</span><b>Détail de pièces</b><span>Fiches de détail générées pièce par pièce.</span></div>
+        <div><span class="badge badge--muted">Présenté</span><b>Bibliothèque</b><span>Familles et types du cabinet, centralisés.</span></div>
+      </div>
+    </div>
+    <div role="tabpanel" id="p4" aria-labelledby="t4" hidden>
+      <h3>Contrôle du dossier avec Claude</h3>
+      <p>Claude relit le dossier DCE complet et signale :</p>
+      <div class="grid2">
+        <div><b>Nommage non conforme</b><span>Fichiers hors convention du projet.</span></div>
+        <div><b>Pièce manquante</b><span>Écart entre la liste attendue et le dossier.</span></div>
+        <div><b>Incohérence plan / CCTP</b><span>Un ouvrage décrit différemment selon la pièce.</span></div>
+      </div>
+      <div class="key"><b>Résultat</b>Des erreurs réelles, trouvées en quelques minutes.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═════════ 05 Déontologie ═════════ -->
+<section id="deontologie" aria-labelledby="h-eth">
+  <span class="chapter">05</span>
+  <h2 id="h-eth">Responsabilité, signature, confiance</h2>
+  <div class="ethic__rules">
+    <div class="rule"><b class="accent">signe</b><h3>Signature humaine</h3><p>Un architecte signe et répond du livrable, quel que soit l'outil.</p></div>
+    <div class="rule"><b class="accent">trace</b><h3>Traçabilité</h3><p>On sait ce que l'IA a produit, ce qui a été vérifié, et par qui.</p></div>
+    <div class="rule"><b class="accent">données</b><h3>Données protégées</h3><p>Les données clients restent hors du cloud public par défaut.</p></div>
+  </div>
+  <ol class="questions">
+    <li><span>01</span>Qui signe ? Qui est responsable du livrable ?</li>
+    <li><span>02</span>Transparence client : dire quand l'IA a aidé.</li>
+    <li><span>03</span>Confidentialité des dossiers et des données clients.</li>
+    <li><span>04</span>Propriété intellectuelle des images et des modèles, dans le cadre de l'Ordre.</li>
+  </ol>
+</section>
+
+<!-- ═════════ 06 Clôture ═════════ -->
+<section id="cloture" class="close" aria-labelledby="h-close">
+  <div class="split">
+    <div class="copy">
+      <span class="chapter" style="color:var(--banco)">06</span>
+      <h2 id="h-close" class="sr-only">Conclusion et démo live</h2>
+      <blockquote>Le pouvoir revient à celui qui identifie le besoin et construit ses outils.</blockquote>
+      <span class="close__sign accent" aria-hidden="true">l'architecte, artisan digital</span>
+    </div>
+    <div class="copy">
+      <p class="lede" style="color:var(--lime)">Place à la démo live interactive, puis aux questions.</p>
+      <div class="close__team">
+        <div><img src="assets/img/ange.webp" alt="Ange Djoké" width="480" height="504"><img src="assets/img/jeanmarc.webp" alt="Jean-Marc Don Mello" width="480" height="504"><img src="assets/img/gaston.webp" alt="Gaston Koffi" width="496" height="504"></div>
+        <p class="small">Merci à l'Ordre des Architectes de Côte d'Ivoire.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+<footer>
+  <img src="assets/img/oaci.png" alt="Ordre des Architectes de Côte d'Ivoire" width="215" height="83">
+  <span>Atelier pratique, session 2. OACI, 9 octobre 2026.</span>
+</footer>
+
+<script type="module">
+import * as THREE from 'three';
+
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const finePointer = matchMedia('(hover: hover) and (pointer: fine)').matches;
+const $ = (s, r = document) => r.querySelector(s);
+const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+const clamp = (v, a, b) => Math.min(b, Math.max(a, v));
+const SVGNS = 'http://www.w3.org/2000/svg';
+const COL = { plaster: '#ECE6DB', lime: '#F7F4EE', banco: '#CDB89B', laterite: '#8E3B1D', lat2: '#B4623F', sage: '#5D6A55', ink: '#2B201A' };
+
+/* ─────────────────────────────────────────────────────────────
+   Spring — Apple's two designer parameters (WWDC18):
+   response (s) = how fast it gets there, damping ratio = overshoot.
+   Always animates from the live value and carries velocity, so any
+   motion can be grabbed and re-targeted mid-flight.
+   ───────────────────────────────────────────────────────────── */
+class Spring {
+  constructor(value, { response = 0.4, damping = 1 } = {}) {
+    this.value = value; this.target = value; this.velocity = 0;
+    this.k = (2 * Math.PI / response) ** 2; this.c = (4 * Math.PI * damping) / response;
+  }
+  to(target, velocity) {
+    this.target = target;
+    if (velocity !== undefined) this.velocity = velocity;
+    if (reduce) { this.value = target; this.velocity = 0; }
+    ticker.wake();
+  }
+  snap(v) { this.value = this.target = v; this.velocity = 0; }
+  step(dt) {
+    const n = Math.ceil(dt / 0.004), h = dt / n;
+    for (let i = 0; i < n; i++) {
+      const a = -this.k * (this.value - this.target) - this.c * this.velocity;
+      this.velocity += a * h; this.value += this.velocity * h;
+    }
+    if (this.settled) { this.value = this.target; this.velocity = 0; }
+  }
+  get settled() { return Math.abs(this.value - this.target) < 1e-4 && Math.abs(this.velocity) < 1e-3; }
+}
+
+/* One display-synced clock; each job returns true while it still needs frames. */
+const ticker = (() => {
+  const jobs = new Set(); let running = false, last = 0;
+  function frame(t) {
+    const dt = Math.min(0.05, (t - last) / 1000 || 0.016); last = t;
+    let busy = false;
+    for (const job of jobs) if (job(dt, t / 1000)) busy = true;
+    if (busy) requestAnimationFrame(frame); else running = false;
+  }
+  return {
+    add(job) { jobs.add(job); this.wake(); return () => jobs.delete(job); },
+    wake() { if (!running) { running = true; last = performance.now(); requestAnimationFrame(frame); } },
+  };
+})();
+
+/* Run a job over springs only while any of them moves. */
+function animateSprings(springs, draw) {
+  let on = false;
+  return () => {
+    if (on) return; on = true;
+    const off = ticker.add(dt => {
+      let busy = false;
+      for (const s of springs()) if (!s.settled) { s.step(dt); busy = true; }
+      draw();
+      if (!busy) { on = false; off(); }
+      return busy;
+    });
+  };
+}
+
+/* Apple's momentum projection (Designing Fluid Interfaces sample code). */
+const project = (v, d = 0.998) => (v / 1000) * d / (1 - d);
+/* Progressive resistance past a boundary. */
+const rubberband = (x, dim, c = 0.55) => (x * dim * c) / (dim + c * Math.abs(x));
+function tracker() {
+  let s = [];
+  return {
+    push(x, y) { const t = performance.now(); s.push({ x, y, t }); s = s.filter(p => t - p.t < 100); },
+    velocity() {
+      if (s.length < 2) return { x: 0, y: 0 };
+      const a = s[0], b = s[s.length - 1], dt = (b.t - a.t) / 1000 || 1;
+      return { x: (b.x - a.x) / dt, y: (b.y - a.y) / dt };
+    },
+    reset() { s = []; },
+  };
+}
+const onVisible = (el, cb, threshold = 0) => new IntersectionObserver(([e]) => cb(e.isIntersecting), { threshold }).observe(el);
+
+/* ═══════════════ Hero : animated motif ═══════════════
+   A lattice of small chevrons, like hatching on a plan. A slow wave runs
+   through it; chevrons near the pointer turn toward it and darken. */
+(function motif() {
+  const cvs = $('#pattern'), ctx = cvs.getContext('2d'), hero = cvs.parentElement;
+  const GAP = 30;
+  let W = 0, H = 0, dpr = 1, cells = [], visible = true;
+  const ptr = { x: -1e4, y: -1e4, tx: -1e4, ty: -1e4 };
+  function resize() {
+    dpr = Math.min(devicePixelRatio, 2); W = hero.clientWidth; H = hero.clientHeight;
+    cvs.width = W * dpr; cvs.height = H * dpr; ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    cells = [];
+    for (let y = GAP / 2; y < H; y += GAP) for (let x = GAP / 2 + ((y / GAP) % 2 ? GAP / 2 : 0); x < W; x += GAP) cells.push({ x, y, a: 0 });
+    draw(0);
+  }
+  function draw(t) {
+    ctx.clearRect(0, 0, W, H);
+    ptr.x += (ptr.tx - ptr.x) * 0.12; ptr.y += (ptr.ty - ptr.y) * 0.12;
+    const buckets = [[], [], []];
+    for (const c of cells) {
+      const dx = ptr.x - c.x, dy = ptr.y - c.y, d = Math.hypot(dx, dy);
+      const near = Math.max(0, 1 - d / 220);
+      const wave = Math.sin(c.x * 0.012 + c.y * 0.008 - t * 0.6) * 0.5;
+      const target = near > 0 ? Math.atan2(dy, dx) - Math.PI / 2 : wave;
+      c.a += (target * near + wave * (1 - near) - c.a) * 0.1;
+      buckets[near > 0.55 ? 2 : near > 0.15 ? 1 : 0].push(c);
+    }
+    const alpha = [0.13, 0.28, 0.55];
+    buckets.forEach((list, k) => {
+      ctx.beginPath();
+      for (const c of list) {
+        const s = 4.2 + k, ca = Math.cos(c.a), sa = Math.sin(c.a);
+        // chevron "^" rotated by c.a
+        const p = (px, py) => [c.x + px * ca - py * sa, c.y + px * sa + py * ca];
+        const [ax, ay] = p(-s, s * 0.5), [bx, by] = p(0, -s * 0.5), [cx, cy] = p(s, s * 0.5);
+        ctx.moveTo(ax, ay); ctx.lineTo(bx, by); ctx.lineTo(cx, cy);
+      }
+      ctx.strokeStyle = `rgba(142, 59, 29, ${alpha[k]})`; ctx.lineWidth = 1.2; ctx.lineCap = 'round'; ctx.stroke();
+    });
+  }
+  new ResizeObserver(resize).observe(hero);
+  if (reduce) return;
+  hero.addEventListener('pointermove', e => { const r = hero.getBoundingClientRect(); ptr.tx = e.clientX - r.left; ptr.ty = e.clientY - r.top; });
+  hero.addEventListener('pointerleave', () => { ptr.tx = ptr.ty = -1e4; });
+  let raf = 0;
+  const loop = t => { draw(t / 1000); raf = visible && !document.hidden ? requestAnimationFrame(loop) : 0; };
+  const start = () => { if (!raf && visible && !document.hidden) raf = requestAnimationFrame(loop); };
+  onVisible(hero, v => { visible = v; start(); });
+  document.addEventListener('visibilitychange', start);
+})();
+
+/* ═══════════════ Hero : the outline as a 3D tower ═══════════════ */
+const CHAPTERS = [
+  ['accueil', '', 'Accueil'], ['lexique', '01', 'Lexique'], ['parti', '02', 'Prompt et parti'], ['agence', '03', 'Process'],
+  ['production', '04', 'Production'], ['cas-pratiques', '', 'Cas pratiques'], ['deontologie', '05', 'Déontologie'], ['cloture', '06', 'Démo'],
+];
+const goTo = id => document.getElementById(id)?.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth' });
+const towerApi = (function tower() {
+  const stage = $('#stage'), labelsEl = $('#floorLabels');
+  const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+  renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+  renderer.shadowMap.enabled = true; renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+  renderer.outputColorSpace = THREE.SRGBColorSpace;
+  stage.prepend(renderer.domElement);
+
+  const scene = new THREE.Scene();
+  const cam = new THREE.OrthographicCamera(-1, 1, 1, -1, 0.1, 100);
+  cam.position.set(14, 13, 14); cam.lookAt(0, 4.9, 0);
+  scene.add(new THREE.HemisphereLight(0xfff6ea, 0xb9a48a, 1.35));
+  const sun = new THREE.DirectionalLight(0xffe9d2, 1.9);
+  sun.position.set(-6, 16, 8); sun.castShadow = true; sun.shadow.mapSize.set(2048, 2048);
+  Object.assign(sun.shadow.camera, { left: -8, right: 8, top: 14, bottom: -4, near: 1, far: 44 });
+  sun.shadow.radius = 4; sun.shadow.bias = -0.0008;
+  scene.add(sun);
+
+  const M = (color, extra = {}) => new THREE.MeshStandardMaterial({ color, roughness: 0.92, ...extra });
+  const mat = {
+    slab: M(0xf4efe7), edge: M(0xb4623f), wall: M(0xd9a48b), lime: M(0xf7f4ee), leaf: M(0x6f8a5e), leaf2: M(0x87a06f),
+    trunk: M(0x9b7b5c), water: M(0x9cc9c1, { roughness: 0.25 }), solar: M(0x39404c, { roughness: 0.4 }), glass: M(0xe8e2d6, { roughness: 0.3 }),
+    on: M(0x8e3b1d),
+  };
+  const box = (w, h, d, m, x = 0, y = 0, z = 0) => {
+    const o = new THREE.Mesh(new THREE.BoxGeometry(w, h, d), m); o.position.set(x, y, z); o.castShadow = o.receiveShadow = true; return o;
+  };
+  function palm(scale) {
+    const g = new THREE.Group();
+    const trunk = new THREE.Mesh(new THREE.CylinderGeometry(0.035, 0.05, 0.7, 6), mat.trunk); trunk.position.y = 0.35; trunk.castShadow = true; g.add(trunk);
+    for (let i = 0; i < 6; i++) {
+      const f = new THREE.Mesh(new THREE.ConeGeometry(0.09, 0.6, 4), i % 2 ? mat.leaf : mat.leaf2);
+      f.position.y = 0.7; f.rotation.set(Math.PI / 2.6, (i / 6) * Math.PI * 2, 0, 'YXZ'); f.translateY(0.27); f.castShadow = true; g.add(f);
+    }
+    g.scale.setScalar(scale); return g;
+  }
+  function planter(x, z, withPalm) {
+    const g = new THREE.Group();
+    g.add(box(0.7, 0.22, 0.7, mat.lime, 0, 0.11, 0));
+    if (withPalm) { const p = palm(1.15); p.position.y = 0.2; g.add(p); }
+    else { const s = new THREE.Mesh(new THREE.IcosahedronGeometry(0.3, 0), mat.leaf2); s.position.y = 0.4; s.castShadow = true; g.add(s); }
+    g.position.set(x, 0.11, z); return g;
+  }
+
+  const FLOOR_H = 1.08, N = CHAPTERS.length;
+  const floors = [];
+  const tower = new THREE.Group(), tilt = new THREE.Group();
+  tilt.add(tower); scene.add(tilt);
+  const base = new THREE.Group();
+  base.add(box(6.6, 0.32, 6.6, mat.slab, 0, -0.16, 0));
+  for (let i = 0; i < 3; i++) base.add(box(1.6, 0.1, 0.35, mat.slab, 1.6, -0.27 - i * 0.1, 3.45 + i * 0.32));
+  base.add(box(2.2, 0.06, 1.1, mat.water, -1.6, 0.01, 2.4));
+  base.add(planter(-2.9, -2.9, true), planter(2.9, 2.2, true));
+  tower.add(base);
+
+  for (let i = 0; i < N; i++) {
+    const g = new THREE.Group();
+    const s = i % 2 ? 4.7 : 5.1;
+    g.add(box(s, 0.18, s, mat.slab, 0, 0.09, 0));
+    const band = box(s + 0.06, 0.07, s + 0.06, mat.edge, 0, 0.035, 0); g.add(band);
+    const cw = 3.1 + (i % 3) * 0.35, cd = 3.4 - (i % 2) * 0.4;
+    g.add(box(cw, 0.78, cd, mat.wall, -0.25, 0.57, -0.2));
+    g.add(box(cw * 0.6, 0.45, 0.04, mat.glass, -0.25, 0.58, -0.2 + cd / 2 + 0.01));
+    if (i % 3 !== 2) for (let k = -3; k <= 3; k++) {
+      if (i % 2 === 0) g.add(box(0.06, 0.78, 0.12, mat.lime, k * 0.62, 0.57, s / 2 - 0.12));
+      else g.add(box(0.12, 0.78, 0.06, mat.lime, s / 2 - 0.12, 0.57, k * 0.58));
+    }
+    for (const [x, z] of [[1, 1], [-1, 1], [1, -1], [-1, -1]]) {
+      const c = new THREE.Mesh(new THREE.CylinderGeometry(0.06, 0.06, 0.9, 8), mat.lime);
+      c.position.set(x * (s / 2 - 0.2), 0.63, z * (s / 2 - 0.2)); c.castShadow = true; g.add(c);
+    }
+    g.add(planter(s / 2 - 0.55, s / 2 - 0.55, i % 2 === 0 && i < N - 1));
+    if (i === 2) g.add(box(1.5, 0.05, 1.1, mat.water, 1.2, 0.21, 1.2));
+    g.userData = { i, band, s, lift: new Spring(0, { response: 0.35, damping: 0.85 }), drop: new Spring(reduce ? 0 : 9 + i * 1.4, { response: 0.7, damping: 0.82 }) };
+    g.traverse(o => { if (o.isMesh) o.userData.floor = g; });
+    floors.push(g); tower.add(g);
+  }
+  const roof = new THREE.Group();
+  roof.add(box(5.7, 0.18, 5.7, mat.slab, 0, 0.09, 0), box(5.76, 0.07, 5.76, mat.edge, 0, 0.035, 0));
+  for (let k = -1; k <= 1; k++) { const p = box(1.3, 0.05, 3.8, mat.solar, k * 1.55, 0.3, 0); p.rotation.x = -0.12; roof.add(p); }
+  roof.userData = { drop: new Spring(reduce ? 0 : 20, { response: 0.75, damping: 0.85 }) };
+  tower.add(roof);
+
+  // HTML labels pinned to each floor's outer corner
+  const labels = CHAPTERS.map(([id, num, name], i) => {
+    const b = document.createElement('button');
+    b.type = 'button'; b.className = 'floor-label';
+    b.innerHTML = `${num ? `<span>${num}</span>` : ''}${name}`;
+    b.addEventListener('click', () => goTo(id));
+    b.addEventListener('pointerenter', () => setHover(floors[i]));
+    b.addEventListener('pointerleave', () => setHover(null));
+    b.addEventListener('focus', () => setHover(floors[i]));
+    b.addEventListener('blur', () => setHover(null));
+    labelsEl.append(b); return b;
+  });
+
+  const QUARTER = Math.PI / 2;
+  const yaw = new Spring(0, { response: 0.45, damping: 0.8 });
+  const pitch = new Spring(0, { response: 0.4, damping: 1 });
+  const explode = new Spring(0, { response: 0.5, damping: 1 });
+  let W = 1, H = 1, current = 0, hovered = null;
+  const v3 = new THREE.Vector3();
+
+  function layout() {
+    floors.forEach((g, i) => { g.position.y = i * FLOOR_H + explode.value * i * 0.5 + g.userData.lift.value + g.userData.drop.value; });
+    roof.position.y = N * FLOOR_H + explode.value * N * 0.5 + roof.userData.drop.value;
+    tower.rotation.y = yaw.value; tilt.rotation.x = pitch.value;
+  }
+  function placeLabels() {
+    tilt.updateMatrixWorld(true);
+    floors.forEach((g, i) => {
+      const h = g.userData.s / 2; let best = null;
+      for (const [x, z] of [[h, h], [-h, h], [h, -h], [-h, -h]]) {
+        v3.set(x, 0.5, z); g.localToWorld(v3); v3.project(cam);
+        const sx = (v3.x + 1) / 2 * W, sy = (1 - v3.y) / 2 * H;
+        if (!best || sx > best[0]) best = [sx, sy];
+      }
+      labels[i].style.transform = `translate(${Math.min(best[0] + 6, W - labels[i].offsetWidth - 4)}px, ${best[1] - 12}px)`;
+      labels[i].style.opacity = g.userData.drop.value > 0.5 ? 0 : 1;
+    });
+  }
+  function render() { layout(); renderer.render(scene, cam); placeLabels(); }
+  function resize() {
+    W = stage.clientWidth; H = stage.clientHeight;
+    renderer.setSize(W, H, false);
+    const a = W / H, view = 7.3;
+    cam.left = -view * a; cam.right = view * a; cam.top = view; cam.bottom = -view;
+    cam.zoom = a < 0.8 ? 0.92 : 1.05;
+    cam.updateProjectionMatrix(); run(); render();
+  }
+  const springs = () => [yaw, pitch, explode, roof.userData.drop, ...floors.flatMap(g => [g.userData.lift, g.userData.drop])];
+  const run = animateSprings(springs, render);
+  new ResizeObserver(resize).observe(stage);
+
+  floors.forEach((g, i) => setTimeout(() => { g.userData.drop.to(0); run(); }, 250 + i * 70));
+  setTimeout(() => { roof.userData.drop.to(0); run(); }, 250 + N * 70);
+  addEventListener('scroll', () => { explode.to(clamp(scrollY / (innerHeight * 0.8), 0, 1)); run(); }, { passive: true });
+
+  function highlight() {
+    floors.forEach((g, i) => {
+      const on = i === current || g === hovered;
+      g.userData.lift.to(g === hovered ? 0.3 : i === current ? 0.12 : 0);
+      g.userData.band.material = on ? mat.on : mat.edge;
+      labels[i].dataset.on = on;
+    });
+    run();
+  }
+  function setHover(g) { if (g !== hovered) { hovered = g; highlight(); } }
+
+  /* Direct manipulation : 1:1 drag, velocity handoff, projected snap to iso views. */
+  const vt = tracker(); let drag = null;
+  const ray = new THREE.Raycaster(), ndc = new THREE.Vector2();
+  const pick = e => {
+    const r = stage.getBoundingClientRect();
+    ndc.set(((e.clientX - r.left) / r.width) * 2 - 1, -((e.clientY - r.top) / r.height) * 2 + 1);
+    ray.setFromCamera(ndc, cam);
+    return ray.intersectObjects(floors, true)[0]?.object.userData.floor ?? null;
+  };
+  stage.addEventListener('pointerdown', e => {
+    if (e.target.closest('button')) return;
+    stage.setPointerCapture(e.pointerId);
+    drag = { x: e.clientX, y: e.clientY, yaw0: yaw.value, axis: null };
+    yaw.snap(yaw.value); vt.reset(); vt.push(e.clientX, e.clientY);
+  });
+  stage.addEventListener('pointermove', e => {
+    if (!drag) { if (e.pointerType === 'mouse' && !e.target.closest('button')) setHover(pick(e)); return; }
+    const dx = e.clientX - drag.x, dy = e.clientY - drag.y;
+    if (!drag.axis && Math.hypot(dx, dy) > 8) drag.axis = Math.abs(dx) > Math.abs(dy) ? 'x' : 'y';
+    vt.push(e.clientX, e.clientY);
+    if (drag.axis === 'x') yaw.snap(drag.yaw0 + dx * 0.012);
+    if (drag.axis === 'y' && e.pointerType === 'mouse') pitch.snap(rubberband(dy * 0.004, 0.5));
+    render();
+  });
+  const release = e => {
+    if (!drag) return;
+    if (!drag.axis) { const g = pick(e); if (g) goTo(CHAPTERS[g.userData.i][0]); }
+    else {
+      const v = vt.velocity().x * 0.012;
+      yaw.to(Math.round((yaw.value + project(v)) / QUARTER) * QUARTER, v);
+      pitch.to(0);
+    }
+    drag = null; run();
+  };
+  stage.addEventListener('pointerup', release);
+  stage.addEventListener('pointercancel', () => { drag = null; yaw.to(Math.round(yaw.value / QUARTER) * QUARTER); pitch.to(0); run(); });
+  stage.addEventListener('pointerleave', () => { if (!drag) setHover(null); });
+  const turn = d => { yaw.to(Math.round(yaw.target / QUARTER) * QUARTER + d * QUARTER); run(); };
+  $('#rotL').addEventListener('click', () => turn(-1));
+  $('#rotR').addEventListener('click', () => turn(1));
+  stage.addEventListener('keydown', e => {
+    if (e.target !== stage) return;
+    if (e.key === 'ArrowLeft') { turn(-1); e.preventDefault(); }
+    if (e.key === 'ArrowRight') { turn(1); e.preventDefault(); }
+  });
+  resize();
+  return { setCurrent(i) { if (i !== current) { current = i; highlight(); } } };
+})();
+
+/* ═══════════════ Intervenants ═══════════════
+   CV data. Everything here is editable in one place.
+   Sources: affiche de l'atelier OACI (rôles), présentation (thèmes),
+   profil LinkedIn public de Konan Gaston Koffi (titre). */
+const SPEAKERS = [
+  {
+    id: 'ange', name: 'Ange Djoké', role: 'Architecte, modérateur de l\'atelier', img: 'assets/img/ange.webp',
+    link: 'https://www.linkedin.com/in/ange-djok%C3%A9-283190136',
+    bio: "Architecte, il modère l'atelier et présente la partie conception et rendus : comment l'IA aide à passer de l'esquisse à l'image, puis à la présentation.",
+    facts: [['Métier', 'Architecte'], ['Rôle', 'Modérateur de l\'atelier'], ['Partie', 'Conception et rendus']],
+    topics: ['Rendus images et vidéos', 'Présentations', 'Conception assistée par IA'],
+    scene: 'render', hint: 'Glissez pour déplacer le soleil',
+  },
+  {
+    id: 'jeanmarc', name: 'Jean-Marc Don Mello', role: 'Architecte', img: 'assets/img/jeanmarc.webp',
+    link: 'https://www.linkedin.com/in/jean-marc-don-mello-67799875/',
+    bio: "Architecte, il porte le fil de la présentation : l'architecte comme artisan augmenté, qui crée ses outils, maîtrise ses process et signe en conscience.",
+    facts: [['Métier', 'Architecte'], ['Agence', 'Koffi & Diabaté Architectes'], ['Partie', 'L\'artisan augmenté']],
+    topics: ['Lexique', 'Prompt et parti', 'Process et agents', 'Déontologie', 'Démo live'],
+    scene: 'stack', hint: 'Glissez pour faire tourner les couches',
+  },
+  {
+    id: 'gaston', name: 'Gaston Koffi', role: 'Ingénieur génie civil, coordinateur BIM', img: 'assets/img/gaston.webp',
+    link: 'https://www.linkedin.com/in/konan-gaston-koffi-4ba76717a/',
+    bio: "Ingénieur BTP et coordinateur BIM, il présente la gestion de l'APD et du DCE avec Claude : Revit, Excel, Word, plugins métier et contrôle de dossier.",
+    facts: [['Métier', 'Ingénieur génie civil'], ['Spécialité', 'Coordination BIM'], ['Partie', 'Gestion APD et DCE']],
+    topics: ['Outils et plugins', 'Calepinages, détails', 'Nommage de fichiers', 'Contrôle de dossiers', 'Excel et Word'],
+    scene: 'bim', hint: 'Glissez pour faire tourner la structure',
+  },
+];
+
+(function speakers() {
+  const grid = $('#speakers');
+  SPEAKERS.forEach((s, i) => {
+    const b = document.createElement('button');
+    b.type = 'button'; b.className = 'spk'; b.setAttribute('aria-haspopup', 'dialog');
+    b.innerHTML = `
+      <div class="spk__frame">
+        <img src="${s.img}" alt="" width="480" height="504" loading="lazy">
+        <span class="spk__badge">${s.facts[2][1]}</span>
+        <span class="spk__open" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 14 14"><path d="M7 2v10M2 7h10" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></span>
+      </div>
+      <div><div class="spk__name">${s.name}</div><div class="spk__role">${s.role}</div></div>`;
+    b.setAttribute('aria-label', `Ouvrir la fiche de ${s.name}, ${s.role}`);
+    b.addEventListener('click', () => profile.open(i, b));
+    grid.append(b);
+    tilt($('.spk__frame', b), 10);
+  });
+})();
+
+/* Cards lean toward the pointer, decorative only, so mouse users only. */
+function tilt(el, max = 14) {
+  if (!finePointer || reduce) return;
+  const rx = new Spring(0, { response: 0.35, damping: 1 }), ry = new Spring(0, { response: 0.35, damping: 1 });
+  const run = animateSprings(() => [rx, ry], () => (el.style.transform = `rotateX(${rx.value}deg) rotateY(${ry.value}deg)`));
+  el.addEventListener('pointermove', e => {
+    const r = el.getBoundingClientRect();
+    ry.to(((e.clientX - r.left) / r.width - 0.5) * max); rx.to(-((e.clientY - r.top) / r.height - 0.5) * max); run();
+  });
+  el.addEventListener('pointerleave', () => { rx.to(0); ry.to(0); run(); });
+}
+$$('[data-tilt]').forEach(el => tilt(el));
+
+/* Profile sheet with a small 3D scene per speaker */
+const profile = (function () {
+  const dlg = $('#profile'), sceneEl = $('#pScene');
+  let idx = 0, opener = null, three = null;
+
+  function fill(i) {
+    const s = SPEAKERS[i]; idx = i;
+    $('#pName').textContent = s.name; $('#pRole').textContent = s.role; $('#pBio').textContent = s.bio;
+    $('#pImg').src = s.img; $('#pImg').alt = `Portrait de ${s.name}`;
+    $('#pFacts').innerHTML = s.facts.map(([k, v]) => `<li><span>${k}</span><span>${v}</span></li>`).join('');
+    $('#pTopics').innerHTML = s.topics.map(t => `<span>${t}</span>`).join('');
+    $('#pLink').href = s.link; $('#pSceneHint').textContent = s.hint;
+    (three ||= miniScene(sceneEl)).show(s.scene);
+  }
+  function open(i, from) {
+    opener = from; fill(i); dlg.showModal();
+    if (!reduce) dlg.animate([{ opacity: 0, transform: 'translateY(16px) scale(0.97)' }, { opacity: 1, transform: 'none' }], { duration: 280, easing: 'cubic-bezier(0.23, 1, 0.32, 1)' });
+    three.resize();
+  }
+  function close() {
+    if (!dlg.open) return;
+    const done = () => { dlg.close(); three?.stop(); opener?.focus(); };
+    if (reduce) return done();
+    dlg.animate([{ opacity: 1, transform: 'none' }, { opacity: 0, transform: 'translateY(10px) scale(0.98)' }], { duration: 160, easing: 'cubic-bezier(0.23, 1, 0.32, 1)' }).onfinish = done;
+  }
+  dlg.addEventListener('cancel', e => { e.preventDefault(); close(); });
+  dlg.addEventListener('click', e => { if (e.target === dlg) close(); });
+  $('#pClose').addEventListener('click', close);
+  $('#pPrev').addEventListener('click', () => fill((idx + SPEAKERS.length - 1) % SPEAKERS.length));
+  $('#pNext').addEventListener('click', () => fill((idx + 1) % SPEAKERS.length));
+
+  // Swipe down on the portrait side to dismiss (phones): a flick is enough.
+  const side = $('#pSide'); let sd = null;
+  side.addEventListener('pointerdown', e => { if (e.pointerType === 'mouse' || e.target.closest('#pScene')) return; sd = { y: e.clientY, t: performance.now() }; });
+  side.addEventListener('pointermove', e => { if (!sd) return; const d = Math.max(0, e.clientY - sd.y); dlg.style.transform = `translateY(${rubberband(d, 600, 0.9)}px)`; });
+  side.addEventListener('pointerup', e => {
+    if (!sd) return; const d = e.clientY - sd.y, v = d / (performance.now() - sd.t); sd = null;
+    if (d > 120 || v > 0.11) { dlg.style.transform = ''; close(); }
+    else dlg.animate([{ transform: dlg.style.transform }, { transform: 'none' }], { duration: 220, easing: 'cubic-bezier(0.32, 0.72, 0, 1)' }).onfinish = () => (dlg.style.transform = '');
+  });
+  return { open };
+})();
+
+function miniScene(host) {
+  const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+  renderer.setPixelRatio(Math.min(devicePixelRatio, 2)); renderer.shadowMap.enabled = true;
+  renderer.outputColorSpace = THREE.SRGBColorSpace;
+  host.prepend(renderer.domElement);
+  const cam = new THREE.PerspectiveCamera(32, 1, 0.1, 100);
+  cam.position.set(7, 5.5, 7); cam.lookAt(0, 0.8, 0);
+  let scene, root, sunLight, kind;
+  const rot = new Spring(0, { response: 0.5, damping: 0.85 }), sunA = new Spring(0.8, { response: 0.5, damping: 1 });
+  const M = (c, o = {}) => new THREE.MeshStandardMaterial({ color: c, roughness: 0.85, ...o });
+  const box = (w, h, d, m, x = 0, y = 0, z = 0) => { const o = new THREE.Mesh(new THREE.BoxGeometry(w, h, d), m); o.position.set(x, y, z); o.castShadow = o.receiveShadow = true; return o; };
+
+  const builders = {
+    render(g) { // a house under a moving sun
+      g.add(box(6, 0.1, 4.4, M(0x6f8a5e), 0, -0.05, 0));
+      g.add(box(3.2, 1, 2, M(0xf4efe7), -0.3, 0.5, -0.3), box(2.4, 0.9, 1.6, M(0xf4efe7), 0.3, 1.45, -0.5));
+      for (let k = 0; k < 4; k++) g.add(box(0.12, 0.9, 0.12, M(0xb58a5e), 1.5 + (k % 2) * 1.1, 0.45, 0.4 + Math.floor(k / 2) * 1.1));
+      for (let k = 0; k < 6; k++) g.add(box(1.4, 0.06, 0.08, M(0xb58a5e), 2.05, 0.92, 0.35 + k * 0.24));
+      g.add(box(0.8, 0.9, 0.04, M(0xb58a5e), -0.6, 0.5, 0.71));
+      [[-2.4, 1.4], [2.5, -1.6], [-2.3, -1.5]].forEach(([x, z]) => { const t = new THREE.Mesh(new THREE.IcosahedronGeometry(0.5, 0), M(0x87a06f)); t.position.set(x, 0.9, z); t.castShadow = true; g.add(t); });
+    },
+    stack(g) { // the agency layers
+      [[0xcdb89b, 'Client'], [0x5d6a55], [0x8e3b1d], [0xf7f4ee], [0xe8e2d6]].forEach(([c], i) => {
+        const p = box(3.4, 0.14, 2.4, M(c), 0, 2.4 - i * 0.55, 0); p.userData.i = i; g.add(p);
+      });
+      const ring = new THREE.Mesh(new THREE.TorusGeometry(2.6, 0.025, 8, 80), M(0xb4623f)); ring.rotation.x = Math.PI / 2; ring.position.y = 1.3; g.add(ring);
+    },
+    bim(g) { // a structural frame with one clash highlighted
+      const col = M(0xf7f4ee), beam = M(0xcdb89b), slab = M(0xf4efe7, { transparent: true, opacity: 0.35 }), clash = M(0xb4623f, { emissive: 0x5a1e0a });
+      for (let lv = 0; lv < 3; lv++) {
+        for (let x = -1; x <= 1; x++) for (let z = -1; z <= 1; z++) g.add(box(0.12, 0.9, 0.12, col, x * 1.4, lv * 0.95 + 0.45, z * 1.1));
+        for (let x = -1; x <= 1; x++) g.add(box(0.1, 0.1, 2.3, beam, x * 1.4, lv * 0.95 + 0.92, 0));
+        for (let z = -1; z <= 1; z++) g.add(box(2.9, 0.1, 0.1, beam, 0, lv * 0.95 + 0.92, z * 1.1));
+        g.add(box(3, 0.04, 2.4, slab, 0, lv * 0.95 + 0.98, 0));
+      }
+      g.add(box(1.4, 0.16, 0.16, clash, 0.7, 1.4, 0.55)); // a duct crossing a beam
+    },
+  };
+  function show(k) {
+    kind = k;
+    scene = new THREE.Scene();
+    scene.add(new THREE.HemisphereLight(0xfff6ea, 0x3a2a20, 1.1));
+    sunLight = new THREE.DirectionalLight(0xffe2c4, 2); sunLight.castShadow = true; sunLight.shadow.mapSize.set(1024, 1024);
+    Object.assign(sunLight.shadow.camera, { left: -5, right: 5, top: 5, bottom: -5 });
+    scene.add(sunLight);
+    root = new THREE.Group(); builders[k](root); scene.add(root);
+    rot.snap(reduce ? 0 : -1.2); rot.to(0); sunA.snap(0.8); run();
+  }
+  function draw() {
+    if (!scene) return;
+    if (kind === 'render') { root.rotation.y = 0.3; sunLight.position.set(Math.cos(sunA.value) * 8, 6, Math.sin(sunA.value) * 8); }
+    else { root.rotation.y = rot.value; sunLight.position.set(-4, 8, 5); }
+    renderer.render(scene, cam);
+  }
+  const run = animateSprings(() => [rot, sunA], draw);
+  function resize() {
+    const w = host.clientWidth, h = host.clientHeight; if (!w || !h) return;
+    renderer.setSize(w, h, false); cam.aspect = w / h;
+    const dist = (cam.aspect > 1.5 ? 8.6 : 10) / Math.min(1, Math.pow(cam.aspect, 0.7));
+    cam.position.set(dist * 0.62, dist * 0.5, dist * 0.62); cam.lookAt(0, 0.9, 0);
+    cam.updateProjectionMatrix(); draw();
+  }
+  new ResizeObserver(resize).observe(host);
+  // drag : rotate (or move the sun), with momentum
+  const vt = tracker(); let d = null;
+  host.addEventListener('pointerdown', e => { host.setPointerCapture(e.pointerId); d = { x: e.clientX, r: rot.value, s: sunA.value }; vt.reset(); vt.push(e.clientX, 0); });
+  host.addEventListener('pointermove', e => {
+    if (!d) return; vt.push(e.clientX, 0); const dx = (e.clientX - d.x) * 0.012;
+    if (kind === 'render') sunA.snap(d.s + dx); else rot.snap(d.r + dx); draw();
+  });
+  host.addEventListener('pointerup', () => {
+    if (!d) return; const v = vt.velocity().x * 0.012;
+    const s = kind === 'render' ? sunA : rot; s.to(s.value + project(v, 0.99), v); d = null; run();
+  });
+  return { show, resize, stop() {} };
+}
+
+/* ═══════════════ Lexique : animated icons ═══════════════ */
+(function lexique() {
+  const data = [
+    ['token', 'Token', "L'unité de texte ou d'image que lit le modèle.", "Comme le mètre d'un métré : on compte le contexte et on paie au volume."],
+    ['llm', 'LLM', 'Le grand modèle de langage, le « cerveau » textuel.', 'ChatGPT, Claude, DeepSeek. Un moteur, pas encore un collaborateur.'],
+    ['mcp', 'MCP', 'Le protocole qui branche le modèle sur vos outils et vos données.', 'La prise normalisée : Revit, Excel, vos bibliothèques, sur le même connecteur.'],
+    ['prompt', 'Prompt', "L'instruction donnée au modèle.", "Le CCTP de la machine : ce qui n'est pas écrit n'est pas fait."],
+    ['agent', 'Agent', 'Un LLM outillé et contextualisé, qui agit à votre place.', 'Un collaborateur qui exécute, sous votre visa et votre signature.'],
+  ];
+  const el = (tag, attrs = {}, parent) => { const n = document.createElementNS(SVGNS, tag); for (const k in attrs) n.setAttribute(k, attrs[k]); parent?.append(n); return n; };
+  const ease = x => x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2;
+
+  /* Each icon : build(svg) returns frame(t) */
+  const ICONS = {
+    token(svg) {
+      const parts = ['ma', 'quet', 'te'], widths = [30, 42, 26], g = [];
+      let x = 80 - (widths.reduce((a, b) => a + b) + 8) / 2;
+      parts.forEach((p, i) => {
+        const grp = el('g', {}, svg);
+        el('rect', { x, y: 62, width: widths[i], height: 30, rx: 7, fill: [COL.banco, COL.lat2, COL.sage][i] }, grp);
+        const t = el('text', { x: x + widths[i] / 2, y: 82, 'text-anchor': 'middle', 'font-size': 15, 'font-family': 'Hanken Grotesk, sans-serif', fill: i ? COL.lime : COL.ink }, grp); t.textContent = p;
+        g.push({ grp, off: i - 1 }); x += widths[i] + 4;
+      });
+      const count = el('text', { x: 80, y: 120, 'text-anchor': 'middle', 'font-size': 12, 'font-family': 'Hanken Grotesk, sans-serif', fill: COL.ink }, svg);
+      count.textContent = '3 tokens';
+      return t => { const s = ease((Math.sin(t * 1.6) + 1) / 2) * 9; g.forEach(o => o.grp.setAttribute('transform', `translate(${o.off * s} 0)`)); count.setAttribute('opacity', 0.35 + s / 14); };
+    },
+    llm(svg) {
+      const layers = [[50, 80, 110], [38, 66, 94, 122], [50, 80, 110]], X = [40, 80, 120], nodes = [], edges = [];
+      layers.forEach((ys, l) => ys.forEach(y => nodes.push({ x: X[l], y, l })));
+      nodes.forEach(a => nodes.forEach(b => { if (b.l === a.l + 1) edges.push([a, b, el('line', { x1: a.x, y1: a.y, x2: b.x, y2: b.y, stroke: COL.banco, 'stroke-width': 1 }, svg)]); }));
+      const dots = nodes.map(n => el('circle', { cx: n.x, cy: n.y, r: 6, fill: COL.ink }, svg));
+      const pulses = [0, 1, 2].map(() => el('circle', { r: 3.5, fill: COL.lat2 }, svg));
+      return t => {
+        pulses.forEach((p, k) => {
+          const tt = t * 0.9 + k * 0.37, i = Math.floor(tt * 3) % edges.length, f = (tt * 3) % 1, [a, b] = edges[(i * 7 + k * 5) % edges.length];
+          p.setAttribute('cx', a.x + (b.x - a.x) * f); p.setAttribute('cy', a.y + (b.y - a.y) * f);
+        });
+        dots.forEach((d, i) => d.setAttribute('fill', Math.sin(t * 3 + i) > 0.7 ? COL.laterite : COL.ink));
+      };
+    },
+    mcp(svg) {
+      const tools = [['Revit', 80, 30], ['Excel', 128, 112], ['Data', 32, 112]];
+      tools.forEach(([n, x, y]) => {
+        el('line', { x1: 80, y1: 84, x2: x, y2: y, stroke: COL.banco, 'stroke-width': 2, 'stroke-dasharray': '3 4' }, svg);
+      });
+      tools.forEach(([n, x, y]) => {
+        el('rect', { x: x - 22, y: y - 12, width: 44, height: 24, rx: 7, fill: COL.lime, stroke: COL.ink, 'stroke-width': 1.2 }, svg);
+        const t = el('text', { x, y: y + 4, 'text-anchor': 'middle', 'font-size': 11, 'font-family': 'Hanken Grotesk, sans-serif', fill: COL.ink }, svg); t.textContent = n;
+      });
+      el('circle', { cx: 80, cy: 84, r: 19, fill: COL.ink }, svg);
+      const t = el('text', { x: 80, y: 88, 'text-anchor': 'middle', 'font-size': 11, 'font-family': 'Hanken Grotesk, sans-serif', fill: COL.lime }, svg); t.textContent = 'MCP';
+      const dot = el('circle', { r: 4.5, fill: COL.lat2 }, svg);
+      return tt => {
+        const k = Math.floor(tt / 1.2) % 3, f = (tt % 1.2) / 1.2, [, x, y] = tools[k], p = f < 0.5 ? ease(f * 2) : ease(2 - f * 2);
+        dot.setAttribute('cx', 80 + (x - 80) * p); dot.setAttribute('cy', 84 + (y - 84) * p);
+      };
+    },
+    prompt(svg) {
+      el('rect', { x: 22, y: 34, width: 116, height: 92, rx: 14, fill: COL.lime, stroke: COL.ink, 'stroke-width': 1.2 }, svg);
+      const lines = ['Logement R+2,', 'Abidjan, brique', 'de terre, visa :', 'ventilation.'];
+      const texts = lines.map((_, i) => el('text', { x: 34, y: 58 + i * 18, 'font-size': 12.5, 'font-family': 'Hanken Grotesk, sans-serif', fill: COL.ink }, svg));
+      const caret = el('rect', { width: 1.6, height: 14, fill: COL.laterite }, svg);
+      const full = lines.join('\n'), total = full.length;
+      return t => {
+        const n = Math.floor(((t * 14) % (total + 24))), shown = full.slice(0, Math.min(n, total)).split('\n');
+        texts.forEach((tx, i) => (tx.textContent = shown[i] ?? ''));
+        const li = shown.length - 1, w = (shown[li] || '').length * 6.3;
+        caret.setAttribute('x', 35 + w); caret.setAttribute('y', 47 + li * 18); caret.setAttribute('opacity', Math.sin(t * 8) > 0 ? 1 : 0.2);
+      };
+    },
+    agent(svg) {
+      const spots = [[40, 48, 'plan'], [120, 48, 'devis'], [80, 122, 'pdf']];
+      el('path', { d: 'M40 48 L120 48 L80 122 Z', fill: 'none', stroke: COL.banco, 'stroke-width': 1.5, 'stroke-dasharray': '3 5' }, svg);
+      const checks = spots.map(([x, y, n]) => {
+        el('rect', { x: x - 18, y: y - 14, width: 36, height: 28, rx: 7, fill: COL.lime, stroke: COL.ink, 'stroke-width': 1.2 }, svg);
+        const t = el('text', { x, y: y + 4, 'text-anchor': 'middle', 'font-size': 10.5, 'font-family': 'Hanken Grotesk, sans-serif', fill: COL.ink }, svg); t.textContent = n;
+        return el('circle', { cx: x + 16, cy: y - 12, r: 5, fill: COL.sage, opacity: 0 }, svg);
+      });
+      const bot = el('g', {}, svg);
+      el('circle', { r: 11, fill: COL.laterite }, bot);
+      el('circle', { cx: -3.5, cy: -2, r: 1.8, fill: COL.lime }, bot); el('circle', { cx: 3.5, cy: -2, r: 1.8, fill: COL.lime }, bot);
+      return t => {
+        const seg = (t / 1.1) % 3, k = Math.floor(seg), f = ease(Math.min(1, (seg - k) * 1.6)), a = spots[k], b = spots[(k + 1) % 3];
+        bot.setAttribute('transform', `translate(${a[0] + (b[0] - a[0]) * f} ${a[1] + (b[1] - a[1]) * f})`);
+        checks.forEach((c, i) => c.setAttribute('opacity', (i <= k && Math.floor(t / 3.3) % 2 === 0) || i === (k + 1) % 3 && f === 1 ? 1 : i < k ? 1 : 0));
+      };
+    },
+  };
+  const makeIcon = (key, size) => { const svg = el('svg', { viewBox: '0 0 160 160', width: size, height: size, 'aria-hidden': 'true' }); const frame = ICONS[key](svg); frame(1.2); return { svg, frame }; };
+
+  const terms = $('#lexTerms'), iconBox = $('#lexIcon'), word = $('#lexWord'), def = $('#lexDef'), ana = $('#lexAna');
+  const tabs = data.map(([key, label], i) => {
+    const b = document.createElement('button');
+    b.className = 'term'; b.setAttribute('role', 'tab'); b.setAttribute('aria-controls', 'lexPanel');
+    b.append(makeIcon(key, 26).svg, document.createTextNode(label));
+    b.addEventListener('click', () => select(i));
+    b.addEventListener('keydown', e => {
+      if (e.key === 'ArrowRight') select((cur + 1) % 5, true);
+      if (e.key === 'ArrowLeft') select((cur + 4) % 5, true);
+    });
+    terms.append(b); return b;
+  });
+  let cur = -1, big = null, visible = false, t0 = performance.now();
+  function select(i, focus) {
+    if (i === cur) return;
+    const dir = i > cur ? 1 : -1; cur = i;
+    tabs.forEach((t, k) => { t.setAttribute('aria-selected', k === i); t.tabIndex = k === i ? 0 : -1; });
+    if (focus) tabs[i].focus();
+    big = makeIcon(data[i][0], '100%'); iconBox.replaceChildren(big.svg); t0 = performance.now();
+    [word, def, ana].forEach((n, k) => {
+      n.textContent = data[i][k + 1];
+      if (!reduce && dir) n.animate([{ opacity: 0, transform: `translateX(${dir * 12}px)` }, { opacity: 1, transform: 'none' }],
+        { duration: 260, delay: k * 40, easing: 'cubic-bezier(0.23, 1, 0.32, 1)', fill: 'backwards' });
+    });
+    if (!reduce && dir) big.svg.animate([{ opacity: 0, transform: 'scale(0.94)' }, { opacity: 1, transform: 'none' }], { duration: 240, easing: 'cubic-bezier(0.23, 1, 0.32, 1)' });
+    loop();
+  }
+  let looping = false;
+  function loop() {
+    if (reduce || looping || !visible) return; looping = true;
+    const off = ticker.add(() => { big?.frame((performance.now() - t0) / 1000); if (!visible) { looping = false; off(); } return visible; });
+  }
+  onVisible($('#lexique'), v => { visible = v; loop(); });
+  cur = -1; select(0);
+})();
+
+/* ═══════════════ Prompt builder ═══════════════ */
+(function builder() {
+  const opts = {
+    site: ['Abidjan, chaud et humide', 'Bouaké, savane', 'San-Pédro, littoral'],
+    mat: ['brique de terre compressée', 'bois local et bambou', 'béton et claustras'],
+    esp: ['logement familial R+2', 'école de quartier', 'centre de santé'],
+    amb: ['ombre et ventilation naturelle', 'lumière zénithale douce', 'cour intérieure plantée'],
+    int: ['construire avec le climat', 'ouvrir sur la rue', 'protéger et recentrer'],
+  };
+  const state = { site: 0, mat: 0, esp: 0, amb: 0, int: 0 };
+  const out = $('#promptText');
+  $$('.seg').forEach(seg => {
+    const key = seg.dataset.key;
+    opts[key].forEach((label, i) => {
+      const b = document.createElement('button');
+      b.type = 'button'; b.textContent = label[0].toUpperCase() + label.slice(1); b.setAttribute('aria-pressed', i === 0);
+      b.addEventListener('click', () => { state[key] = i; $$('button', seg).forEach((x, k) => x.setAttribute('aria-pressed', k === i)); render(); });
+      seg.append(b);
+    });
+  });
+  const pick = k => opts[k][state[k]];
+  let plain = '';
+  function render() {
+    out.innerHTML = `<b>Parti :</b> ${pick('int')}. <b>Programme :</b> ${pick('esp')}, site ${pick('site')}. <b>Contraintes :</b> ${pick('mat')}, ${pick('amb')}, normes locales, budget maîtrisé. <b>Critères de visa :</b> ventilation traversante dans chaque pièce, façades est et ouest protégées du soleil, quantités vérifiables depuis la maquette.`;
+    plain = out.textContent;
+  }
+  render();
+  const copy = $('#copyPrompt');
+  copy.addEventListener('click', async () => {
+    try { await navigator.clipboard.writeText(plain); copy.textContent = 'Prompt copié'; }
+    catch { copy.textContent = 'Sélectionnez le texte pour le copier'; }
+    setTimeout(() => (copy.textContent = 'Copier le prompt'), 1800);
+  });
+})();
+
+/* ═══════════════ Loop videos : play only when seen ═══════════════ */
+(function loops() {
+  const ICON_PAUSE = '<svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><rect x="2" y="1.5" width="2.6" height="9" rx="1" fill="currentColor"/><rect x="7.4" y="1.5" width="2.6" height="9" rx="1" fill="currentColor"/></svg>';
+  const ICON_PLAY = '<svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M3 1.8v8.4a.6.6 0 0 0 .9.5l6.6-4.2a.6.6 0 0 0 0-1L3.9 1.3a.6.6 0 0 0-.9.5Z" fill="currentColor"/></svg>';
+  $$('[data-loop]').forEach(fig => {
+    const v = $('video', fig), btn = $('.loop__toggle', fig);
+    let userPaused = reduce, visible = false;
+    const sync = () => {
+      if (visible && !userPaused) v.play().catch(() => {}); else v.pause();
+      btn.innerHTML = userPaused ? ICON_PLAY : ICON_PAUSE;
+      btn.setAttribute('aria-label', userPaused ? 'Lire la boucle' : 'Mettre en pause');
+    };
+    btn.addEventListener('click', () => { userPaused = !userPaused; sync(); });
+    onVisible(fig, v => { visible = v; sync(); }, 0.25);
+    sync();
+  });
+})();
+
+/* ═══════════════ Agence : CSS 3D stack ═══════════════ */
+(function stack() {
+  const info = [
+    ['Client', 'Usages et exigences du projet : le point de départ et le point de retour.'],
+    ['World model', 'Brief, contraintes, décisions, coûts, normes : la mémoire vivante du projet.'],
+    ['Intelligence layer', 'Elle orchestre : elle lit le world model, appelle les bons outils et rend compte.'],
+    ['Outils', 'Design, BIM, coût, carbone, réglementation : branchés, plus juxtaposés.'],
+    ['Interfaces', 'Les livrables : plans, pièces écrites, images, dossiers.'],
+  ];
+  const root = $('#stack'), plates = $$('.plate', root).sort((a, b) => b.dataset.l - a.dataset.l);
+  const gap = new Spring(14, { response: 0.6, damping: 1 });
+  const lifts = plates.map(() => new Spring(0, { response: 0.35, damping: 0.8 }));
+  let active = -1;
+  const draw = () => plates.forEach((p, k) => {
+    const z = k * gap.value + lifts[k].value;
+    p.style.transform = `translate(-50%, -50%) translateZ(${z}px)`;
+  });
+  const run = animateSprings(() => [gap, ...lifts], draw);
+  function setActive(l) {
+    if (l === active) return; active = l;
+    plates.forEach((p, k) => lifts[k].to(+p.dataset.l === l ? 34 : 0));
+    $('#layerTitle').textContent = info[l][0]; $('#layerText').textContent = info[l][1]; run();
+  }
+  // Upper plates hide lower ones on screen, so pick by pointer height instead.
+  root.addEventListener('pointermove', e => {
+    const r = root.getBoundingClientRect();
+    setActive(clamp(Math.floor(((e.clientY - r.top) / r.height - 0.12) / 0.76 * 5), 0, 4));
+  });
+  plates.forEach(p => { const l = +p.dataset.l; p.addEventListener('focus', () => setActive(l)); p.addEventListener('click', () => setActive(l)); });
+  onVisible(root, v => { gap.to(v ? 58 : 14); run(); }, 0.35);
+  draw(); setActive(2);
+})();
+
+/* ═══════════════ Process hub ═══════════════ */
+(function hub() {
+  const nodes = [
+    ['Plans', 'Le plan reste la source.'], ['Coupe', 'La coupe suit le plan.'], ['Façade', 'Les élévations suivent le volume.'],
+    ['Modèle 3D', 'La maquette reste à jour.'], ['Document', 'Les pièces partent en PDF.'], ['Rendu', "L'image sort de la maquette."],
+    ['Permis', 'Le dossier se prépare.'], ['Devis', 'Les quantités viennent du modèle.'], ['Données', 'Programme et normes.'],
+    ['Réunion', 'Les décisions reviennent au brief.'], ['Chantier', 'Les écarts sont relevés.'], ['Client', 'Les validations restent tracées.'],
+  ];
+  const root = $('#hub'), svg = $('#hubLines'), lines = [], btns = [];
+  nodes.forEach(([name, line], i) => {
+    const a = (i / nodes.length) * Math.PI * 2 - Math.PI / 2, x = 50 + Math.cos(a) * 43, y = 50 + Math.sin(a) * 43;
+    const l = document.createElementNS(SVGNS, 'line');
+    l.setAttribute('x1', '50%'); l.setAttribute('y1', '50%'); l.setAttribute('x2', x + '%'); l.setAttribute('y2', y + '%');
+    svg.append(l); lines.push(l);
+    const b = document.createElement('button');
+    b.className = 'node'; b.type = 'button'; b.textContent = name; b.style.left = x + '%'; b.style.top = y + '%'; b.setAttribute('aria-pressed', 'false');
+    const on = () => {
+      btns.forEach((o, k) => o.setAttribute('aria-pressed', k === i)); lines.forEach((o, k) => o.classList.toggle('on', k === i));
+      $('#hubTitle').textContent = name; $('#hubText').textContent = line;
+    };
+    b.addEventListener('pointerenter', on); b.addEventListener('focus', on); b.addEventListener('click', on);
+    root.append(b); btns.push(b);
+  });
+})();
+
+/* ═══════════════ Segmented toggle with a draggable thumb ═══════════════ */
+function segmented(root, initial, onChange) {
+  const thumb = $('.toggle__thumb', root), btns = $$('button', root);
+  const x = new Spring(0, { response: 0.35, damping: 0.85 });
+  let value = initial, w = 0;
+  const paint = () => (thumb.style.transform = `translateX(${x.value}px)`);
+  const run = animateSprings(() => [x], paint);
+  const measure = () => { w = btns[0].offsetWidth; thumb.style.width = w + 'px'; x.snap(value * w); paint(); };
+  function set(v, vel) { value = v; btns.forEach((b, k) => b.setAttribute('aria-pressed', k === v)); x.to(v * w, vel); run(); onChange(v); }
+  const vt = tracker(); let drag = null, moved = false;
+  root.addEventListener('pointerdown', e => { drag = { x0: e.clientX, v0: x.value }; moved = false; vt.reset(); vt.push(e.clientX, 0); root.setPointerCapture(e.pointerId); });
+  root.addEventListener('pointermove', e => {
+    if (!drag) return;
+    const dx = e.clientX - drag.x0;
+    if (Math.abs(dx) > 6) moved = true;
+    if (!moved) return;
+    vt.push(e.clientX, 0);
+    const raw = drag.v0 + dx, over = raw < 0 ? raw : raw > w ? raw - w : 0;
+    x.snap(clamp(raw, 0, w) + rubberband(over, w, 0.3)); paint();
+  });
+  root.addEventListener('pointerup', e => {
+    if (!drag) return;
+    if (moved) { const v = vt.velocity().x; set(x.value + project(v, 0.99) > w / 2 ? 1 : 0, v); }
+    else { const hit = btns.findIndex(b => b.contains(document.elementFromPoint(e.clientX, e.clientY))); if (hit >= 0) set(hit); }
+    drag = null;
+  });
+  root.addEventListener('pointercancel', () => { drag = null; set(value); });
+  btns.forEach((b, k) => b.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); set(k); } }));
+  new ResizeObserver(measure).observe(root);
+  measure(); onChange(initial);
+}
+
+/* ═══════════════ Difficulté : two views, one dataset ═══════════════ */
+(function difficulty() {
+  const chart = $('#chart');
+  const pts = [
+    ['kiosk', 'Kiosque de quartier', [0.12, 0.1], 0.14], ['entrepot', 'Entrepôt', [0.18, 0.82], 0.04],
+    ['lotissement', 'Maison de lotissement', [0.3, 0.34], 0.26], ['hopital', 'Hôpital', [0.78, 0.74], 0.5],
+    ['aeroport', 'Aéroport', [0.9, 0.94], 0.7], ['mesure', 'Maison sur mesure', [0.72, 0.22], 0.92],
+  ].map(([k, label, h, ai], i) => {
+    const el = document.createElement('div');
+    el.className = 'pt'; el.dataset.k = k; el.innerHTML = `<i></i><span>${label}</span>`; chart.append(el);
+    return { el, h, ai, x: new Spring(h[0], { response: 0.55 + i * 0.04, damping: 0.86 }), y: new Spring(1 - h[1], { response: 0.55 + i * 0.04, damping: 0.86 }) };
+  });
+  [...pts].sort((a, b) => a.ai - b.ai).forEach((p, k) => (p.slot = k));
+  const place = () => { const W = chart.clientWidth, H = chart.clientHeight; pts.forEach(p => (p.el.style.transform = `translate(${p.x.value * W - 6}px, ${p.y.value * H - 10}px)`)); };
+  const run = animateSprings(() => pts.flatMap(p => [p.x, p.y]), place);
+  function view(v) {
+    pts.forEach(p => {
+      if (v === 0) { p.x.to(p.h[0] * 0.9 + 0.03); p.y.to(1 - (p.h[1] * 0.9 + 0.04)); }
+      else { p.x.to(0.04 + p.ai * 0.82); p.y.to(p.slot % 2 ? 0.58 : 0.4); }
+    });
+    $('#axHuman').setAttribute('opacity', v ? 0 : 1); $('#axAI').setAttribute('opacity', v ? 1 : 0);
+    $('#noteL').style.opacity = $('#noteR').style.opacity = v ? 1 : 0;
+    $('#diffLede').textContent = v ? "Pour l'IA, un seul axe compte : le déterminisme." : 'Pour un humain, elle monte avec la taille et la complexité.';
+    run();
+  }
+  new ResizeObserver(place).observe(chart);
+  segmented($('#diffToggle'), 0, view);
+})();
+
+/* ═══════════════ Production : force-directed graph (Obsidian-like) ═══════════════ */
+(function graph() {
+  const wrap = $('#graph'), cvs = $('#graphCanvas'), ctx = cvs.getContext('2d');
+  const KIND = {
+    archi: { color: COL.lime, r: 34, label: 'Architecte' },
+    human: { color: COL.banco, r: 9, label: 'Métiers de la construction' },
+    immo: { color: '#9FB08F', r: 9, label: "Métiers de l'immobilier" },
+    model: { color: COL.sage, r: 14, label: 'Modèle du projet' },
+    agent: { color: COL.lat2, r: 11, label: 'Agents IA' },
+  };
+  const N = (id, label, kind, text) => ({ id, label, kind, text });
+  const PEOPLE = [
+    N('archi', 'Architecte', 'archi', 'Au centre du projet, il signe et arbitre.'),
+    N('collab', 'Collaborateurs', 'human', "L'équipe de l'agence : dessin, maquette, suivi."),
+    N('eco', 'Économiste', 'human', 'Métrés, estimations, DPGF.'),
+    N('struct', 'BET structure', 'human', 'Descente de charges, plans de structure.'),
+    N('fluides', 'BET fluides', 'human', 'CVC, plomberie, électricité.'),
+    N('geo', 'Géomètre', 'human', 'Levés, implantation, bornage.'),
+    N('ctrl', 'Bureau de contrôle', 'human', 'Solidité, sécurité incendie, conformité.'),
+    N('ent', 'Entreprises', 'human', 'Gros œuvre et corps d\'état.'),
+    N('opc', 'OPC', 'human', 'Ordonnancement et coordination du chantier.'),
+    N('paysage', 'Paysagiste', 'human', 'Espaces extérieurs et végétal.'),
+    N('mairie', 'Mairie, urbanisme', 'human', 'Permis de construire, règles locales.'),
+    N('mo', "Maître d'ouvrage", 'immo', 'Le client : programme, budget, décisions.'),
+    N('promo', 'Promoteur', 'immo', 'Montage et commercialisation de l\'opération.'),
+    N('immo', 'Agent immobilier', 'immo', 'Vente et location des lots.'),
+    N('notaire', 'Notaire', 'immo', 'Actes, VEFA, titres fonciers.'),
+    N('banque', 'Banque', 'immo', 'Financement de l\'opération.'),
+    N('syndic', 'Gestionnaire, syndic', 'immo', 'Exploitation et entretien après livraison.'),
+  ];
+  const AI = [
+    N('model', 'Modèle du projet', 'model', 'Brief, décisions, quantités, normes : la mémoire partagée.'),
+    N('aRendu', 'Agent rendu', 'agent', 'Images et vidéos depuis la maquette.'),
+    N('aMetre', 'Agent métrés', 'agent', 'Quantités extraites du modèle, prêtes pour le DPGF.'),
+    N('aCctp', 'Agent CCTP', 'agent', 'Pièces écrites conformes à la charte.'),
+    N('aConf', 'Agent conformité', 'agent', 'Contrôle des normes et du dossier.'),
+    N('aPermis', 'Agent permis', 'agent', 'Prépare et vérifie le dossier de permis.'),
+    N('aPlan', 'Agent planning', 'agent', 'Planning et suivi des écarts de chantier.'),
+    N('aClient', 'Agent relation client', 'agent', 'Comptes rendus, validations tracées.'),
+  ];
+  const E_BEFORE = [
+    ['archi', 'collab'], ['archi', 'eco'], ['archi', 'struct'], ['archi', 'fluides'], ['archi', 'geo'], ['archi', 'ctrl'], ['archi', 'ent'],
+    ['archi', 'mo'], ['archi', 'mairie'], ['archi', 'paysage'], ['archi', 'opc'], ['archi', 'promo'],
+    ['mo', 'promo'], ['promo', 'immo'], ['immo', 'notaire'], ['promo', 'banque'], ['mo', 'banque'], ['struct', 'eco'], ['fluides', 'eco'],
+    ['ent', 'ctrl'], ['ent', 'opc'], ['geo', 'mairie'], ['mo', 'syndic'], ['notaire', 'banque'], ['collab', 'eco'],
+  ];
+  const E_AFTER = [
+    ...E_BEFORE, ['archi', 'model'],
+    ['model', 'aRendu'], ['model', 'aMetre'], ['model', 'aCctp'], ['model', 'aConf'], ['model', 'aPermis'], ['model', 'aPlan'], ['model', 'aClient'],
+    ['archi', 'aRendu'], ['archi', 'aCctp'], ['archi', 'aConf'],
+    ['aMetre', 'eco'], ['aCctp', 'ent'], ['aConf', 'ctrl'], ['aPermis', 'mairie'], ['aPlan', 'opc'], ['aPlan', 'ent'],
+    ['aRendu', 'promo'], ['aRendu', 'immo'], ['aClient', 'mo'], ['aClient', 'syndic'], ['collab', 'model'],
+  ];
+  const VIEWS = [{ nodes: PEOPLE, edges: E_BEFORE }, { nodes: [...PEOPLE, ...AI], edges: E_AFTER }];
+
+  let W = 0, H = 0, dpr = 1, nodes = new Map(), edges = [], view = 1, energy = 1, visible = false;
+  let hover = null, dragN = null;
+  const legend = $('#gLegend');
+  legend.innerHTML = Object.values(KIND).map(k => `<span><i style="background:${k.color}"></i>${k.label}</span>`).join('');
+
+  function setView(v) {
+    view = v;
+    const { nodes: list, edges: el } = VIEWS[v], keep = new Set(list.map(n => n.id));
+    const archi = nodes.get('archi');
+    list.forEach((n, i) => {
+      if (!nodes.has(n.id)) {
+        const a = (i / list.length) * Math.PI * 2;
+        const ox = archi ? archi.x : W / 2, oy = archi ? archi.y : H / 2;
+        nodes.set(n.id, { ...n, x: ox + Math.cos(a) * 30, y: oy + Math.sin(a) * 30, vx: 0, vy: 0, alpha: 0, gone: false });
+      } else nodes.get(n.id).gone = false;
+    });
+    nodes.forEach(n => { if (!keep.has(n.id)) n.gone = true; });
+    edges = el.map(([a, b]) => ({ a, b, ai: a.startsWith('a') && a !== 'archi' || b.startsWith('a') && b !== 'archi' || a === 'model' || b === 'model' }));
+    energy = 1; wake();
+  }
+
+  function stepSim(dt) {
+    const list = [...nodes.values()];
+    const cx = W / 2, cy = H / 2, k = Math.min(W, H);
+    for (const n of list) { n.fx = 0; n.fy = 0; }
+    for (let i = 0; i < list.length; i++) for (let j = i + 1; j < list.length; j++) {
+      const a = list[i], b = list[j]; if (a.gone || b.gone) continue;
+      let dx = b.x - a.x, dy = b.y - a.y, d2 = dx * dx + dy * dy + 0.01, d = Math.sqrt(d2);
+      const f = (k * k * (W < 600 ? 0.012 : 0.018)) / d2; dx /= d; dy /= d;
+      a.fx -= dx * f; a.fy -= dy * f; b.fx += dx * f; b.fy += dy * f;
+    }
+    for (const e of edges) {
+      const a = nodes.get(e.a), b = nodes.get(e.b); if (!a || !b) continue;
+      const rest = (a.kind === 'archi' || b.kind === 'archi') ? k * 0.26 : e.ai ? k * 0.16 : k * 0.2;
+      const dx = b.x - a.x, dy = b.y - a.y, d = Math.hypot(dx, dy) || 1, f = (d - rest) * 0.02;
+      a.fx += dx / d * f; a.fy += dy / d * f; b.fx -= dx / d * f; b.fy -= dy / d * f;
+    }
+    let e = 0;
+    for (const n of list) {
+      n.alpha += ((n.gone ? 0 : 1) - n.alpha) * 0.12;
+      if (n.kind === 'archi') { n.x += (cx - n.x) * 0.2; n.y += (cy - n.y) * 0.2; n.vx = n.vy = 0; continue; } // always centred
+      if (n === dragN) continue;
+      n.fx += (cx - n.x) * 0.004; n.fy += (cy - n.y) * 0.004;
+      n.vx = (n.vx + n.fx) * 0.82; n.vy = (n.vy + n.fy) * 0.82;
+      n.x = clamp(n.x + n.vx, 40, W - 40); n.y = clamp(n.y + n.vy, 96, H - (W < 600 ? 120 : 56));
+      e += Math.abs(n.vx) + Math.abs(n.vy);
+    }
+    for (const [id, n] of nodes) if (n.gone && n.alpha < 0.02) nodes.delete(id);
+    energy = e / Math.max(1, list.length);
+  }
+
+  function neighbours(id) { const s = new Set([id]); edges.forEach(e => { if (e.a === id) s.add(e.b); if (e.b === id) s.add(e.a); }); return s; }
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    const focus = hover || dragN, near = focus ? neighbours(focus.id) : null;
+    for (const e of edges) {
+      const a = nodes.get(e.a), b = nodes.get(e.b); if (!a || !b) continue;
+      const lit = near && near.has(a.id) && near.has(b.id) && (a === focus || b === focus);
+      const base = e.ai ? 'rgba(180,98,63,' : 'rgba(247,244,238,';
+      ctx.strokeStyle = base + (lit ? 0.85 : near ? 0.06 : e.ai ? 0.42 : 0.16) * Math.min(a.alpha, b.alpha) + ')';
+      ctx.lineWidth = lit ? 1.8 : e.ai ? 1.3 : 1;
+      ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke();
+    }
+    for (const n of nodes.values()) {
+      const K = KIND[n.kind], dim = near && !near.has(n.id) ? 0.25 : 1, r = K.r * (n === focus ? 1.2 : 1);
+      ctx.globalAlpha = n.alpha * dim;
+      if (n.kind === 'agent' || n.kind === 'archi') { ctx.fillStyle = n.kind === 'agent' ? 'rgba(180,98,63,0.22)' : 'rgba(247,244,238,0.12)'; ctx.beginPath(); ctx.arc(n.x, n.y, r * 1.9, 0, Math.PI * 2); ctx.fill(); }
+      ctx.fillStyle = K.color; ctx.beginPath(); ctx.arc(n.x, n.y, r, 0, Math.PI * 2); ctx.fill();
+      const big = n.kind === 'archi' || n.kind === 'agent' || n.kind === 'model', small = W < 600;
+      ctx.font = `${big ? 500 : 400} ${small ? 10.5 : 12}px Hanken Grotesk, sans-serif`;
+      ctx.textAlign = 'center'; ctx.fillStyle = n.kind === 'agent' ? '#E9B79E' : 'rgba(247,244,238,0.9)';
+      if (n.kind === 'archi') { ctx.font = '500 13px Hanken Grotesk, sans-serif'; ctx.fillStyle = COL.ink; ctx.fillText('Architecte', n.x, n.y + 4.5); }
+      else if (!small || big || n === focus || (near && near.has(n.id))) ctx.fillText(n.label, n.x, n.y + r + (small ? 12 : 15));
+    }
+    ctx.globalAlpha = 1;
+  }
+
+  let looping = false;
+  function wake() {
+    if (looping || !visible) return; looping = true;
+    const off = ticker.add(dt => {
+      stepSim(dt); draw();
+      const busy = visible && (energy > 0.02 || dragN || [...nodes.values()].some(n => Math.abs(n.alpha - (n.gone ? 0 : 1)) > 0.02));
+      if (!busy) { looping = false; off(); }
+      return busy;
+    });
+  }
+  function resize() {
+    dpr = Math.min(devicePixelRatio, 2); const oldW = W || wrap.clientWidth, oldH = H || wrap.clientHeight;
+    W = wrap.clientWidth; H = wrap.clientHeight; cvs.width = W * dpr; cvs.height = H * dpr; ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    nodes.forEach(n => { n.x *= W / oldW; n.y *= H / oldH; });
+    if (reduce) { for (let i = 0; i < 400; i++) stepSim(0.016); }
+    draw(); wake();
+  }
+
+  const at = e => { const r = cvs.getBoundingClientRect(); return { x: e.clientX - r.left, y: e.clientY - r.top }; };
+  const hit = p => { let best = null, bd = 1e9; nodes.forEach(n => { if (n.gone) return; const d = Math.hypot(n.x - p.x, n.y - p.y); if (d < KIND[n.kind].r + 12 && d < bd) { bd = d; best = n; } }); return best; };
+  function info(n) { $('#gTitle').textContent = n ? n.label : 'Architecte'; $('#gText').textContent = n ? n.text : 'Au centre du projet, il signe et arbitre.'; }
+  cvs.addEventListener('pointermove', e => {
+    const p = at(e);
+    if (dragN) { dragN.x = clamp(p.x, 30, W - 30); dragN.y = clamp(p.y, 30, H - 30); energy = 1; wake(); return; }
+    const n = hit(p); if (n !== hover) { hover = n; info(n); draw(); }
+    cvs.style.cursor = n ? 'grab' : 'default';
+  });
+  cvs.addEventListener('pointerleave', () => { if (!dragN) { hover = null; info(null); draw(); } });
+  cvs.addEventListener('pointerdown', e => {
+    const n = hit(at(e)); if (!n) return;
+    hover = n; info(n);
+    if (n.kind === 'archi') { draw(); return; }
+    dragN = n; cvs.setPointerCapture(e.pointerId); e.preventDefault(); wake();
+  });
+  const drop = () => { if (dragN) { dragN.vx = dragN.vy = 0; dragN = null; energy = 1; wake(); } };
+  cvs.addEventListener('pointerup', drop); cvs.addEventListener('pointercancel', drop);
+
+  onVisible(wrap, v => { visible = v; if (v) wake(); });
+  new ResizeObserver(resize).observe(wrap);
+  W = wrap.clientWidth; H = wrap.clientHeight;
+  segmented($('#prodToggle'), 1, setView);
+})();
+
+/* ═══════════════ Ange : pipeline esquisse → rendu → vidéo → présentation ═══════════════ */
+(function pipeline() {
+  const tabs = $$('#pipe [role="tab"]'), layers = $$('#pipeStage .pipe__layer'), cap = $('#pipeCap');
+  const caps = ['Esquisse à la main', "Rendu généré par l'IA depuis l'esquisse", "Boucle vidéo générée par l'IA", 'Planche de présentation'];
+  let cur = 0;
+  function sel(i, focus) {
+    cur = (i + tabs.length) % tabs.length;
+    tabs.forEach((t, k) => { t.setAttribute('aria-selected', k === cur); t.tabIndex = k === cur ? 0 : -1; });
+    layers.forEach((l, k) => { l.dataset.on = k === cur; if (l.tagName === 'VIDEO') { if (k === cur && !reduce) l.play().catch(() => {}); else l.pause(); } });
+    cap.textContent = caps[cur];
+    if (focus) tabs[cur].focus();
+  }
+  tabs.forEach((t, i) => {
+    t.addEventListener('click', () => sel(i));
+    t.addEventListener('keydown', e => {
+      if (e.key === 'ArrowDown' || e.key === 'ArrowRight') { sel(cur + 1, true); e.preventDefault(); }
+      if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') { sel(cur - 1, true); e.preventDefault(); }
+    });
+  });
+  // Swipe the stage : a flick is enough.
+  const stage = $('#pipeStage'); let sx = null;
+  stage.addEventListener('pointerdown', e => { sx = { x: e.clientX, t: performance.now() }; });
+  stage.addEventListener('pointerup', e => {
+    if (!sx) return; const d = e.clientX - sx.x, v = Math.abs(d) / (performance.now() - sx.t); sx = null;
+    if (Math.abs(d) > 60 || (v > 0.11 && Math.abs(d) > 12)) sel(cur + (d < 0 ? 1 : -1));
+  });
+})();
+
+/* ═══════════════ Tabs (cas pratique Gaston) ═══════════════ */
+(function tabs() {
+  const list = $$('#caseTabs [role="tab"]');
+  const sel = (i, focus) => {
+    list.forEach((t, k) => { t.setAttribute('aria-selected', k === i); t.tabIndex = k === i ? 0 : -1; $('#' + t.getAttribute('aria-controls')).hidden = k !== i; });
+    if (focus) list[i].focus();
+  };
+  list.forEach((t, i) => {
+    t.addEventListener('click', () => sel(i));
+    t.addEventListener('keydown', e => {
+      const n = list.length;
+      if (e.key === 'ArrowDown' || e.key === 'ArrowRight') { sel((i + 1) % n, true); e.preventDefault(); }
+      if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') { sel((i + n - 1) % n, true); e.preventDefault(); }
+    });
+  });
+})();
+
+/* ═══════════════ Nav : current chapter, mirrored on the tower ═══════════════ */
+(function nav() {
+  const links = $$('.bar nav a');
+  const ids = ['accueil', 'intervenants', 'lexique', 'parti', 'agence', 'production', 'cas-pratiques', 'deontologie', 'cloture'];
+  const io = new IntersectionObserver(ens => ens.forEach(en => {
+    if (!en.isIntersecting) return;
+    const id = en.target.id;
+    links.forEach(a => a.setAttribute('aria-current', a.getAttribute('href') === '#' + id));
+    const fi = CHAPTERS.findIndex(c => c[0] === id); if (fi >= 0) towerApi.setCurrent(fi);
+  }), { rootMargin: '-45% 0px -50% 0px' });
+  ids.forEach(id => io.observe(document.getElementById(id)));
+  onVisible($('#cloture'), v => { if (v) $('#cloture').classList.add('is-in'); }, 0.4);
+})();
+</script>
+</body>
+</html>
