@@ -10,8 +10,9 @@
 <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@300;400;500;600&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
 <link rel="icon" href="assets/img/oaci.png">
 <link rel="stylesheet" href="style.css">
+<script src="assets/3d/parti-assets.js"></script>
 <script type="importmap">
-{ "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js" } }
+{ "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js", "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/" } }
 </script>
 </head>
 <body>
@@ -27,6 +28,7 @@
     <a href="#cas-pratiques">Cas pratiques</a>
     <a href="#deontologie"><span>05</span>Déontologie</a>
     <a href="#cloture"><span>06</span>Démo</a>
+    <a href="#questions"><span>07</span>Q&amp;R</a>
   </nav>
 </header>
 
@@ -68,7 +70,7 @@
   <div class="profile__in">
     <button class="profile__close press" type="button" id="pClose" aria-label="Fermer la fiche"><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><path d="M3 3l8 8M11 3l-8 8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></button>
     <div class="profile__side" id="pSide">
-      <img class="profile__portrait" id="pImg" alt="" width="512" height="512">
+      <video class="profile__portrait" id="pImg" muted loop playsinline preload="metadata"></video>
       <div class="profile__scene" id="pScene"><p id="pSceneHint">Glissez pour manipuler</p></div>
     </div>
     <div class="profile__body">
@@ -129,6 +131,7 @@
       <p class="formula"><span>Intention</span><i>+</i><span>contraintes</span><i>+</i><span>critères de visa</span></p>
       <div class="builder">
         <div class="builder__row"><span>Site et climat</span><div class="seg" data-key="site"></div></div>
+        <div class="builder__row"><span>Façade</span><div class="seg" data-key="fac"></div></div>
         <div class="builder__row"><span>Matériaux</span><div class="seg" data-key="mat"></div></div>
         <div class="builder__row"><span>Espaces</span><div class="seg" data-key="esp"></div></div>
         <div class="builder__row"><span>Ambiance</span><div class="seg" data-key="amb"></div></div>
@@ -136,11 +139,14 @@
         <div class="prompt-out" aria-live="polite"><p id="promptText"></p><button type="button" id="copyPrompt" class="press">Copier le prompt</button></div>
       </div>
     </div>
-    <figure class="loop loop--tower" data-loop>
-      <video muted loop playsinline preload="metadata" poster="assets/img/tour-iso.webp" aria-label="Tour illustrée en vue axonométrique : les palmiers des terrasses bougent dans la brise.">
-        <source src="assets/video/tour.mp4" type="video/mp4">
-      </video>
-      <button class="loop__toggle press" type="button" aria-label="Mettre en pause"></button>
+    <figure class="maquette" id="maquette" role="img" aria-label="Maquette 3D interactive du projet : elle se reconstruit selon le site, la façade, les matériaux, les espaces, l'ambiance et l'intention choisis. Glissez pour tourner, molette ou pincement pour zoomer.">
+      <figcaption class="maquette__hud">
+        <span class="maquette__live"><i></i>Maquette générée par le prompt</span>
+        <b id="mqView">Le site</b>
+        <span id="mqArea"></span>
+      </figcaption>
+      <ul class="maquette__chips" id="mqState" aria-hidden="true"></ul>
+      <p class="maquette__hint">Glissez pour tourner · molette pour zoomer</p>
     </figure>
   </div>
 </section>
@@ -266,7 +272,7 @@
 <!-- ═════════ Cas pratique : Ange Djoké ═════════ -->
 <section id="cas-pratiques" class="case case--ange" aria-labelledby="h-ange">
   <h2 id="h-ange" style="max-width:20ch">Concevoir et rendre avec l'IA</h2>
-  <div class="case__by"><img src="assets/img/ange.webp" alt="" width="480" height="504"><span>Cas pratique présenté par <b>Ange Djoké</b>, architecte et modérateur de l'atelier.</span></div>
+  <div class="case__by"><img src="assets/img/ange.webp" alt="" width="480" height="504"><span>Cas pratique présenté par <b>Ange Djoké</b>, architecte, designer et edge expert, modérateur de l'atelier.</span></div>
   <div class="topics"><span>Rendus images et vidéos</span><span>Présentations</span><span>Conception de projets assistée par IA</span></div>
   <div class="pipe" id="pipe">
     <ol class="pipe__steps" role="tablist" aria-label="Étapes">
@@ -381,11 +387,33 @@
     </div>
     <div class="copy">
       <p class="lede" style="color:var(--lime)">Place à la démo live interactive, puis aux questions.</p>
+      <figure class="qr" id="qr">
+        <div class="qr__frame">
+          <img src="assets/img/qr-demo.png" alt="QR code d'accès à la démo live" width="330" height="330">
+          <span class="qr__scan" aria-hidden="true"></span>
+          <i class="qr__corner qr__corner--tl" aria-hidden="true"></i><i class="qr__corner qr__corner--tr" aria-hidden="true"></i><i class="qr__corner qr__corner--bl" aria-hidden="true"></i><i class="qr__corner qr__corner--br" aria-hidden="true"></i>
+        </div>
+        <figcaption><b>Scannez pour suivre la démo</b>Ouvrez l'appareil photo de votre téléphone et visez le code.</figcaption>
+      </figure>
       <div class="close__team">
         <div><img src="assets/img/ange.webp" alt="Ange Djoké" width="480" height="504"><img src="assets/img/jeanmarc.webp" alt="Jean-Marc Don Mello" width="480" height="504"><img src="assets/img/gaston.webp" alt="Gaston Koffi" width="496" height="504"></div>
         <p class="small">Merci à l'Ordre des Architectes de Côte d'Ivoire.</p>
       </div>
     </div>
+  </div>
+</section>
+
+<!-- ═════════ 07 Questions et réponses ═════════ -->
+<section id="questions" class="qa" aria-labelledby="h-qa">
+  <canvas class="qa__sky" id="qaSky" aria-hidden="true"></canvas>
+  <div class="qa__in">
+    <div class="qa__head">
+      <span class="chapter">07</span>
+      <h2 id="h-qa">Questions et réponses</h2>
+      <p class="qa__typed" aria-live="off"><span id="qaTyped"></span><i class="qa__caret" aria-hidden="true"></i></p>
+      <p class="lede">La parole est à la salle. En attendant le micro, voici les questions qu'on nous pose le plus souvent.</p>
+    </div>
+    <div class="qa__list" id="qaList"></div>
   </div>
 </section>
 
@@ -397,6 +425,8 @@
 
 <script type="module">
 import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 
 const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const finePointer = matchMedia('(hover: hover) and (pointer: fine)').matches;
@@ -538,6 +568,7 @@ const onVisible = (el, cb, threshold = 0) => new IntersectionObserver(([e]) => c
 const CHAPTERS = [
   ['accueil', '', 'Accueil'], ['lexique', '01', 'Lexique'], ['parti', '02', 'Prompt et parti'], ['agence', '03', 'Process'],
   ['production', '04', 'Production'], ['cas-pratiques', '', 'Cas pratiques'], ['deontologie', '05', 'Déontologie'], ['cloture', '06', 'Démo'],
+  ['questions', '07', 'Questions'],
 ];
 const goTo = id => document.getElementById(id)?.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth' });
 const towerApi = (function tower() {
@@ -550,7 +581,7 @@ const towerApi = (function tower() {
 
   const scene = new THREE.Scene();
   const cam = new THREE.OrthographicCamera(-1, 1, 1, -1, 0.1, 100);
-  cam.position.set(14, 13, 14); cam.lookAt(0, 4.9, 0);
+  cam.position.set(14, 13.5, 14); cam.lookAt(0, 5.4, 0);
   scene.add(new THREE.HemisphereLight(0xfff6ea, 0xb9a48a, 1.35));
   const sun = new THREE.DirectionalLight(0xffe9d2, 1.9);
   sun.position.set(-6, 16, 8); sun.castShadow = true; sun.shadow.mapSize.set(2048, 2048);
@@ -665,7 +696,7 @@ const towerApi = (function tower() {
   function resize() {
     W = stage.clientWidth; H = stage.clientHeight;
     renderer.setSize(W, H, false);
-    const a = W / H, view = 7.3;
+    const a = W / H, view = 7.9;
     cam.left = -view * a; cam.right = view * a; cam.top = view; cam.bottom = -view;
     cam.zoom = a < 0.8 ? 0.92 : 1.05;
     cam.updateProjectionMatrix(); run(); render();
@@ -744,15 +775,15 @@ const towerApi = (function tower() {
    profil LinkedIn public de Konan Gaston Koffi (titre). */
 const SPEAKERS = [
   {
-    id: 'ange', name: 'Ange Djoké', role: 'Architecte, modérateur de l\'atelier', img: 'assets/img/ange.webp',
+    id: 'ange', name: 'Ange Djoké', role: 'Architecte, designer et edge expert', img: 'assets/img/ange.webp', vid: 'assets/video/spk-ange.mp4',
     link: 'https://www.linkedin.com/in/ange-djok%C3%A9-283190136',
-    bio: "Architecte, il modère l'atelier et présente la partie conception et rendus : comment l'IA aide à passer de l'esquisse à l'image, puis à la présentation.",
-    facts: [['Métier', 'Architecte'], ['Rôle', 'Modérateur de l\'atelier'], ['Partie', 'Conception et rendus']],
+    bio: "Architecte, designer et edge expert, il modère l'atelier et présente la partie conception et rendus : comment l'IA aide à passer de l'esquisse à l'image, puis à la présentation.",
+    facts: [['Métier', 'Architecte, designer, edge expert'], ['Rôle', 'Modérateur de l\'atelier'], ['Partie', 'Conception et rendus']],
     topics: ['Rendus images et vidéos', 'Présentations', 'Conception assistée par IA'],
     scene: 'render', hint: 'Glissez pour déplacer le soleil',
   },
   {
-    id: 'jeanmarc', name: 'Jean-Marc Don Mello', role: 'Architecte', img: 'assets/img/jeanmarc.webp',
+    id: 'jeanmarc', name: 'Jean-Marc Don Mello', role: 'Architecte', img: 'assets/img/jeanmarc.webp', vid: 'assets/video/spk-jeanmarc.mp4',
     link: 'https://www.linkedin.com/in/jean-marc-don-mello-67799875/',
     bio: "Architecte, il porte le fil de la présentation : l'architecte comme artisan augmenté, qui crée ses outils, maîtrise ses process et signe en conscience.",
     facts: [['Métier', 'Architecte'], ['Agence', 'Koffi & Diabaté Architectes'], ['Partie', 'L\'artisan augmenté']],
@@ -760,7 +791,7 @@ const SPEAKERS = [
     scene: 'stack', hint: 'Glissez pour faire tourner les couches',
   },
   {
-    id: 'gaston', name: 'Gaston Koffi', role: 'Ingénieur génie civil, coordinateur BIM', img: 'assets/img/gaston.webp',
+    id: 'gaston', name: 'Gaston Koffi', role: 'Ingénieur génie civil, coordinateur BIM', img: 'assets/img/gaston.webp', vid: 'assets/video/spk-gaston.mp4',
     link: 'https://www.linkedin.com/in/konan-gaston-koffi-4ba76717a/',
     bio: "Ingénieur BTP et coordinateur BIM, il présente la gestion de l'APD et du DCE avec Claude : Revit, Excel, Word, plugins métier et contrôle de dossier.",
     facts: [['Métier', 'Ingénieur génie civil'], ['Spécialité', 'Coordination BIM'], ['Partie', 'Gestion APD et DCE']],
@@ -776,7 +807,7 @@ const SPEAKERS = [
     b.type = 'button'; b.className = 'spk'; b.setAttribute('aria-haspopup', 'dialog');
     b.innerHTML = `
       <div class="spk__frame">
-        <img src="${s.img}" alt="" width="480" height="504" loading="lazy">
+        <video muted loop playsinline preload="metadata" poster="${s.img}" aria-hidden="true"><source src="${s.vid}" type="video/mp4"></video>
         <span class="spk__badge">${s.facts[2][1]}</span>
         <span class="spk__open" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 14 14"><path d="M7 2v10M2 7h10" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></span>
       </div>
@@ -785,6 +816,8 @@ const SPEAKERS = [
     b.addEventListener('click', () => profile.open(i, b));
     grid.append(b);
     tilt($('.spk__frame', b), 10);
+    const v = $('video', b);
+    onVisible(b, on => { if (on && !reduce) v.play().catch(() => {}); else v.pause(); }, 0.3);
   });
 })();
 
@@ -809,7 +842,8 @@ const profile = (function () {
   function fill(i) {
     const s = SPEAKERS[i]; idx = i;
     $('#pName').textContent = s.name; $('#pRole').textContent = s.role; $('#pBio').textContent = s.bio;
-    $('#pImg').src = s.img; $('#pImg').alt = `Portrait de ${s.name}`;
+    const pv = $('#pImg'); pv.poster = s.img; pv.src = s.vid; pv.setAttribute('aria-label', `Portrait animé de ${s.name}`);
+    if (!reduce) pv.play().catch(() => {});
     $('#pFacts').innerHTML = s.facts.map(([k, v]) => `<li><span>${k}</span><span>${v}</span></li>`).join('');
     $('#pTopics').innerHTML = s.topics.map(t => `<span>${t}</span>`).join('');
     $('#pLink').href = s.link; $('#pSceneHint').textContent = s.hint;
@@ -822,7 +856,7 @@ const profile = (function () {
   }
   function close() {
     if (!dlg.open) return;
-    const done = () => { dlg.close(); three?.stop(); opener?.focus(); };
+    const done = () => { dlg.close(); three?.stop(); $('#pImg').pause(); opener?.focus(); };
     if (reduce) return done();
     dlg.animate([{ opacity: 1, transform: 'none' }, { opacity: 0, transform: 'translateY(10px) scale(0.98)' }], { duration: 160, easing: 'cubic-bezier(0.23, 1, 0.32, 1)' }).onfinish = done;
   }
@@ -931,92 +965,163 @@ function miniScene(host) {
     ['agent', 'Agent', 'Un LLM outillé et contextualisé, qui agit à votre place.', 'Un collaborateur qui exécute, sous votre visa et votre signature.'],
   ];
   const el = (tag, attrs = {}, parent) => { const n = document.createElementNS(SVGNS, tag); for (const k in attrs) n.setAttribute(k, attrs[k]); parent?.append(n); return n; };
+  const txt = (parent, s, attrs) => { const t = el('text', { 'text-anchor': 'middle', 'font-family': 'Hanken Grotesk, sans-serif', ...attrs }, parent); t.textContent = s; return t; };
   const ease = x => x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2;
+  const back = x => { const c = 1.9; return 1 + (c + 1) * Math.pow(x - 1, 3) + c * Math.pow(x - 1, 2); }; // overshoot
+  const seg = (t, a, b) => clamp((t - a) / (b - a), 0, 1);
 
-  /* Each icon : build(svg) returns frame(t) */
+  /* Each icon : build(svg) returns frame(t). Every icon now moves all the time. */
   const ICONS = {
     token(svg) {
-      const parts = ['ma', 'quet', 'te'], widths = [30, 42, 26], g = [];
-      let x = 80 - (widths.reduce((a, b) => a + b) + 8) / 2;
+      // "maquette" arrives whole, splits into three tokens that hop apart, get counted, then merge again.
+      const parts = ['ma', 'quet', 'te'], widths = [30, 42, 26], fills = [COL.banco, COL.lat2, COL.sage], g = [];
+      const total = widths.reduce((a, b) => a + b);
+      let x = 80 - total / 2;
       parts.forEach((p, i) => {
         const grp = el('g', {}, svg);
-        el('rect', { x, y: 62, width: widths[i], height: 30, rx: 7, fill: [COL.banco, COL.lat2, COL.sage][i] }, grp);
-        const t = el('text', { x: x + widths[i] / 2, y: 82, 'text-anchor': 'middle', 'font-size': 15, 'font-family': 'Hanken Grotesk, sans-serif', fill: i ? COL.lime : COL.ink }, grp); t.textContent = p;
-        g.push({ grp, off: i - 1 }); x += widths[i] + 4;
+        el('rect', { x, y: 58, width: widths[i], height: 30, rx: 7, fill: fills[i] }, grp);
+        txt(grp, p, { x: x + widths[i] / 2, y: 78, 'font-size': 15, fill: i ? COL.lime : COL.ink });
+        g.push({ grp, off: i - 1 }); x += widths[i];
       });
-      const count = el('text', { x: 80, y: 120, 'text-anchor': 'middle', 'font-size': 12, 'font-family': 'Hanken Grotesk, sans-serif', fill: COL.ink }, svg);
-      count.textContent = '3 tokens';
-      return t => { const s = ease((Math.sin(t * 1.6) + 1) / 2) * 9; g.forEach(o => o.grp.setAttribute('transform', `translate(${o.off * s} 0)`)); count.setAttribute('opacity', 0.35 + s / 14); };
+      const count = txt(svg, '3 tokens', { x: 80, y: 122, 'font-size': 13, fill: COL.ink });
+      const tick = el('g', {}, svg);
+      [0, 1, 2].forEach(i => el('circle', { cx: 64 + i * 16, cy: 136, r: 3.4, fill: fills[i] }, tick));
+      return t => {
+        const c = (t % 3.2) / 3.2;
+        const split = back(seg(c, 0.12, 0.34)) * (1 - ease(seg(c, 0.82, 0.98)));
+        g.forEach((o, i) => {
+          const hop = Math.sin(clamp((c - 0.36 - i * 0.07) / 0.18, 0, 1) * Math.PI) * 14;
+          const bob = Math.sin(t * 3 + i) * 2 * split;
+          o.grp.setAttribute('transform', `translate(${o.off * split * 12} ${-hop + bob})`);
+        });
+        const k = back(seg(c, 0.4, 0.6));
+        count.setAttribute('opacity', k * (1 - seg(c, 0.82, 0.92)));
+        count.setAttribute('transform', `translate(80 122) scale(${0.6 + 0.4 * k}) translate(-80 -122)`);
+        [...tick.children].forEach((d, i) => d.setAttribute('r', 3.4 * back(seg(c, 0.36 + i * 0.07, 0.5 + i * 0.07)) * (1 - seg(c, 0.82, 0.92))));
+      };
     },
     llm(svg) {
-      const layers = [[50, 80, 110], [38, 66, 94, 122], [50, 80, 110]], X = [40, 80, 120], nodes = [], edges = [];
+      const layers = [[50, 80, 110], [38, 66, 94, 122], [50, 80, 110], [80]], X = [28, 64, 100, 136], nodes = [], edges = [];
       layers.forEach((ys, l) => ys.forEach(y => nodes.push({ x: X[l], y, l })));
       nodes.forEach(a => nodes.forEach(b => { if (b.l === a.l + 1) edges.push([a, b, el('line', { x1: a.x, y1: a.y, x2: b.x, y2: b.y, stroke: COL.banco, 'stroke-width': 1 }, svg)]); }));
-      const dots = nodes.map(n => el('circle', { cx: n.x, cy: n.y, r: 6, fill: COL.ink }, svg));
-      const pulses = [0, 1, 2].map(() => el('circle', { r: 3.5, fill: COL.lat2 }, svg));
+      const dots = nodes.map(n => el('circle', { cx: n.x, cy: n.y, r: n.l === 3 ? 8 : 6, fill: COL.ink }, svg));
+      const halo = el('circle', { cx: 136, cy: 80, r: 8, fill: 'none', stroke: COL.laterite, 'stroke-width': 2 }, svg);
+      const pulses = Array.from({ length: 9 }, () => el('circle', { r: 3.2, fill: COL.lat2 }, svg));
+      const byLayer = l => edges.filter(([a]) => a.l === l);
       return t => {
+        // signal waves run left to right, one layer per beat
         pulses.forEach((p, k) => {
-          const tt = t * 0.9 + k * 0.37, i = Math.floor(tt * 3) % edges.length, f = (tt * 3) % 1, [a, b] = edges[(i * 7 + k * 5) % edges.length];
+          const tt = t * 1.4 + k * 0.33, l = Math.floor(tt) % 3, f = ease(tt % 1), list = byLayer(l), [a, b] = list[(k * 5 + Math.floor(tt / 3) * 3) % list.length];
           p.setAttribute('cx', a.x + (b.x - a.x) * f); p.setAttribute('cy', a.y + (b.y - a.y) * f);
         });
-        dots.forEach((d, i) => d.setAttribute('fill', Math.sin(t * 3 + i) > 0.7 ? COL.laterite : COL.ink));
+        const wave = (t * 1.4) % 3;
+        dots.forEach((d, i) => {
+          const n = nodes[i], on = Math.max(0, 1 - Math.abs(wave - n.l) * 1.6);
+          d.setAttribute('fill', on > 0.4 ? COL.laterite : COL.ink);
+          d.setAttribute('r', (n.l === 3 ? 8 : 6) + on * 2.2);
+        });
+        edges.forEach(([a, , line]) => line.setAttribute('stroke-opacity', 0.45 + 0.55 * Math.max(0, 1 - Math.abs(wave - a.l - 0.5) * 1.4)));
+        const h = (t * 1.4) % 3 / 3;
+        halo.setAttribute('r', 8 + h * 16); halo.setAttribute('opacity', 1 - h);
       };
     },
     mcp(svg) {
-      const tools = [['Revit', 80, 30], ['Excel', 128, 112], ['Data', 32, 112]];
-      tools.forEach(([n, x, y]) => {
-        el('line', { x1: 80, y1: 84, x2: x, y2: y, stroke: COL.banco, 'stroke-width': 2, 'stroke-dasharray': '3 4' }, svg);
+      const tools = [['Revit', 80, 28], ['Excel', 130, 114], ['Data', 30, 114]];
+      const lines = tools.map(([, x, y]) => el('line', { x1: 80, y1: 84, x2: x, y2: y, stroke: COL.banco, 'stroke-width': 2, 'stroke-dasharray': '3 4' }, svg));
+      const boxes = tools.map(([n, x, y]) => {
+        const g = el('g', {}, svg);
+        el('rect', { x: x - 22, y: y - 12, width: 44, height: 24, rx: 7, fill: COL.lime, stroke: COL.ink, 'stroke-width': 1.2 }, g);
+        txt(g, n, { x, y: y + 4, 'font-size': 11, fill: COL.ink });
+        return g;
       });
-      tools.forEach(([n, x, y]) => {
-        el('rect', { x: x - 22, y: y - 12, width: 44, height: 24, rx: 7, fill: COL.lime, stroke: COL.ink, 'stroke-width': 1.2 }, svg);
-        const t = el('text', { x, y: y + 4, 'text-anchor': 'middle', 'font-size': 11, 'font-family': 'Hanken Grotesk, sans-serif', fill: COL.ink }, svg); t.textContent = n;
-      });
+      const ring = el('circle', { cx: 80, cy: 84, r: 26, fill: 'none', stroke: COL.lat2, 'stroke-width': 1.5, 'stroke-dasharray': '4 6' }, svg);
       el('circle', { cx: 80, cy: 84, r: 19, fill: COL.ink }, svg);
-      const t = el('text', { x: 80, y: 88, 'text-anchor': 'middle', 'font-size': 11, 'font-family': 'Hanken Grotesk, sans-serif', fill: COL.lime }, svg); t.textContent = 'MCP';
-      const dot = el('circle', { r: 4.5, fill: COL.lat2 }, svg);
-      return tt => {
-        const k = Math.floor(tt / 1.2) % 3, f = (tt % 1.2) / 1.2, [, x, y] = tools[k], p = f < 0.5 ? ease(f * 2) : ease(2 - f * 2);
-        dot.setAttribute('cx', 80 + (x - 80) * p); dot.setAttribute('cy', 84 + (y - 84) * p);
+      txt(svg, 'MCP', { x: 80, y: 88, 'font-size': 11, fill: COL.lime });
+      const dots = tools.map(() => el('circle', { r: 4.5, fill: COL.lat2 }, svg));
+      return t => {
+        ring.setAttribute('transform', `rotate(${t * 40} 80 84)`);
+        lines.forEach(l => l.setAttribute('stroke-dashoffset', -t * 14));
+        tools.forEach(([, x, y], k) => {
+          const f = ((t * 0.8 + k / 3) % 1), p = f < 0.5 ? ease(f * 2) : ease(2 - f * 2);
+          dots[k].setAttribute('cx', 80 + (x - 80) * p); dots[k].setAttribute('cy', 84 + (y - 84) * p);
+          const hit = Math.max(0, 1 - Math.abs(f - 0.5) * 8);
+          boxes[k].setAttribute('transform', `translate(${x} ${y}) scale(${1 + hit * 0.14}) translate(${-x} ${-y})`);
+        });
       };
     },
     prompt(svg) {
-      el('rect', { x: 22, y: 34, width: 116, height: 92, rx: 14, fill: COL.lime, stroke: COL.ink, 'stroke-width': 1.2 }, svg);
+      const card = el('g', {}, svg);
+      const frame = el('rect', { x: 18, y: 30, width: 124, height: 96, rx: 14, fill: COL.lime, stroke: COL.ink, 'stroke-width': 1.2 }, card);
       const lines = ['Logement R+2,', 'Abidjan, brique', 'de terre, visa :', 'ventilation.'];
-      const texts = lines.map((_, i) => el('text', { x: 34, y: 58 + i * 18, 'font-size': 12.5, 'font-family': 'Hanken Grotesk, sans-serif', fill: COL.ink }, svg));
-      const caret = el('rect', { width: 1.6, height: 14, fill: COL.laterite }, svg);
+      const texts = lines.map((_, i) => el('text', { x: 30, y: 54 + i * 18, 'font-size': 12.5, 'font-family': 'Hanken Grotesk, sans-serif', fill: COL.ink }, card));
+      const caret = el('rect', { width: 1.6, height: 14, fill: COL.laterite }, card);
+      const send = el('g', {}, svg);
+      el('circle', { cx: 0, cy: 0, r: 11, fill: COL.laterite }, send);
+      el('path', { d: 'M-4 0h8M1-4l4 4-4 4', stroke: COL.lime, 'stroke-width': 1.8, fill: 'none', 'stroke-linecap': 'round', 'stroke-linejoin': 'round' }, send);
+      const star = el('path', { d: 'M0-9 2.4-2.4 9 0 2.4 2.4 0 9-2.4 2.4-9 0-2.4-2.4Z', fill: COL.lat2 }, svg);
       const full = lines.join('\n'), total = full.length;
       return t => {
-        const n = Math.floor(((t * 14) % (total + 24))), shown = full.slice(0, Math.min(n, total)).split('\n');
+        const cyc = total / 16 + 2.2, c = t % cyc, n = Math.floor(c * 16), shown = full.slice(0, Math.min(n, total)).split('\n');
         texts.forEach((tx, i) => (tx.textContent = shown[i] ?? ''));
         const li = shown.length - 1, w = (shown[li] || '').length * 6.3;
-        caret.setAttribute('x', 35 + w); caret.setAttribute('y', 47 + li * 18); caret.setAttribute('opacity', Math.sin(t * 8) > 0 ? 1 : 0.2);
+        caret.setAttribute('x', 31 + w); caret.setAttribute('y', 43 + li * 18); caret.setAttribute('opacity', Math.sin(t * 8) > 0 ? 1 : 0.2);
+        card.setAttribute('transform', `translate(0 ${Math.sin(t * 1.6) * 3}) rotate(${Math.sin(t * 1.1) * 1.6} 80 78)`);
+        const done = seg(c, total / 16, total / 16 + 0.5), fly = seg(c, total / 16 + 0.6, cyc);
+        frame.setAttribute('stroke', done > 0 && fly < 1 ? COL.laterite : COL.ink);
+        send.setAttribute('transform', `translate(${130 + ease(fly) * 40} ${118 - ease(fly) * 30}) scale(${back(done) * (1 - fly)})`);
+        star.setAttribute('transform', `translate(138 32) rotate(${t * 90}) scale(${0.5 + 0.5 * Math.abs(Math.sin(t * 2.2))})`);
       };
     },
     agent(svg) {
-      const spots = [[40, 48, 'plan'], [120, 48, 'devis'], [80, 122, 'pdf']];
-      el('path', { d: 'M40 48 L120 48 L80 122 Z', fill: 'none', stroke: COL.banco, 'stroke-width': 1.5, 'stroke-dasharray': '3 5' }, svg);
-      const checks = spots.map(([x, y, n]) => {
-        el('rect', { x: x - 18, y: y - 14, width: 36, height: 28, rx: 7, fill: COL.lime, stroke: COL.ink, 'stroke-width': 1.2 }, svg);
-        const t = el('text', { x, y: y + 4, 'text-anchor': 'middle', 'font-size': 10.5, 'font-family': 'Hanken Grotesk, sans-serif', fill: COL.ink }, svg); t.textContent = n;
-        return el('circle', { cx: x + 16, cy: y - 12, r: 5, fill: COL.sage, opacity: 0 }, svg);
+      const spots = [[36, 46, 'plan'], [124, 46, 'devis'], [80, 124, 'pdf']];
+      el('path', { d: 'M36 46 L124 46 L80 124 Z', fill: 'none', stroke: COL.banco, 'stroke-width': 1.5, 'stroke-dasharray': '3 5' }, svg);
+      const cards = spots.map(([x, y, n]) => {
+        const g = el('g', {}, svg);
+        el('rect', { x: x - 18, y: y - 14, width: 36, height: 28, rx: 7, fill: COL.lime, stroke: COL.ink, 'stroke-width': 1.2 }, g);
+        txt(g, n, { x, y: y + 4, 'font-size': 10.5, fill: COL.ink });
+        const chk = el('g', {}, g);
+        el('circle', { cx: 0, cy: 0, r: 6, fill: COL.sage }, chk);
+        el('path', { d: 'M-2.6 0.2 -0.6 2.2 2.8-1.8', stroke: COL.lime, 'stroke-width': 1.5, fill: 'none', 'stroke-linecap': 'round' }, chk);
+        return { g, chk, x, y };
       });
+      const trail = [0, 1, 2, 3].map(i => el('circle', { r: 3 - i * 0.6, fill: COL.lat2, opacity: 0.5 - i * 0.1 }, svg));
       const bot = el('g', {}, svg);
-      el('circle', { r: 11, fill: COL.laterite }, bot);
-      el('circle', { cx: -3.5, cy: -2, r: 1.8, fill: COL.lime }, bot); el('circle', { cx: 3.5, cy: -2, r: 1.8, fill: COL.lime }, bot);
+      const body = el('g', {}, bot);
+      el('circle', { r: 11, fill: COL.laterite }, body);
+      el('circle', { cx: -3.5, cy: -2, r: 1.8, fill: COL.lime }, body); el('circle', { cx: 3.5, cy: -2, r: 1.8, fill: COL.lime }, body);
+      el('line', { x1: 0, y1: -11, x2: 0, y2: -16, stroke: COL.laterite, 'stroke-width': 1.5 }, body);
+      const ant = el('circle', { cx: 0, cy: -17, r: 2, fill: COL.lat2 }, body);
+      const pos = tt => {
+        const s = (tt / 1.2) % 3, k = Math.floor(s), f = ease(Math.min(1, (s - k) * 1.5)), a = spots[k], b = spots[(k + 1) % 3];
+        return [a[0] + (b[0] - a[0]) * f, a[1] + (b[1] - a[1]) * f - Math.sin(f * Math.PI) * 16, k, f];
+      };
       return t => {
-        const seg = (t / 1.1) % 3, k = Math.floor(seg), f = ease(Math.min(1, (seg - k) * 1.6)), a = spots[k], b = spots[(k + 1) % 3];
-        bot.setAttribute('transform', `translate(${a[0] + (b[0] - a[0]) * f} ${a[1] + (b[1] - a[1]) * f})`);
-        checks.forEach((c, i) => c.setAttribute('opacity', (i <= k && Math.floor(t / 3.3) % 2 === 0) || i === (k + 1) % 3 && f === 1 ? 1 : i < k ? 1 : 0));
+        const [x, y, k, f] = pos(t);
+        const squash = f === 1 ? 1 - Math.abs(Math.sin(t * 9)) * 0.1 : 1;
+        bot.setAttribute('transform', `translate(${x} ${y})`);
+        body.setAttribute('transform', `scale(${1 / squash} ${squash})`);
+        ant.setAttribute('fill', Math.sin(t * 10) > 0 ? COL.lat2 : COL.lime);
+        trail.forEach((d, i) => { const [tx, ty] = pos(t - (i + 1) * 0.06); d.setAttribute('cx', tx); d.setAttribute('cy', ty); });
+        const lap = Math.floor(t / 3.6) % 2 === 0;
+        cards.forEach((c, i) => {
+          const reached = i === (k + 1) % 3 ? (f === 1 ? 1 : 0) : (lap ? (i <= k ? 1 : 0) : (i > k + 1 ? 1 : 0));
+          const s = reached ? back(clamp(((t / 1.2) % 3 - k - 0.66) * 3, 0, 1)) : 0;
+          c.chk.setAttribute('transform', `translate(${c.x + 16} ${c.y - 13}) scale(${i === (k + 1) % 3 ? s : reached})`);
+          const nod = i === (k + 1) % 3 && f === 1 ? Math.sin(clamp(((t / 1.2) % 3 - k - 0.66) * 3, 0, 1) * Math.PI) * 3 : 0;
+          c.g.setAttribute('transform', `translate(0 ${-nod})`);
+        });
       };
     },
   };
   const makeIcon = (key, size) => { const svg = el('svg', { viewBox: '0 0 160 160', width: size, height: size, 'aria-hidden': 'true' }); const frame = ICONS[key](svg); frame(1.2); return { svg, frame }; };
 
   const terms = $('#lexTerms'), iconBox = $('#lexIcon'), word = $('#lexWord'), def = $('#lexDef'), ana = $('#lexAna');
+  const minis = [];
   const tabs = data.map(([key, label], i) => {
     const b = document.createElement('button');
     b.className = 'term'; b.setAttribute('role', 'tab'); b.setAttribute('aria-controls', 'lexPanel');
-    b.append(makeIcon(key, 26).svg, document.createTextNode(label));
+    const mini = makeIcon(key, 26); minis.push(mini);
+    b.append(mini.svg, document.createTextNode(label));
     b.addEventListener('click', () => select(i));
     b.addEventListener('keydown', e => {
       if (e.key === 'ArrowRight') select((cur + 1) % 5, true);
@@ -1025,54 +1130,543 @@ function miniScene(host) {
     terms.append(b); return b;
   });
   let cur = -1, big = null, visible = false, t0 = performance.now();
+  // the word itself is spelled letter by letter, each letter dropping in on a spring curve
+  const spell = s => { word.replaceChildren(...[...s].map((ch, k) => { const sp = document.createElement('span'); sp.textContent = ch; sp.style.setProperty('--k', k); return sp; })); };
   function select(i, focus) {
     if (i === cur) return;
     const dir = i > cur ? 1 : -1; cur = i;
     tabs.forEach((t, k) => { t.setAttribute('aria-selected', k === i); t.tabIndex = k === i ? 0 : -1; });
     if (focus) tabs[i].focus();
     big = makeIcon(data[i][0], '100%'); iconBox.replaceChildren(big.svg); t0 = performance.now();
-    [word, def, ana].forEach((n, k) => {
-      n.textContent = data[i][k + 1];
-      if (!reduce && dir) n.animate([{ opacity: 0, transform: `translateX(${dir * 12}px)` }, { opacity: 1, transform: 'none' }],
-        { duration: 260, delay: k * 40, easing: 'cubic-bezier(0.23, 1, 0.32, 1)', fill: 'backwards' });
-    });
-    if (!reduce && dir) big.svg.animate([{ opacity: 0, transform: 'scale(0.94)' }, { opacity: 1, transform: 'none' }], { duration: 240, easing: 'cubic-bezier(0.23, 1, 0.32, 1)' });
+    spell(data[i][1]); word.setAttribute('aria-label', data[i][1]);
+    def.textContent = data[i][2]; ana.textContent = data[i][3];
+    if (!reduce) {
+      word.classList.remove('is-in'); void word.offsetWidth; word.classList.add('is-in');
+      [def, ana].forEach((n, k) => n.animate(
+        [{ opacity: 0, transform: `translate(${dir * 28}px, 10px)`, filter: 'blur(6px)' }, { opacity: 1, transform: 'none', filter: 'blur(0)' }],
+        { duration: 520, delay: 120 + k * 90, easing: 'cubic-bezier(0.23, 1, 0.32, 1)', fill: 'backwards' }));
+      iconBox.animate(
+        [{ transform: `translateX(${dir * -30}px) rotate(${dir * -8}deg) scale(0.8)`, opacity: 0 }, { transform: `rotate(${dir * 3}deg) scale(1.04)`, opacity: 1, offset: 0.6 }, { transform: 'none', opacity: 1 }],
+        { duration: 620, easing: 'cubic-bezier(0.23, 1, 0.32, 1)' });
+    }
     loop();
   }
   let looping = false;
   function loop() {
     if (reduce || looping || !visible) return; looping = true;
-    const off = ticker.add(() => { big?.frame((performance.now() - t0) / 1000); if (!visible) { looping = false; off(); } return visible; });
+    const off = ticker.add(() => {
+      const t = (performance.now() - t0) / 1000;
+      big?.frame(t);
+      minis.forEach((m, k) => m.frame(performance.now() / 1000 + k));
+      if (!visible) { looping = false; off(); }
+      return visible;
+    });
   }
   onVisible($('#lexique'), v => { visible = v; loop(); });
   cur = -1; select(0);
 })();
 
-/* ═══════════════ Prompt builder ═══════════════ */
+/* ═══════════════ Prompt et parti : la maquette qui répond au prompt ═══════════════
+   Every option of the builder rebuilds one layer of a live 3D model :
+   site (sol, eau, végétation), espaces (volumes), matériaux (textures),
+   façade (brise-soleil, claustras, coursives), ambiance (lumière, toiture, cour),
+   intention (course du soleil, rue, enceinte). Trees are 3D models generated
+   with Hunyuan 3D on fal.ai; textures were generated with Nano Banana on fal.ai.
+   Assets ship as data URIs (assets/3d/parti-assets.js) so the page also works
+   when opened straight from the disk. */
+const parti3d = (function () {
+  const host = $('#maquette'), hudView = $('#mqView'), hudArea = $('#mqArea');
+  const A = window.PARTI_ASSETS || {};
+  const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+  renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+  renderer.shadowMap.enabled = true; renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+  renderer.outputColorSpace = THREE.SRGBColorSpace;
+  renderer.toneMapping = THREE.ACESFilmicToneMapping; renderer.toneMappingExposure = 1.05;
+  host.prepend(renderer.domElement);
+
+  const scene = new THREE.Scene();
+  const cam = new THREE.PerspectiveCamera(30, 1, 0.5, 600);
+  const controls = new OrbitControls(cam, renderer.domElement);
+  Object.assign(controls, { enableDamping: true, dampingFactor: 0.07, enablePan: false, minDistance: 12, maxDistance: 140, maxPolarAngle: 1.45, rotateSpeed: 0.7, zoomSpeed: 0.8 });
+  controls.target.set(0, 3, 0);
+
+  const hemi = new THREE.HemisphereLight(0xfff6ea, 0xb9a48a, 1.2); scene.add(hemi);
+  const sun = new THREE.DirectionalLight(0xfff1dc, 2.2);
+  sun.castShadow = true; sun.shadow.mapSize.set(2048, 2048);
+  Object.assign(sun.shadow.camera, { left: -26, right: 26, top: 26, bottom: -26, near: 1, far: 120 });
+  sun.shadow.bias = -0.0004; sun.shadow.normalBias = 0.03; sun.shadow.radius = 3;
+  scene.add(sun, sun.target);
+
+  /* ── materials and textures ── */
+  const texLoader = new THREE.TextureLoader();
+  const tex = (src, size) => {
+    const t = src instanceof HTMLCanvasElement ? new THREE.CanvasTexture(src) : texLoader.load(src);
+    t.wrapS = t.wrapT = THREE.RepeatWrapping; t.colorSpace = THREE.SRGBColorSpace; t.anisotropy = 8;
+    t.repeat.set(1 / size, 1 / size); return t;
+  };
+  const canvas = (w, h, draw) => { const c = document.createElement('canvas'); c.width = w; c.height = h; draw(c.getContext('2d'), w, h); return c; };
+  // timber boards drawn in code (a fal prompt for wood kept tripping the safety filter)
+  const woodCanvas = canvas(512, 512, (g, w, h) => {
+    const boards = 8, bw = w / boards;
+    for (let i = 0; i < boards; i++) {
+      const hue = 26 + (i * 37 % 7), light = 36 + (i * 53 % 11);
+      g.fillStyle = `hsl(${hue} 42% ${light}%)`; g.fillRect(i * bw, 0, bw, h);
+      for (let k = 0; k < 26; k++) {
+        g.strokeStyle = `hsla(${hue - 4} 45% ${light - 10}% / ${0.25 + (k % 3) * 0.12})`; g.lineWidth = 1 + (k % 2);
+        const x0 = i * bw + ((k * 29) % bw); g.beginPath(); g.moveTo(x0, 0);
+        for (let y = 0; y <= h; y += 32) g.lineTo(x0 + Math.sin(y / 60 + k) * 3, y); g.stroke();
+      }
+      g.fillStyle = 'rgba(30,18,10,0.85)'; g.fillRect(i * bw, 0, 3, h);
+    }
+  });
+  // claustra pattern : opaque where white, open where black (alpha map)
+  const claustraCanvas = canvas(256, 256, (g, w) => {
+    g.fillStyle = '#fff'; g.fillRect(0, 0, w, w); g.fillStyle = '#000';
+    const n = 2, s = w / n;
+    for (let i = 0; i < n; i++) for (let j = 0; j < n; j++) {
+      const cx = i * s + s / 2, cy = j * s + s / 2;
+      g.beginPath(); g.moveTo(cx, cy - s * 0.4); g.lineTo(cx + s * 0.4, cy); g.lineTo(cx, cy + s * 0.4); g.lineTo(cx - s * 0.4, cy); g.closePath(); g.fill();
+    }
+  });
+  const M = (color, extra = {}) => new THREE.MeshStandardMaterial({ color, roughness: 0.9, ...extra });
+  const MATS = [
+    { name: 'BTC', wall: M(0xffffff, { map: tex(A.btc || woodCanvas, 2.2) }), accent: M(0xf1e9dc), screen: 0xb0613c, slab: M(0xf4efe7) },
+    { name: 'Bois', wall: M(0xffffff, { map: tex(woodCanvas, 2.4), roughness: 0.8 }), accent: M(0x7d5434), screen: 0x8a5a36, slab: M(0xefe7da) },
+    { name: 'Béton', wall: M(0xffffff, { map: tex(A.beton || woodCanvas, 3.2), roughness: 0.95 }), accent: M(0xe9e6e0), screen: 0xe6e1d8, slab: M(0xdedad3) },
+  ];
+  const glass = M(0x30413f, { roughness: 0.12, metalness: 0.35 });
+  const glow = M(0xfff2c8, { emissive: 0xffd88a, emissiveIntensity: 1.1, roughness: 0.4 });
+  const mat = {
+    base: M(0xcdb89b), white: M(0xf7f4ee), leaf: M(0x6f8a5e), leaf2: M(0x87a06f), trunk: M(0x8b6b4c), road: M(0x5a534d), walk: M(0xd9d0c2),
+    water: M(0x7fb7b3, { roughness: 0.15, metalness: 0.15, transparent: true, opacity: 0.92 }), lat: M(0x8e3b1d), sunball: M(0xffc46b, { emissive: 0xff9d2e, emissiveIntensity: 1.4 }),
+    ghost: new THREE.MeshBasicMaterial({ color: 0xffe2a8, transparent: true, opacity: 0.18, depthWrite: false, blending: THREE.AdditiveBlending }),
+    wind: new THREE.MeshBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.7, depthWrite: false }),
+  };
+  const GROUNDS = [0x86a56b, 0xc9a46a, 0xe3cfa3];
+
+  /* world-scale UVs so a texture keeps its real size on every box */
+  function boxGeo(w, h, d) {
+    const g = new THREE.BoxGeometry(w, h, d), uv = g.attributes.uv;
+    const dims = [[d, h], [d, h], [w, d], [w, d], [w, h], [w, h]];
+    for (let f = 0; f < 6; f++) for (let k = 0; k < 4; k++) { const i = f * 4 + k; uv.setXY(i, uv.getX(i) * dims[f][0], uv.getY(i) * dims[f][1]); }
+    return g;
+  }
+  const box = (w, h, d, m, x = 0, y = 0, z = 0, parent) => {
+    const o = new THREE.Mesh(boxGeo(w, h, d), m); o.position.set(x, y, z); o.castShadow = o.receiveShadow = true; parent?.add(o); return o;
+  };
+
+  /* ── 3D trees from fal (Hunyuan 3D), procedural stand-ins until they load ── */
+  const models = {};
+  const gltf = new GLTFLoader();
+  function loadModel(key, height) {
+    if (!A[key]) return Promise.resolve();
+    return gltf.loadAsync(A[key]).then(({ scene: s }) => {
+      s.traverse(o => { if (o.isMesh) { o.geometry.computeVertexNormals(); o.castShadow = true; o.receiveShadow = true; if (o.material.map) o.material.map.anisotropy = 4; o.material.side = THREE.DoubleSide; } });
+      const wrap = new THREE.Group(); wrap.add(s);
+      const b = new THREE.Box3().setFromObject(wrap), size = b.getSize(new THREE.Vector3());
+      s.position.sub(new THREE.Vector3((b.min.x + b.max.x) / 2, b.min.y, (b.min.z + b.max.z) / 2));
+      wrap.scale.setScalar(height / size.y);
+      models[key] = wrap;
+    }).catch(() => {});
+  }
+  function tree(kind, scale = 1) {
+    let o;
+    if (models[kind]) o = models[kind].clone();
+    else {
+      o = new THREE.Group();
+      const t = new THREE.Mesh(new THREE.CylinderGeometry(0.18, 0.28, kind === 'palm' ? 7 : 2.6, 7), mat.trunk); t.position.y = kind === 'palm' ? 3.5 : 1.3; t.castShadow = true; o.add(t);
+      const c = new THREE.Mesh(kind === 'palm' ? new THREE.IcosahedronGeometry(1.4, 0) : new THREE.SphereGeometry(2.6, 9, 6), mat.leaf); c.scale.y = kind === 'palm' ? 0.6 : 0.55; c.position.y = kind === 'palm' ? 7 : 3.4; c.castShadow = true; o.add(c);
+    }
+    o.scale.multiplyScalar(scale); o.userData.sway = Math.random() * 6; o.userData.tree = true; return o;
+  }
+
+  /* ── tiny tween engine, ticks inside the render loop ── */
+  const tweens = new Set();
+  const easeOut = x => 1 - Math.pow(1 - x, 3), easeIO = x => x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2;
+  const backOut = x => { const c = 1.5; return 1 + (c + 1) * Math.pow(x - 1, 3) + c * Math.pow(x - 1, 2); };
+  const tween = (dur, fn, ease = easeOut, delay = 0) => new Promise(res => { if (reduce) { fn(1); return res(); } tweens.add({ t: -delay, dur, fn, ease, res }); wake(); });
+  function stepTweens(dt) {
+    for (const tw of tweens) {
+      tw.t += dt; if (tw.t < 0) continue;
+      const k = Math.min(1, tw.t / tw.dur); tw.fn(tw.ease(k));
+      if (k >= 1) { tweens.delete(tw); tw.res(); }
+    }
+  }
+
+  /* ── layers : each one is rebuilt and animated on its own ── */
+  const layers = {};
+  function dispose(g) { g.traverse(o => { if (o.isMesh && !o.userData.shared) o.geometry?.dispose(); }); }
+  function swap(name, build, { spread = 0.55, drop = 5 } = {}) {
+    const old = layers[name];
+    if (old) tween(0.32, k => old.scale.set(1, Math.max(0.001, 1 - k), 1), easeIO).then(() => { scene.remove(old); dispose(old); });
+    const g = new THREE.Group(); build(g); scene.add(g); layers[name] = g;
+    const kids = g.children, n = kids.length;
+    kids.forEach((c, i) => {
+      const y0 = c.position.y, s0 = c.scale.clone();
+      c.position.y = y0 + drop; c.scale.multiplyScalar(0.001);
+      const delay = (old ? 0.18 : 0) + (n > 1 ? (i / (n - 1)) * spread : 0);
+      tween(0.7, k => { c.position.y = y0 + drop * (1 - k); }, backOut, delay);
+      tween(0.45, k => c.scale.copy(s0).multiplyScalar(Math.max(0.001, k)), easeOut, delay);
+    });
+    return g;
+  }
+
+  /* ── programmes : volumes in metres { x, z, w, d, floors } and a courtyard ── */
+  const FLOOR = 3.1;
+  const PROGRAMS = [
+    { label: 'Logement R+2', vols: [{ x: 0, z: -1, w: 11, d: 8, floors: 3 }], court: { x: 0, z: 7.5, w: 11, d: 5 }, street: 'z' },
+    { label: 'École', vols: [{ x: -1, z: -5, w: 20, d: 6, floors: 2 }, { x: -8, z: 3.5, w: 6, d: 11, floors: 1 }], court: { x: 3, z: 3, w: 10, d: 9 } },
+    { label: 'Centre de santé', vols: [{ x: -6.5, z: 0, w: 6, d: 15, floors: 1 }, { x: 6.5, z: 0, w: 6, d: 15, floors: 1 }, { x: 0, z: -5.5, w: 7, d: 4, floors: 2 }], court: { x: 0, z: 2.5, w: 7, d: 9 } },
+  ];
+
+  let state = { site: 0, fac: 0, mat: 0, esp: 0, amb: 0, int: 0 };
+  const prog = () => PROGRAMS[state.esp];
+  const bounds = () => {
+    const b = { x0: 1e9, x1: -1e9, z0: 1e9, z1: -1e9, h: 0 };
+    prog().vols.forEach(v => { b.x0 = Math.min(b.x0, v.x - v.w / 2); b.x1 = Math.max(b.x1, v.x + v.w / 2); b.z0 = Math.min(b.z0, v.z - v.d / 2); b.z1 = Math.max(b.z1, v.z + v.d / 2); b.h = Math.max(b.h, v.floors * FLOOR); });
+    return b;
+  };
+
+  /* Site : a model base, ground, water and vegetation */
+  const R = 21;
+  const capShape = (axis, t) => { // the part of the disc beyond a line, as a shape
+    const s = new THREE.Shape(), a = Math.acos(t / R), pts = [];
+    for (let i = 0; i <= 40; i++) { const ang = -a + (2 * a * i) / 40; pts.push([Math.cos(ang) * R, Math.sin(ang) * R]); }
+    pts.forEach(([u, v], i) => { const [x, y] = axis === 'x' ? [-u, v] : [v, u]; i ? s.lineTo(x, y) : s.moveTo(x, y); });
+    s.closePath(); return s;
+  };
+  const baseMesh = new THREE.Mesh(new THREE.CylinderGeometry(R + 0.4, R + 0.9, 1.4, 96), mat.base);
+  baseMesh.position.y = -0.72; baseMesh.receiveShadow = true; scene.add(baseMesh);
+  let waterMesh = null;
+  function buildSite(g) {
+    const top = new THREE.Mesh(new THREE.CircleGeometry(R, 96), M(GROUNDS[state.site])); top.rotation.x = -Math.PI / 2; top.position.y = 0.01; top.receiveShadow = true; g.add(top);
+    const plot = new THREE.Mesh(new THREE.PlaneGeometry(30, 24), M(0xf1ebe0)); plot.rotation.x = -Math.PI / 2; plot.position.set(0, 0.03, 0); plot.receiveShadow = true; g.add(plot);
+    waterMesh = null;
+    if (state.site !== 1) {
+      const shape = state.site === 0 ? capShape('x', 15.5) : capShape('z', 13.5);
+      const geo = new THREE.ShapeGeometry(shape, 24);
+      const w = new THREE.Mesh(geo, mat.water); w.rotation.x = -Math.PI / 2; w.position.y = 0.06; w.receiveShadow = true; g.add(w); waterMesh = w;
+      if (state.site === 2) for (let i = 0; i < 3; i++) { // foam lines on the beach
+        const f = new THREE.Mesh(new THREE.BoxGeometry(30 - i * 4, 0.05, 0.12), mat.white); f.position.set(0, 0.09, -13.2 - i * 1.6); f.userData.foam = i; g.add(f);
+      }
+    }
+    const rng = (() => { let s = 7 + state.site * 13; return () => (s = (s * 16807) % 2147483647) / 2147483647; })();
+    const spots = state.site === 0
+      ? [[-13, 8, 'palm'], [-14, -6, 'palm'], [13, -11, 'palm'], [14, 9, 'tree'], [-11, -13, 'tree'], [9, 14, 'palm']]
+      : state.site === 1
+        ? [[-14, 8, 'tree'], [14, -8, 'tree'], [12, 12, 'tree'], [-12, -12, 'tree']]
+        : [[-14, -9, 'palm'], [-10, -12, 'palm'], [12, -11, 'palm'], [15, 4, 'palm'], [-15, 6, 'tree'], [7, 15, 'palm']];
+    spots.forEach(([x, z, k]) => { const t = tree(k, 0.85 + rng() * 0.35); t.position.set(x, 0, z); t.rotation.y = rng() * 6; g.add(t); });
+    if (state.site === 1) { // dry grass tufts on the savanna
+      const tuft = new THREE.InstancedMesh(new THREE.ConeGeometry(0.22, 0.9, 5), M(0xa98a4c), 160), d = new THREE.Object3D();
+      for (let i = 0; i < 160; i++) {
+        const a = rng() * Math.PI * 2, r = 15.5 + rng() * 4.8; d.position.set(Math.cos(a) * r, 0.4, Math.sin(a) * r); d.rotation.set((rng() - 0.5) * 0.4, 0, (rng() - 0.5) * 0.4); d.scale.setScalar(0.6 + rng() * 0.8); d.updateMatrix(); tuft.setMatrixAt(i, d.matrix);
+      }
+      tuft.castShadow = true; g.add(tuft);
+    }
+  }
+
+  /* Espaces + matériaux : stacked floors, ribbon windows, slab edges */
+  function buildBuilding(g) {
+    const m = MATS[state.mat];
+    const levels = [];
+    prog().vols.forEach(v => { for (let f = 0; f < v.floors; f++) levels.push([f, v]); });
+    levels.sort((a, b) => a[0] - b[0]).forEach(([f, v]) => {
+      const fl = new THREE.Group(); fl.position.set(v.x, f * FLOOR, v.z);
+      box(v.w, 0.3, v.d, m.slab, 0, 0.15, 0, fl);
+      box(v.w - 0.3, FLOOR - 0.3, v.d - 0.3, m.wall, 0, 0.3 + (FLOOR - 0.3) / 2, 0, fl);
+      const wy = 0.3 + (FLOOR - 0.3) * 0.55, wh = (FLOOR - 0.3) * 0.46;
+      const long = v.w >= v.d;
+      for (const s of [-1, 1]) {
+        if (long) { box(v.w * 0.78, wh, 0.08, glass, 0, wy, s * (v.d / 2 - 0.1), fl); for (let k = -2; k <= 2; k++) box(0.12, wh, 0.12, m.accent, k * v.w * 0.16, wy, s * (v.d / 2 - 0.05), fl); }
+        else { box(0.08, wh, v.d * 0.78, glass, s * (v.w / 2 - 0.1), wy, 0, fl); for (let k = -2; k <= 2; k++) box(0.12, wh, 0.12, m.accent, s * (v.w / 2 - 0.05), wy, k * v.d * 0.16, fl); }
+      }
+      if (f === 0) { // a door on the main side
+        box(1.6, 2.2, 0.1, glass, 0, 1.4, v.d / 2 - 0.1, fl);
+      }
+      g.add(fl);
+    });
+    prog().vols.forEach(v => { const r = new THREE.Group(); r.position.set(v.x, v.floors * FLOOR, v.z); box(v.w + 0.2, 0.34, v.d + 0.2, m.slab, 0, 0.17, 0, r); box(v.w + 0.26, 0.12, v.d + 0.26, mat.lat, 0, 0.2, 0, r); g.add(r); });
+  }
+
+  /* Façade : three ways to filter the sun */
+  function buildFacade(g) {
+    const m = MATS[state.mat];
+    const finMat = state.mat === 1 ? MATS[1].accent : state.mat === 0 ? M(0xb0613c) : M(0xece8e1);
+    prog().vols.forEach(v => {
+      const H = v.floors * FLOOR;
+      if (state.fac === 0) { // vertical fins along every side
+        const sides = [[v.w, 'z', 1], [v.w, 'z', -1], [v.d, 'x', 1], [v.d, 'x', -1]];
+        sides.forEach(([len, ax, s]) => {
+          const n = Math.floor(len / 0.9);
+          for (let i = 0; i <= n; i++) {
+            const u = -len / 2 + (i * len) / n;
+            const fin = ax === 'z' ? box(0.12, H, 0.75, finMat, v.x + u, H / 2, v.z + s * (v.d / 2 + 0.4)) : box(0.75, H, 0.12, finMat, v.x + s * (v.w / 2 + 0.4), H / 2, v.z + u);
+            fin.rotation.y = ax === 'z' ? 0.35 * s : 0.35 * s; g.add(fin);
+          }
+        });
+      } else if (state.fac === 1) { // perforated screen, a second skin
+        const cm = new THREE.MeshStandardMaterial({ color: m.screen, roughness: 0.85, alphaMap: tex(claustraCanvas, 1.5), alphaTest: 0.5, side: THREE.DoubleSide });
+        cm.alphaMap.colorSpace = THREE.NoColorSpace;
+        const make = (w, h, x, z, ry) => { const p = new THREE.Mesh(boxGeo(w, h, 0.14), cm); p.position.set(x, h / 2 + 0.6, z); p.rotation.y = ry; p.castShadow = p.receiveShadow = true; g.add(p); };
+        make(v.w + 0.6, H - 1, v.x, v.z + v.d / 2 + 0.55, 0); make(v.w + 0.6, H - 1, v.x, v.z - v.d / 2 - 0.55, 0);
+        make(v.d + 0.6, H - 1, v.x + v.w / 2 + 0.55, v.z, Math.PI / 2); make(v.d + 0.6, H - 1, v.x - v.w / 2 - 0.55, v.z, Math.PI / 2);
+        for (const [sx, sz] of [[1, 1], [-1, 1], [1, -1], [-1, -1]]) box(0.3, H, 0.3, m.slab, v.x + sx * (v.w / 2 + 0.55), H / 2, v.z + sz * (v.d / 2 + 0.55), g);
+      } else { // deep galleries and a wide roof overhang
+        for (let f = 1; f <= v.floors; f++) {
+          const y = f * FLOOR, over = f === v.floors ? 1.9 : 1.4;
+          const sl = box(v.w + over * 2, 0.22, v.d + over * 2, m.slab, v.x, y - 0.05, v.z); g.add(sl);
+          if (f < v.floors) for (const s of [-1, 1]) {
+            box(v.w + over * 2, 0.9, 0.06, finMat, v.x, y + 0.5, v.z + s * (v.d / 2 + over - 0.05), g);
+            box(0.06, 0.9, v.d + over * 2, finMat, v.x + s * (v.w / 2 + over - 0.05), y + 0.5, v.z, g);
+          }
+        }
+        const H2 = v.floors * FLOOR;
+        for (let i = 0; i <= Math.round(v.w / 3); i++) for (const s of [-1, 1]) {
+          const x = v.x - v.w / 2 - 1.2 + (i * (v.w + 2.4)) / Math.round(v.w / 3);
+          const c = new THREE.Mesh(new THREE.CylinderGeometry(0.12, 0.12, H2, 8), mat.white); c.position.set(x, H2 / 2, v.z + s * (v.d / 2 + 1.25)); c.castShadow = true; g.add(c);
+        }
+      }
+    });
+  }
+
+  /* Ambiance : light, a roof that breathes, rooflights or a planted courtyard */
+  const AMB = [
+    { sun: [-12, 30, 10], color: 0xfff1dc, i: 2.3, hemi: 1.2, sky: 0xfff6ea, bg: ['#f3efe6', '#dfe7e0'], view: 'Ombre et air' },
+    { sun: [3, 36, 4], color: 0xffffff, i: 2.6, hemi: 1.35, sky: 0xf6f8ff, bg: ['#f7f6f2', '#e8ece9'], view: 'Lumière zénithale' },
+    { sun: [26, 12, 14], color: 0xffbf86, i: 2.5, hemi: 0.85, sky: 0xffe2c2, bg: ['#f6e7d3', '#e9c9a6'], view: 'Lumière du soir' },
+  ];
+  let winds = [];
+  function buildAmbiance(g) {
+    winds = [];
+    const c = prog().court;
+    if (state.amb === 0) { // floating umbrella roofs + air streams
+      prog().vols.forEach(v => {
+        const H = v.floors * FLOOR + 1.4;
+        const roof = new THREE.Group(); roof.position.set(v.x, H, v.z);
+        box(v.w + 3, 0.16, v.d + 3, MATS[state.mat].slab, 0, 0, 0, roof);
+        for (let i = -1; i <= 1; i++) box(v.w + 3, 0.1, 0.1, mat.lat, 0, -0.1, i * (v.d + 3) / 3, roof);
+        for (const [sx, sz] of [[1, 1], [-1, 1], [1, -1], [-1, -1]]) box(0.14, 1.4, 0.14, mat.white, sx * (v.w / 2 - 0.3), -0.7, sz * (v.d / 2 - 0.3), roof);
+        g.add(roof);
+      });
+      for (let i = 0; i < 26; i++) {
+        const s = new THREE.Mesh(new THREE.BoxGeometry(2.6 + (i % 4), 0.05, 0.05), mat.wind);
+        s.userData = { y: 1.4 + (i % 7) * 1.25, z: -12 + (i * 9.7) % 24, speed: 5 + (i % 5), off: i * 3.7 }; g.add(s); winds.push(s);
+      }
+    } else if (state.amb === 1) { // sawtooth rooflights and shafts of light
+      prog().vols.forEach(v => {
+        const H = v.floors * FLOOR + 0.4, n = Math.max(2, Math.floor(v.w / 3.2));
+        const grp = new THREE.Group(); grp.position.set(v.x, H, v.z);
+        for (let i = 0; i < n; i++) {
+          const x = -v.w / 2 + (i + 0.5) * (v.w / n);
+          const shed = new THREE.Mesh(new THREE.CylinderGeometry(0.01, 1.1, Math.max(2, v.d - 1.2), 3, 1), MATS[state.mat].slab);
+          shed.rotation.set(0, 0, 0); shed.rotation.x = Math.PI / 2; shed.rotation.z = 0; shed.position.set(x, 0.5, 0); shed.castShadow = true; grp.add(shed);
+          const pane = box(0.06, 0.9, Math.max(2, v.d - 1.4), glow, x + 0.48, 0.48, 0, grp); pane.rotation.z = -0.5;
+          const shaft = new THREE.Mesh(new THREE.CylinderGeometry(0.6, 1.4, H - 0.2, 12, 1, true), mat.ghost); shaft.position.set(x, -(H - 0.2) / 2, 0); shaft.userData.shaft = i; shaft.userData.shared = false; grp.add(shaft);
+        }
+        g.add(grp);
+      });
+    } else { // the courtyard fills with planting, water and a pergola
+      const court = new THREE.Group(); court.position.set(c.x, 0, c.z);
+      const lawn = new THREE.Mesh(new THREE.BoxGeometry(c.w, 0.1, c.d), M(0x7d9a5f)); lawn.position.y = 0.06; lawn.receiveShadow = true; court.add(lawn);
+      const pool = new THREE.Mesh(new THREE.BoxGeometry(c.w * 0.35, 0.12, c.d * 0.5), mat.water); pool.position.set(-c.w * 0.22, 0.1, 0); court.add(pool);
+      g.add(court);
+      const t = tree('tree', 0.85); t.position.set(c.x + c.w * 0.18, 0.1, c.z); g.add(t);
+      const per = new THREE.Group(); per.position.set(c.x, 0, c.z + c.d * 0.3);
+      for (let i = 0; i < 9; i++) box(0.12, 0.12, c.d * 0.35, M(0x9b7350), -c.w * 0.4 + (i * c.w * 0.8) / 8, 2.8, 0, per);
+      for (const sx of [-1, 1]) for (const sz of [-1, 1]) box(0.14, 2.8, 0.14, mat.white, sx * c.w * 0.4, 1.4, sz * c.d * 0.15, per);
+      g.add(per);
+      for (let i = 0; i < 6; i++) { const b = new THREE.Mesh(new THREE.IcosahedronGeometry(0.55, 0), i % 2 ? mat.leaf : mat.leaf2); b.position.set(c.x - c.w / 2 + 0.7 + (i * (c.w - 1.4)) / 5, 0.5, c.z - c.d / 2 + 0.7); b.castShadow = true; g.add(b); }
+    }
+  }
+
+  /* Intention : what the project says to its context */
+  let sunPath = null, walkers = [];
+  function buildIntention(g) {
+    sunPath = null; walkers = [];
+    const b = bounds();
+    if (state.int === 0) { // build with the climate : sun course + prevailing wind
+      const arc = new THREE.Mesh(new THREE.TorusGeometry(19, 0.07, 6, 80, Math.PI), M(0xffc46b, { emissive: 0xff9d2e, emissiveIntensity: 0.6 }));
+      arc.rotation.set(0, 0.3, 0); arc.position.y = 0.1; g.add(arc);
+      const ball = new THREE.Mesh(new THREE.SphereGeometry(0.9, 20, 14), mat.sunball); g.add(ball);
+      sunPath = { arc, ball };
+      const arrows = new THREE.Group();
+      for (let i = 0; i < 4; i++) {
+        const a = new THREE.Mesh(new THREE.ConeGeometry(0.45, 1.3, 3), mat.wind); a.rotation.z = -Math.PI / 2; a.position.set(-18 + i * 1.6, 1.2, 9 - i * 0.6); a.userData.arrow = i; arrows.add(a);
+      }
+      g.add(arrows);
+      const north = new THREE.Group(); north.position.set(15, 0.1, -12);
+      const n = new THREE.Mesh(new THREE.ConeGeometry(0.7, 2, 3), mat.lat); n.rotation.x = -Math.PI / 2; n.position.y = 0.3; north.add(n); g.add(north);
+    } else if (state.int === 1) { // open onto the street : road, sidewalk, porch, passers-by
+      const z = 14.2;
+      const road = new THREE.Mesh(new THREE.BoxGeometry(32, 0.08, 3.6), mat.road); road.position.set(0, 0.06, z + 1.6); road.receiveShadow = true; g.add(road);
+      const walk = new THREE.Mesh(new THREE.BoxGeometry(30, 0.16, 1.8), mat.walk); walk.position.set(0, 0.1, z - 1.1); walk.receiveShadow = true; g.add(walk);
+      for (let i = -3; i <= 3; i++) { const l = new THREE.Mesh(new THREE.BoxGeometry(1.4, 0.1, 0.18), mat.white); l.position.set(i * 4, 0.11, z + 1.6); g.add(l); }
+      const porch = new THREE.Group(); porch.position.set(0, 0, b.z1 + 1.6);
+      box(Math.min(12, b.x1 - b.x0), 0.18, 3, mat.lat, 0, 3, 0, porch);
+      for (const s of [-1, 1]) box(0.16, 3, 0.16, mat.white, s * Math.min(5.6, (b.x1 - b.x0) / 2 - 0.4), 1.5, 1.3, porch);
+      box(3, 0.45, 0.5, MATS[state.mat].accent, -3, 0.25, 1, porch); box(3, 0.45, 0.5, MATS[state.mat].accent, 3, 0.25, 1, porch);
+      g.add(porch);
+      const colors = [0x8e3b1d, 0x5d6a55, 0xcdb89b, 0x2b201a, 0xb4623f, 0x7d9a5f];
+      for (let i = 0; i < 7; i++) {
+        const p = new THREE.Group();
+        const body = new THREE.Mesh(new THREE.CapsuleGeometry(0.28, 0.9, 4, 8), M(colors[i % 6])); body.position.y = 0.75; body.castShadow = true; p.add(body);
+        const head = new THREE.Mesh(new THREE.SphereGeometry(0.22, 10, 8), M(0x5b3a28)); head.position.y = 1.6; head.castShadow = true; p.add(head);
+        p.userData = { lane: z - 1.1 + ((i % 2) ? 0.4 : -0.4), dir: i % 2 ? 1 : -1, off: i * 4.3, speed: 1.1 + (i % 3) * 0.25 };
+        g.add(p); walkers.push(p);
+      }
+    } else { // protect and re-centre : an enclosure that looks inward
+      const W = 29, D = 23, h = 2.4;
+      const wallM = state.mat === 1 ? MATS[1].accent : MATS[state.mat].wall;
+      const seg = (w, d, x, z) => box(w, h, d, wallM, x, h / 2, z, g);
+      seg(W, 0.4, 0, -D / 2); seg(0.4, D, -W / 2, 0); seg(0.4, D, W / 2, 0);
+      seg(W / 2 - 2, 0.4, -(W / 4 + 1), D / 2); seg(W / 2 - 2, 0.4, W / 4 + 1, D / 2);
+      const gate = new THREE.Group(); gate.position.set(0, 0, D / 2);
+      box(4.8, 0.4, 1.2, mat.lat, 0, 3.2, 0, gate); for (const s of [-1, 1]) box(0.4, 3.2, 1.2, mat.lat, s * 2.2, 1.6, 0, gate);
+      g.add(gate);
+      const c = prog().court, ring = new THREE.Mesh(new THREE.RingGeometry(Math.min(c.w, c.d) * 0.32, Math.min(c.w, c.d) * 0.4, 48), M(0xffc46b, { emissive: 0xff9d2e, emissiveIntensity: 0.8, side: THREE.DoubleSide }));
+      ring.rotation.x = -Math.PI / 2; ring.position.set(c.x, 0.2, c.z); ring.userData.pulse = true; g.add(ring);
+    }
+  }
+
+  /* ── camera views, one per builder row ── */
+  const VIEWS = {
+    site: { r: 92, phi: 0.9, theta: 0.7, ty: 1, label: 'Le site' },
+    fac: { r: 52, phi: 1.3, theta: 0.22, ty: 4, label: 'La façade' },
+    mat: { r: 30, phi: 1.2, theta: 0.62, ty: 3.5, corner: true, label: 'La matière, de près' },
+    esp: { r: 80, phi: 0.18, theta: 0.25, ty: 0, label: 'Les espaces, en plan' },
+    amb: { r: 64, phi: 1.0, theta: -0.75, ty: 3, label: 'L\'ambiance' },
+    int: { r: 94, phi: 0.8, theta: 1.15, ty: 1, label: 'L\'intention' },
+  };
+  const sph = new THREE.Spherical(), tmp = new THREE.Vector3();
+  let camTween = 0;
+  function focus(key) {
+    const v = VIEWS[key]; if (!v) return;
+    hudView.textContent = key === 'amb' ? AMB[state.amb].view : v.label;
+    const id = ++camTween, b = bounds();
+    const t1 = v.corner ? new THREE.Vector3(b.x1 - 1, v.ty, b.z1 - 1) : new THREE.Vector3(0, v.ty, 0);
+    const t0 = controls.target.clone();
+    sph.setFromVector3(tmp.copy(cam.position).sub(controls.target));
+    const r0 = sph.radius, p0 = sph.phi;
+    let th0 = sph.theta; const dth = Math.atan2(Math.sin(v.theta - th0), Math.cos(v.theta - th0));
+    const aspectBoost = cam.aspect < 0.9 ? 1.35 : 1;
+    pauseAuto(5);
+    tween(1.25, k => {
+      if (id !== camTween) return;
+      controls.target.lerpVectors(t0, t1, k);
+      sph.set(r0 + (v.r * aspectBoost - r0) * k, p0 + (v.phi - p0) * k, th0 + dth * k);
+      cam.position.copy(controls.target).add(tmp.setFromSpherical(sph));
+    }, easeIO);
+  }
+  renderer.domElement.addEventListener('pointerdown', () => { camTween++; pauseAuto(6); });
+  renderer.domElement.addEventListener('wheel', () => { camTween++; pauseAuto(6); }, { passive: true });
+
+  /* ── light transitions ── */
+  const sunPos = new THREE.Vector3(...AMB[0].sun);
+  function applyAmbiance(instant) {
+    const a = AMB[state.amb], p0 = sunPos.clone(), p1 = new THREE.Vector3(...a.sun);
+    const c0 = sun.color.clone(), c1 = new THREE.Color(a.color), i0 = sun.intensity, h0 = hemi.intensity, s0 = hemi.color.clone(), s1 = new THREE.Color(a.sky);
+    host.style.setProperty('--mq-top', a.bg[0]); host.style.setProperty('--mq-bottom', a.bg[1]);
+    const f = k => { sunPos.lerpVectors(p0, p1, k); sun.color.lerpColors(c0, c1, k); sun.intensity = i0 + (a.i - i0) * k; hemi.intensity = h0 + (a.hemi - h0) * k; hemi.color.lerpColors(s0, s1, k); };
+    if (instant) f(1); else tween(1.1, f, easeIO);
+  }
+
+  /* ── public : apply a new state, rebuilding only what changed ── */
+  const DEPS = { site: ['site'], building: ['esp', 'mat'], facade: ['esp', 'fac', 'mat'], ambiance: ['esp', 'amb', 'mat'], intention: ['int', 'esp', 'mat'] };
+  const BUILD = { site: buildSite, building: buildBuilding, facade: buildFacade, ambiance: buildAmbiance, intention: buildIntention };
+  const OPTS = { site: { spread: 0.7, drop: 6 }, building: { spread: 0.8, drop: 7 }, facade: { spread: 0.7, drop: 4 }, ambiance: { spread: 0.5, drop: 5 }, intention: { spread: 0.6, drop: 3 } };
+  function set(next, changedKey) {
+    const prev = state; state = { ...next };
+    for (const [layer, deps] of Object.entries(DEPS)) if (!layers[layer] || deps.some(k => prev[k] !== state[k])) swap(layer, BUILD[layer], OPTS[layer]);
+    if (!changedKey || prev.amb !== state.amb) applyAmbiance(!changedKey);
+    const p = prog(), area = Math.round(p.vols.reduce((s, v) => s + v.w * v.d * v.floors, 0) / 10) * 10;
+    hudArea.textContent = `${p.label} · ${p.vols.length > 1 ? p.vols.length + ' volumes' : Math.max(...p.vols.map(v => v.floors)) + ' niveaux'} · ≈ ${area} m² de plancher`;
+    if (changedKey) focus(changedKey);
+    wake();
+  }
+
+  /* ── loop : render while visible, idle auto-rotation ── */
+  let W = 1, H = 1, visible = false, raf = 0, last = performance.now(), autoAt = 0;
+  const pauseAuto = s => { autoAt = performance.now() + s * 1000; };
+  function resize() {
+    W = host.clientWidth; H = host.clientHeight; if (!W || !H) return;
+    renderer.setSize(W, H, false); cam.aspect = W / H; cam.updateProjectionMatrix(); wake();
+  }
+  function frame(now) {
+    raf = 0;
+    const raw = Math.min(0.25, (now - last) / 1000), dt = Math.min(0.05, raw); last = now; const t = now / 1000;
+    stepTweens(raw); // real time, so transitions finish on time even on a slow GPU
+    controls.autoRotate = !reduce && now > autoAt && !tweens.size;
+    controls.autoRotateSpeed = 0.35;
+    controls.update();
+    // living details
+    if (!reduce) {
+      for (const s of winds) { const u = s.userData, x = ((t * u.speed + u.off) % 40) - 20; s.position.set(x, u.y + Math.sin(t * 2 + u.off) * 0.2, u.z); s.material.opacity = 0.55; s.scale.x = 1 - Math.abs(x) / 24; }
+      for (const p of walkers) { const u = p.userData, x = (((t * u.speed * u.dir + u.off) % 30) + 30) % 30 - 15; p.position.set(x, 0.1, u.lane); p.rotation.y = u.dir > 0 ? Math.PI / 2 : -Math.PI / 2; p.children[0].position.y = 0.75 + Math.abs(Math.sin(t * 6 + u.off)) * 0.08; }
+      layers.site?.children.forEach(o => { if (o.userData.tree) o.rotation.z = Math.sin(t * 1.2 + o.userData.sway) * 0.025; if (o.userData.foam !== undefined) { o.position.z = -13.2 - o.userData.foam * 1.6 + Math.sin(t * 1.3 + o.userData.foam) * 0.5; } });
+      if (waterMesh) waterMesh.position.y = 0.06 + Math.sin(t * 1.4) * 0.025;
+      layers.intention?.traverse(o => {
+        if (o.userData.arrow !== undefined) o.position.x = -18 + o.userData.arrow * 1.6 + ((t * 3) % 6);
+        if (o.userData.pulse) o.scale.setScalar(1 + Math.sin(t * 2.4) * 0.08);
+      });
+      layers.ambiance?.traverse(o => { if (o.userData.shaft !== undefined) o.material.opacity = 0.14 + Math.sin(t * 1.5 + o.userData.shaft) * 0.06; });
+    }
+    if (sunPath) { // the sun travels its course and drives the real shadows
+      const a = reduce ? 0.9 : ((t * 0.18) % Math.PI);
+      const p = new THREE.Vector3(Math.cos(a) * 19, Math.sin(a) * 19, 0).applyAxisAngle(new THREE.Vector3(0, 1, 0), 0.3);
+      sunPath.ball.position.copy(p); sun.position.copy(p).multiplyScalar(1.6); sun.intensity = 0.6 + Math.sin(a) * 2.2;
+    } else sun.position.copy(sunPos);
+    renderer.render(scene, cam);
+    if (visible && !document.hidden) raf = requestAnimationFrame(frame);
+  }
+  function wake() { if (!raf && visible && !document.hidden) { last = performance.now(); raf = requestAnimationFrame(frame); } }
+  controls.addEventListener('change', () => { if (!raf) renderer.render(scene, cam); });
+  new ResizeObserver(resize).observe(host);
+  onVisible(host, v => { visible = v; if (v) wake(); });
+  document.addEventListener('visibilitychange', wake);
+
+  cam.position.set(40, 34, 44);
+  sph.set(VIEWS.site.r, VIEWS.site.phi, VIEWS.site.theta); cam.position.copy(controls.target).add(tmp.setFromSpherical(sph));
+  set(state);
+  // swap the stand-in trees for the fal-generated models once decoded
+  Promise.all([loadModel('palm', 8.5), loadModel('tree', 6.5)]).then(() => { if (models.palm || models.tree) { swap('site', buildSite, OPTS.site); if (state.amb === 2) swap('ambiance', buildAmbiance, OPTS.ambiance); host.dataset.loaded = 'true'; } });
+  return { set, focus };
+})();
+
+/* ═══════════════ Prompt builder, driving the 3D model ═══════════════ */
 (function builder() {
   const opts = {
     site: ['Abidjan, chaud et humide', 'Bouaké, savane', 'San-Pédro, littoral'],
-    mat: ['brique de terre compressée', 'bois local et bambou', 'béton et claustras'],
+    fac: ['brise-soleil verticaux', 'claustras ajourés', 'coursives et larges débords'],
+    mat: ['brique de terre compressée', 'bois local', 'béton et claustras'],
     esp: ['logement familial R+2', 'école de quartier', 'centre de santé'],
     amb: ['ombre et ventilation naturelle', 'lumière zénithale douce', 'cour intérieure plantée'],
     int: ['construire avec le climat', 'ouvrir sur la rue', 'protéger et recentrer'],
   };
-  const state = { site: 0, mat: 0, esp: 0, amb: 0, int: 0 };
-  const out = $('#promptText');
+  const short = { site: ['Abidjan', 'Bouaké', 'San-Pédro'], fac: ['Brise-soleil', 'Claustras', 'Coursives'], mat: ['BTC', 'Bois', 'Béton'], esp: ['Logement', 'École', 'Santé'], amb: ['Ombre', 'Zénithal', 'Cour'], int: ['Climat', 'Rue', 'Recentrer'] };
+  const state = { site: 0, fac: 0, mat: 0, esp: 0, amb: 0, int: 0 };
+  const out = $('#promptText'), chips = $('#mqState');
   $$('.seg').forEach(seg => {
     const key = seg.dataset.key;
     opts[key].forEach((label, i) => {
       const b = document.createElement('button');
       b.type = 'button'; b.textContent = label[0].toUpperCase() + label.slice(1); b.setAttribute('aria-pressed', i === 0);
-      b.addEventListener('click', () => { state[key] = i; $$('button', seg).forEach((x, k) => x.setAttribute('aria-pressed', k === i)); render(); });
+      b.addEventListener('click', () => {
+        const same = state[key] === i;
+        state[key] = i; $$('button', seg).forEach((x, k) => x.setAttribute('aria-pressed', k === i)); render(key);
+        if (same) parti3d.focus(key); else parti3d.set(state, key);
+      });
       seg.append(b);
     });
+    // hovering a row previews its point of view on the model
+    seg.parentElement.addEventListener('focusin', () => parti3d.focus(key));
   });
   const pick = k => opts[k][state[k]];
   let plain = '';
-  function render() {
-    out.innerHTML = `<b>Parti :</b> ${pick('int')}. <b>Programme :</b> ${pick('esp')}, site ${pick('site')}. <b>Contraintes :</b> ${pick('mat')}, ${pick('amb')}, normes locales, budget maîtrisé. <b>Critères de visa :</b> ventilation traversante dans chaque pièce, façades est et ouest protégées du soleil, quantités vérifiables depuis la maquette.`;
+  function render(changed) {
+    out.innerHTML = `<b>Parti :</b> ${pick('int')}. <b>Programme :</b> ${pick('esp')}, site ${pick('site')}. <b>Façade :</b> ${pick('fac')}. <b>Contraintes :</b> ${pick('mat')}, ${pick('amb')}, normes locales, budget maîtrisé. <b>Critères de visa :</b> ventilation traversante dans chaque pièce, façades est et ouest protégées du soleil, quantités vérifiables depuis la maquette.`;
     plain = out.textContent;
+    chips.innerHTML = Object.keys(short).map(k => `<li${k === changed ? ' data-new' : ''}>${short[k][state[k]]}</li>`).join('');
   }
   render();
   const copy = $('#copyPrompt');
@@ -1440,10 +2034,102 @@ function segmented(root, initial, onChange) {
   });
 })();
 
+/* ═══════════════ Questions et réponses ═══════════════
+   A sky of question marks drifts up the section. Near the pointer they turn
+   into exclamation marks : a question meeting its answer. Opening an answer
+   releases a small burst from that line. */
+(function qa() {
+  const QA = [
+    ['Qui signe un livrable produit avec l\'IA ?', "L'architecte, toujours. L'IA est un outil : la responsabilité professionnelle et la signature restent humaines, quel que soit le logiciel utilisé."],
+    ['Faut-il dire au client que l\'IA a aidé ?', 'Oui. La transparence protège la confiance : on précise ce que l\'IA a produit, ce qui a été vérifié, et par qui.'],
+    ['Mes données de projet partent-elles sur Internet ?', 'Pas par défaut. Les dossiers clients restent hors du cloud public : comptes professionnels, rétention désactivée ou outils installés en local selon la sensibilité du projet.'],
+    ['Par où commencer dans mon agence ?', 'Un gabarit de projet propre, une tâche répétitive à automatiser (nommage, métrés, pièces écrites), et 5 à 10 % du temps réservé à un laboratoire interne.'],
+    ['L\'IA va-t-elle remplacer l\'architecte ?', 'Elle prend en charge ce qui est déterministe : normes, quantités, mise en forme. Le goût, le jugement et l\'arbitrage restent le cœur du métier.'],
+    ['Combien ça coûte ?', 'Quelques dizaines de dollars par mois et par poste pour les abonnements. L\'usage avancé, par API, se paie au volume, en tokens : comme un métré.'],
+  ];
+  const list = $('#qaList');
+  QA.forEach(([q, a], i) => {
+    const item = document.createElement('div'); item.className = 'qa__item';
+    item.innerHTML = `<h3><button type="button" aria-expanded="false" aria-controls="qa${i}" id="qaq${i}"><span class="qa__n">${String(i + 1).padStart(2, '0')}</span><span>${q}</span><i aria-hidden="true"></i></button></h3>
+      <div class="qa__a" id="qa${i}" role="region" aria-labelledby="qaq${i}"><div><p>${a}</p></div></div>`;
+    const btn = $('button', item);
+    btn.addEventListener('click', e => {
+      const open = btn.getAttribute('aria-expanded') !== 'true';
+      btn.setAttribute('aria-expanded', open); item.classList.toggle('is-open', open);
+      if (open) { const r = btn.getBoundingClientRect(), s = sky.getBoundingClientRect(); burst(r.left - s.left + 40, r.top - s.top + r.height / 2); }
+    });
+    list.append(item);
+  });
+
+  // typed question, cycling
+  const typed = $('#qaTyped'), lines = ['Et la responsabilité ?', 'Et mes données ?', 'Par où commencer ?', 'Et le coût ?', 'Votre question ?'];
+  let li = 0, ci = 0, del = false, tTyped = 0;
+  if (reduce) typed.textContent = lines[lines.length - 1];
+
+  // the sky
+  const sky = $('#qaSky'), ctx = sky.getContext('2d'), sec = $('#questions');
+  let W = 0, H = 0, dpr = 1, glyphs = [], sparks = [], visible = false, raf = 0, last = 0;
+  const ptr = { x: -1e4, y: -1e4 };
+  function resize() {
+    dpr = Math.min(devicePixelRatio, 2); W = sec.clientWidth; H = sec.clientHeight;
+    sky.width = W * dpr; sky.height = H * dpr; ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    const n = Math.round(W * H / 26000);
+    glyphs = Array.from({ length: n }, () => ({ x: Math.random() * W, y: Math.random() * H, s: 14 + Math.random() * 30, v: 10 + Math.random() * 22, ph: Math.random() * 6, a: 0, vx: 0, ans: 0 }));
+    if (reduce) draw(0, 0);
+  }
+  function burst(x, y) {
+    if (reduce) return;
+    for (let i = 0; i < 14; i++) { const a = (i / 14) * Math.PI * 2; sparks.push({ x, y, vx: Math.cos(a) * (60 + Math.random() * 90), vy: Math.sin(a) * (60 + Math.random() * 90) - 40, life: 1, s: 12 + Math.random() * 10 }); }
+    wake();
+  }
+  function draw(t, dt) {
+    ctx.clearRect(0, 0, W, H);
+    ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+    for (const g of glyphs) {
+      g.y -= g.v * dt; if (g.y < -40) { g.y = H + 40; g.x = Math.random() * W; }
+      const dx = g.x - ptr.x, dy = g.y - ptr.y, d = Math.hypot(dx, dy), near = Math.max(0, 1 - d / 170);
+      g.vx += (dx / (d || 1)) * near * 260 * dt; g.vx *= 0.92; g.x += g.vx * dt + Math.sin(t * 0.8 + g.ph) * 0.25;
+      g.ans += ((near > 0.25 ? 1 : 0) - g.ans) * Math.min(1, dt * 6);
+      const alpha = 0.1 + g.ans * 0.5;
+      ctx.save(); ctx.translate(g.x, g.y); ctx.rotate(Math.sin(t + g.ph) * 0.25 * (1 - g.ans)); ctx.scale(1 + g.ans * 0.35, 1 + g.ans * 0.35);
+      ctx.font = `italic ${g.s}px "Instrument Serif", Georgia, serif`;
+      ctx.fillStyle = g.ans > 0.5 ? `rgba(142, 59, 29, ${alpha})` : `rgba(43, 32, 26, ${alpha})`;
+      ctx.fillText(g.ans > 0.5 ? '!' : '?', 0, 0); ctx.restore();
+    }
+    sparks = sparks.filter(p => (p.life -= dt * 1.4) > 0);
+    for (const p of sparks) {
+      p.vy += 160 * dt; p.x += p.vx * dt; p.y += p.vy * dt;
+      ctx.font = `italic ${p.s}px "Instrument Serif", Georgia, serif`; ctx.fillStyle = `rgba(180, 98, 63, ${p.life})`; ctx.fillText('!', p.x, p.y);
+    }
+    // typing, in the same clock
+    if (!reduce) {
+      tTyped += dt;
+      const speed = del ? 0.03 : 0.07, pause = !del && ci === lines[li].length ? 1.6 : 0;
+      if (tTyped > speed + pause) {
+        tTyped = 0;
+        if (!del) { if (ci < lines[li].length) ci++; else del = true; }
+        else { if (ci > 0) ci--; else { del = false; li = (li + 1) % lines.length; } }
+        typed.textContent = lines[li].slice(0, ci);
+      }
+    }
+  }
+  function frame(now) {
+    const dt = Math.min(0.05, (now - last) / 1000 || 0.016); last = now;
+    draw(now / 1000, dt);
+    raf = visible && !document.hidden ? requestAnimationFrame(frame) : 0;
+  }
+  function wake() { if (!raf && visible && !document.hidden && !reduce) { last = performance.now(); raf = requestAnimationFrame(frame); } }
+  sec.addEventListener('pointermove', e => { const r = sec.getBoundingClientRect(); ptr.x = e.clientX - r.left; ptr.y = e.clientY - r.top; });
+  sec.addEventListener('pointerleave', () => { ptr.x = ptr.y = -1e4; });
+  new ResizeObserver(resize).observe(sec);
+  onVisible(sec, v => { visible = v; wake(); });
+  document.addEventListener('visibilitychange', wake);
+})();
+
 /* ═══════════════ Nav : current chapter, mirrored on the tower ═══════════════ */
 (function nav() {
   const links = $$('.bar nav a');
-  const ids = ['accueil', 'intervenants', 'lexique', 'parti', 'agence', 'production', 'cas-pratiques', 'deontologie', 'cloture'];
+  const ids = ['accueil', 'intervenants', 'lexique', 'parti', 'agence', 'production', 'cas-pratiques', 'deontologie', 'cloture', 'questions'];
   const io = new IntersectionObserver(ens => ens.forEach(en => {
     if (!en.isIntersecting) return;
     const id = en.target.id;
@@ -1451,7 +2137,7 @@ function segmented(root, initial, onChange) {
     const fi = CHAPTERS.findIndex(c => c[0] === id); if (fi >= 0) towerApi.setCurrent(fi);
   }), { rootMargin: '-45% 0px -50% 0px' });
   ids.forEach(id => io.observe(document.getElementById(id)));
-  onVisible($('#cloture'), v => { if (v) $('#cloture').classList.add('is-in'); }, 0.4);
+  onVisible($('#cloture'), v => { if (v) $('#cloture').classList.add('is-in'); }, 0.15);
 })();
 </script>
 </body>

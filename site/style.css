@@ -150,7 +150,7 @@ section { position: relative; padding: clamp(5rem, 12vw, 9rem) var(--gutter); }
   transform-style: preserve-3d; will-change: transform;
   box-shadow: 0 30px 60px -32px rgba(43, 32, 26, 0.55);
 }
-.spk__frame img { width: 100%; height: 100%; object-fit: cover; transform: translateZ(0) scale(1.06); }
+.spk__frame img, .spk__frame video { width: 100%; height: 100%; object-fit: cover; transform: translateZ(0) scale(1.06); }
 .spk__badge {
   position: absolute; left: 0.8rem; top: 0.8rem; transform: translateZ(40px);
   font-size: 0.75rem; padding: 0.25rem 0.65rem; border-radius: 999px; background: var(--glass);
@@ -175,7 +175,7 @@ section { position: relative; padding: clamp(5rem, 12vw, 9rem) var(--gutter); }
 .profile::backdrop { background: rgba(43, 32, 26, 0.38); }
 .profile__in { position: relative; display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr); max-height: inherit; }
 .profile__side { position: relative; background: var(--ink); color: var(--lime); display: grid; grid-template-rows: auto 1fr; min-height: 0; }
-.profile__portrait { aspect-ratio: 1; object-fit: cover; width: 100%; }
+.profile__portrait { aspect-ratio: 1; object-fit: cover; width: 100%; background: #3a3633; }
 .profile__scene { position: relative; min-height: 13rem; touch-action: none; cursor: grab; }
 .profile__scene canvas { position: absolute; inset: 0; width: 100% !important; height: 100% !important; }
 .profile__scene p { position: absolute; left: 1rem; bottom: 0.8rem; font-size: 0.75rem; color: rgba(247, 244, 238, 0.7); pointer-events: none; }
@@ -457,6 +457,103 @@ section { position: relative; padding: clamp(5rem, 12vw, 9rem) var(--gutter); }
 footer { padding: 2rem var(--gutter) 3rem; font-size: var(--t-sm); color: var(--ink-2); display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 1rem; }
 footer img { height: 2rem; width: auto; mix-blend-mode: multiply; }
 
+/* ───────────── Lexique : more motion ───────────── */
+.lex__icon { animation: lexFloat 5s ease-in-out infinite; }
+@keyframes lexFloat { 0%, 100% { translate: 0 0; rotate: -1.5deg; } 50% { translate: 0 -8px; rotate: 1.5deg; } }
+.lex__word span { display: inline-block; white-space: pre; }
+.lex__word.is-in span { animation: letterIn 620ms cubic-bezier(0.34, 1.56, 0.64, 1) both; animation-delay: calc(var(--k) * 45ms); }
+@keyframes letterIn { from { opacity: 0; transform: translateY(0.55em) rotate(8deg) scale(0.7); filter: blur(4px); } to { opacity: 1; transform: none; filter: blur(0); } }
+.term[aria-selected="true"] svg { animation: termPop 420ms cubic-bezier(0.34, 1.56, 0.64, 1); }
+@keyframes termPop { from { transform: scale(0.5) rotate(-20deg); } to { transform: none; } }
+
+/* ───────────── Prompt et parti : la maquette 3D ───────────── */
+.parti .split { align-items: start; }
+.maquette {
+  --mq-top: #f3efe6; --mq-bottom: #dfe7e0;
+  position: sticky; top: 5.5rem; margin: 0; height: min(78svh, 46rem); border-radius: 24px; overflow: hidden;
+  background: linear-gradient(180deg, var(--mq-top), var(--mq-bottom));
+  transition: --mq-top 1.1s ease, --mq-bottom 1.1s ease;
+  box-shadow: 0 40px 80px -40px rgba(20, 24, 18, 0.55); touch-action: none; cursor: grab;
+}
+@property --mq-top { syntax: "<color>"; inherits: true; initial-value: #f3efe6; }
+@property --mq-bottom { syntax: "<color>"; inherits: true; initial-value: #dfe7e0; }
+.maquette:active { cursor: grabbing; }
+.maquette canvas { position: absolute; inset: 0; width: 100% !important; height: 100% !important; }
+.maquette__hud {
+  position: absolute; left: 1rem; top: 1rem; z-index: 2; pointer-events: none; display: grid; gap: 0.15rem;
+  padding: 0.7rem 0.95rem; border-radius: 16px; background: var(--glass); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); color: var(--ink);
+}
+.maquette__hud b { font-weight: 500; font-size: var(--t-md); letter-spacing: -0.01em; }
+.maquette__hud span { font-size: 0.78rem; color: var(--ink-2); }
+.maquette__live { display: flex; align-items: center; gap: 0.45rem; }
+.maquette__live i { width: 0.5rem; height: 0.5rem; border-radius: 50%; background: var(--laterite-soft); animation: livePulse 1.6s ease-in-out infinite; }
+@keyframes livePulse { 50% { box-shadow: 0 0 0 5px rgba(180, 98, 63, 0.18); } }
+.maquette__chips { position: absolute; left: 1rem; right: 1rem; bottom: 3.1rem; z-index: 2; list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 0.35rem; pointer-events: none; }
+.maquette__chips li { font-size: 0.75rem; padding: 0.25rem 0.65rem; border-radius: 999px; background: rgba(43, 32, 26, 0.72); color: var(--lime); }
+.maquette__chips li[data-new] { background: var(--laterite); animation: chipIn 520ms cubic-bezier(0.34, 1.56, 0.64, 1); }
+@keyframes chipIn { from { transform: translateY(8px) scale(0.8); opacity: 0; } }
+.maquette__hint { position: absolute; left: 1rem; bottom: 0.9rem; z-index: 2; font-size: 0.75rem; color: var(--ink-2); pointer-events: none; }
+.maquette:not([data-loaded])::after {
+  content: "Chargement des arbres 3D…"; position: absolute; right: 1rem; bottom: 0.9rem; font-size: 0.75rem; color: var(--ink-2);
+}
+.builder { gap: 0.9rem; }
+.seg button { padding: 0.4rem 0.8rem; }
+@media (max-width: 860px) {
+  /* stays pinned under the bar while the options scroll below it
+     (block layout : a grid area would cap the sticky range to its own row) */
+  .parti .split { display: flex; flex-direction: column; gap: 2rem; }
+  .maquette { align-self: stretch; top: 3.4rem; height: 46svh; order: -1; z-index: 3; }
+  .maquette__hud { padding: 0.5rem 0.7rem; }
+  .maquette__hud span:last-child, .maquette__hint { display: none; }
+}
+
+/* ───────────── Démo : QR code ───────────── */
+.qr { margin: 0.4rem 0 0; display: grid; gap: 1rem; justify-items: start; }
+.qr__frame {
+  position: relative; width: min(100%, 22rem); aspect-ratio: 1; padding: 1.4rem; border-radius: 28px; background: #fff;
+  box-shadow: 0 40px 80px -36px rgba(0, 0, 0, 0.55); transform: rotate(-2deg) scale(0.92); opacity: 0;
+  transition: transform 900ms cubic-bezier(0.34, 1.56, 0.64, 1), opacity 500ms ease;
+}
+.close.is-in .qr__frame { transform: none; opacity: 1; }
+.qr__frame img { width: 100%; height: 100%; image-rendering: pixelated; }
+.qr__scan { position: absolute; left: 1.2rem; right: 1.2rem; top: 1.4rem; height: 3px; border-radius: 3px; background: var(--laterite-soft); box-shadow: 0 0 18px 4px rgba(180, 98, 63, 0.45); animation: scan 2.6s ease-in-out infinite; }
+@keyframes scan { 0%, 100% { top: 1.4rem; } 50% { top: calc(100% - 1.6rem); } }
+.qr__corner { position: absolute; width: 1.8rem; height: 1.8rem; border: 3px solid var(--laterite); }
+.qr__corner--tl { left: 0.55rem; top: 0.55rem; border-right: 0; border-bottom: 0; border-radius: 12px 0 0 0; }
+.qr__corner--tr { right: 0.55rem; top: 0.55rem; border-left: 0; border-bottom: 0; border-radius: 0 12px 0 0; }
+.qr__corner--bl { left: 0.55rem; bottom: 0.55rem; border-right: 0; border-top: 0; border-radius: 0 0 0 12px; }
+.qr__corner--br { right: 0.55rem; bottom: 0.55rem; border-left: 0; border-top: 0; border-radius: 0 0 12px 0; }
+.qr figcaption { display: grid; gap: 0.2rem; color: rgba(247, 244, 238, 0.8); font-size: var(--t-sm); }
+.qr figcaption b { color: var(--lime); font-weight: 500; font-size: var(--t-md); }
+
+/* ───────────── 07 Questions et réponses ───────────── */
+.qa { background: var(--plaster); overflow: clip; }
+.qa__sky { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+.qa__in { position: relative; display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr); gap: clamp(2rem, 6vw, 6rem); align-items: start; }
+.qa__head { display: grid; gap: 1.2rem; position: sticky; top: 6rem; }
+.qa__typed { font-family: var(--f-accent); font-style: italic; font-size: clamp(2rem, 4.4vw, 3.4rem); line-height: 1.05; color: var(--laterite); min-height: 1.1em; }
+.qa__caret { display: inline-block; width: 2px; height: 0.9em; margin-left: 0.08em; vertical-align: -0.1em; background: var(--laterite); animation: caret 1s steps(1) infinite; }
+@keyframes caret { 50% { opacity: 0; } }
+.qa__list { display: grid; }
+.qa__item { border-bottom: 1px solid var(--line); }
+.qa__item h3 { margin: 0; }
+.qa__item button {
+  width: 100%; display: grid; grid-template-columns: 2.4rem 1fr 1.6rem; align-items: center; gap: 0.4rem; text-align: left;
+  padding: 1.15rem 0; border: 0; background: transparent; cursor: pointer; font-size: var(--t-md); letter-spacing: -0.01em; font-weight: 500;
+}
+.qa__n { color: var(--laterite-soft); font-size: var(--t-sm); font-variant-numeric: tabular-nums; font-weight: 400; }
+.qa__item button i { position: relative; width: 1.6rem; height: 1.6rem; border-radius: 50%; background: var(--lime); transition: background-color 200ms ease, transform 400ms cubic-bezier(0.34, 1.56, 0.64, 1); }
+.qa__item button i::before, .qa__item button i::after { content: ""; position: absolute; left: 50%; top: 50%; width: 0.65rem; height: 1.5px; background: currentColor; translate: -50% -50%; transition: rotate 300ms ease; }
+.qa__item button i::after { rotate: 90deg; }
+.qa__item.is-open button i { background: var(--laterite); color: var(--lime); transform: rotate(180deg); }
+.qa__item.is-open button i::after { rotate: 0deg; }
+.qa__a { display: grid; grid-template-rows: 0fr; transition: grid-template-rows 450ms cubic-bezier(0.23, 1, 0.32, 1); }
+.qa__a > div { overflow: hidden; }
+.qa__a p { padding: 0 0 1.3rem 2.8rem; color: var(--ink-2); opacity: 0; transform: translateY(-6px); transition: opacity 300ms ease, transform 400ms ease; }
+.qa__item.is-open .qa__a { grid-template-rows: 1fr; }
+.qa__item.is-open .qa__a p { opacity: 1; transform: none; transition-delay: 80ms; }
+@media (max-width: 860px) { .qa__in { grid-template-columns: 1fr; } .qa__head { position: static; } }
+
 /* ───────────── Hover motion only where hover is real ───────────── */
 @media (hover: hover) and (pointer: fine) {
   .bar nav a:hover, .floor-label:hover { color: var(--ink); }
@@ -471,6 +568,8 @@ footer img { height: 2rem; width: auto; mix-blend-mode: multiply; }
   .hero__sign, .close__sign { animation: none; clip-path: none; transition: none; }
   .pipe__layer { filter: none; transition: opacity 200ms ease; }
   .press:active, .term:active, .seg button:active { transform: none; }
+  .lex__icon, .lex__word.is-in span, .term[aria-selected="true"] svg, .maquette__live i, .qr__scan, .qa__caret, .maquette__chips li[data-new] { animation: none; }
+  .qr__frame { transform: none; opacity: 1; transition: none; }
 }
 @media (prefers-reduced-transparency: reduce) {
   .bar, .hero__hint, .loop__toggle, .spk__badge, .profile__close, .pipe__cap { background: var(--lime); -webkit-backdrop-filter: none; backdrop-filter: none; }
