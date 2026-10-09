@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Artisan augmenté</title>
+<title>Architecte augmenté</title>
 <meta name="description" content="L'IA en agence d'architecture : présentation à l'Ordre des Architectes de Côte d'Ivoire (OACI), atelier pratique du 9 octobre 2026.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -19,7 +19,7 @@
 <body>
 
 <header class="bar">
-  <a class="bar__mark accent" href="#top" aria-label="Retour en haut"><img src="assets/img/oaci.png" alt="" width="215" height="83">Artisan augmenté</a>
+  <a class="bar__mark accent" href="#top" aria-label="Retour en haut"><img src="assets/img/oaci.png" alt="" width="215" height="83">Architecte augmenté</a>
   <nav aria-label="Parcours">
     <a href="#intervenants">Intervenants</a>
     <a href="#lexique"><span>01</span>Lexique</a>
@@ -43,7 +43,7 @@
       <img src="assets/img/oaci.png" alt="Ordre des Architectes de Côte d'Ivoire" width="215" height="83">
       <p><b>Présentation à l'OACI</b>Atelier pratique, session 2. Vendredi 9 octobre 2026, 15 h à 18 h, amphithéâtre de l'OACI.</p>
     </div>
-    <h1 id="h-hero"><span class="hero__title" data-enter>L'IA en agence d'architecture</span><span class="hero__sign accent ink" data-enter="ink" aria-hidden="true">l'artisan augmenté</span></h1>
+    <h1 id="h-hero"><span class="hero__title" data-enter>L'IA en agence d'architecture</span><span class="hero__sign accent ink" data-enter="ink" aria-hidden="true">l'architecte augmenté</span></h1>
     <p class="lede" style="margin-top:1.6rem" data-enter>Créer ses outils, maîtriser ses process, signer en conscience.</p>
     <div class="hero__meta" data-enter>
       <strong>Ange Djoké, Jean-Marc Don Mello, Gaston Koffi</strong>
@@ -873,7 +873,7 @@ const towerApi = (function tower() {
     }
     g.add(planter(s / 2 - 0.55, s / 2 - 0.55, i % 2 === 0 && i < N - 1));
     if (i === 2) g.add(box(1.5, 0.05, 1.1, mat.water, 1.2, 0.21, 1.2));
-    g.userData = { i, band, s, lift: new Spring(0, { response: 0.35, damping: 0.85 }), drop: new Spring(reduce ? 0 : 9 + i * 1.4, { response: 0.7, damping: 0.82 }) };
+    g.userData = { i, band, s, lift: new Spring(0, { response: 0.35, damping: 0.85 }), spin: new Spring(0, { response: 1.3, damping: 0.9 }), drop: new Spring(reduce ? 0 : 9 + i * 1.4, { response: 0.7, damping: 0.82 }) };
     g.traverse(o => { if (o.isMesh) o.userData.floor = g; });
     floors.push(g); tower.add(g);
   }
@@ -903,10 +903,10 @@ const towerApi = (function tower() {
   // a slight lean toward the pointer, added on top of the snapped rotation
   const leanX = new Spring(0, { response: 1.1, damping: 1 }), leanY = new Spring(0, { response: 1.1, damping: 1 });
   let W = 1, H = 1, current = 0, hovered = null, shown = true, labelW = [];
-  const v3 = new THREE.Vector3();
+  const v3 = new THREE.Vector3(), UP = new THREE.Vector3(0, 1, 0);
 
   function layout() {
-    floors.forEach((g, i) => { g.position.y = i * FLOOR_H + explode.value * i * 0.5 + g.userData.lift.value + g.userData.drop.value; });
+    floors.forEach((g, i) => { g.position.y = i * FLOOR_H + explode.value * i * 0.5 + g.userData.lift.value + g.userData.drop.value; g.rotation.y = g.userData.spin.value; });
     roof.position.y = N * FLOOR_H + explode.value * N * 0.5 + roof.userData.drop.value;
     tower.rotation.y = yaw.value + leanX.value; tilt.rotation.x = pitch.value + leanY.value;
   }
@@ -917,7 +917,8 @@ const towerApi = (function tower() {
     floors.forEach((g, i) => {
       const h = g.userData.s / 2; let best = null;
       for (const [x, z] of [[h, h], [-h, h], [h, -h], [-h, -h]]) {
-        v3.set(x, 0.5, z); g.localToWorld(v3); v3.project(cam);
+        // undo the floor's own spin : the label stays on the tower's corner
+        v3.set(x, 0.5, z).applyAxisAngle(UP, -g.rotation.y); g.localToWorld(v3); v3.project(cam);
         const sx = (v3.x + 1) / 2 * W, sy = (1 - v3.y) / 2 * H;
         if (!best || sx > best[0]) best = [sx, sy];
       }
@@ -935,7 +936,7 @@ const towerApi = (function tower() {
     cam.zoom = a < 0.8 ? 0.92 : 1.05;
     cam.updateProjectionMatrix(); measureLabels(); run(); render();
   }
-  const springs = () => [yaw, pitch, explode, leanX, leanY, roof.userData.drop, ...floors.flatMap(g => [g.userData.lift, g.userData.drop])];
+  const springs = () => [yaw, pitch, explode, leanX, leanY, roof.userData.drop, ...floors.flatMap(g => [g.userData.lift, g.userData.spin, g.userData.drop])];
   const run = animateSprings(springs, render);
   new ResizeObserver(resize).observe(stage);
   document.fonts?.ready.then(() => { measureLabels(); render(); });
@@ -957,6 +958,19 @@ const towerApi = (function tower() {
     });
     hero.addEventListener('pointerleave', () => { leanX.to(0); leanY.to(0); run(); });
   }
+
+  /* Now and then, one floor idles : a quarter turn on its vertical axis, a pause, then back in line. */
+  if (!reduce) (function idle() {
+    setTimeout(() => {
+      const free = floors.filter(g => g !== hovered && g.userData.i !== current && g.userData.spin.target === 0 && g.userData.drop.target === 0);
+      if (shown && !drag && !document.hidden && free.length) {
+        const g = free[Math.floor(Math.random() * free.length)];
+        g.userData.spin.to((Math.random() < 0.5 ? -1 : 1) * QUARTER); run();
+        setTimeout(() => { g.userData.spin.to(0); run(); }, 1800);
+      }
+      idle();
+    }, 2600 + Math.random() * 2400);
+  })();
 
   function highlight() {
     floors.forEach((g, i) => {
@@ -1034,16 +1048,16 @@ const SPEAKERS = [
   {
     id: 'jeanmarc', name: 'Jean-Marc Don Mello', role: 'Architecte', img: 'assets/img/jeanmarc.webp', vid: 'assets/video/spk-jeanmarc.mp4',
     link: 'https://www.linkedin.com/in/jean-marc-don-mello-67799875/',
-    bio: "Architecte, il porte le fil de la présentation : l'architecte comme artisan augmenté, qui crée ses outils, maîtrise ses process et signe en conscience.",
-    facts: [['Métier', 'Architecte'], ['Agence', 'Koffi & Diabaté Architectes'], ['Partie', 'L\'artisan augmenté']],
+    bio: "Architecte, il porte le fil de la présentation : l'architecte augmenté, qui crée ses outils, maîtrise ses process et signe en conscience.",
+    facts: [['Métier', 'Architecte'], ['Agence', 'Koffi & Diabaté Architectes'], ['Partie', 'L\'architecte augmenté']],
     topics: ['Lexique', 'Prompt et parti', 'Process et agents', 'Déontologie', 'Démo live'],
     scene: 'stack', hint: 'Glissez pour faire tourner les couches',
   },
   {
-    id: 'gaston', name: 'Gaston Koffi', role: 'Ingénieur génie civil, coordinateur BIM', img: 'assets/img/gaston.webp', vid: 'assets/video/spk-gaston.mp4',
+    id: 'gaston', name: 'Gaston Koffi', role: 'Ingénieur génie civil, BIM Manager', img: 'assets/img/gaston.webp', vid: 'assets/video/spk-gaston.mp4',
     link: 'https://www.linkedin.com/in/konan-gaston-koffi-4ba76717a/',
-    bio: "Ingénieur BTP et coordinateur BIM, il présente la gestion de l'APD et du DCE avec Claude : Revit, Excel, Word, plugins métier et contrôle de dossier.",
-    facts: [['Métier', 'Ingénieur génie civil'], ['Spécialité', 'Coordination BIM'], ['Partie', 'Gestion APD et DCE']],
+    bio: "Ingénieur BTP et BIM Manager, il présente la gestion de l'APD et du DCE avec Claude : Revit, Excel, Word, plugins métier et contrôle de dossier.",
+    facts: [['Métier', 'Ingénieur génie civil'], ['Spécialité', 'BIM Manager'], ['Partie', 'Gestion APD et DCE']],
     topics: ['Outils et plugins', 'Calepinages, détails', 'Nommage de fichiers', 'Contrôle de dossiers', 'Excel et Word'],
     scene: 'bim', hint: 'Glissez pour faire tourner la structure',
   },
