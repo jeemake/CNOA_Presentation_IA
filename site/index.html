@@ -10,6 +10,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@300;400;500;600&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
 <link rel="icon" href="assets/img/oaci.png">
 <link rel="stylesheet" href="style.css">
+<script>if (!matchMedia('(prefers-reduced-motion: reduce)').matches) document.documentElement.classList.add('motion');</script>
 <script src="assets/3d/parti-assets.js"></script>
 <script type="importmap">
 { "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js", "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/" } }
@@ -38,13 +39,13 @@
 <section id="accueil" class="hero" aria-labelledby="h-hero">
   <canvas class="hero__pattern" id="pattern" aria-hidden="true"></canvas>
   <div>
-    <div class="hero__event">
+    <div class="hero__event" data-enter>
       <img src="assets/img/oaci.png" alt="Ordre des Architectes de Côte d'Ivoire" width="215" height="83">
       <p><b>Présentation à l'OACI</b>Atelier pratique, session 2. Vendredi 9 octobre 2026, 15 h à 18 h, amphithéâtre de l'OACI.</p>
     </div>
-    <h1 id="h-hero">L'IA en agence d'architecture<span class="hero__sign accent" aria-hidden="true">l'artisan augmenté</span></h1>
-    <p class="lede" style="margin-top:1.6rem">Créer ses outils, maîtriser ses process, signer en conscience.</p>
-    <div class="hero__meta">
+    <h1 id="h-hero"><span class="hero__title" data-enter>L'IA en agence d'architecture</span><span class="hero__sign accent ink" data-enter="ink" aria-hidden="true">l'artisan augmenté</span></h1>
+    <p class="lede" style="margin-top:1.6rem" data-enter>Créer ses outils, maîtriser ses process, signer en conscience.</p>
+    <div class="hero__meta" data-enter>
       <strong>Ange Djoké, Jean-Marc Don Mello, Gaston Koffi</strong>
       <span>Ordre des Architectes de Côte d'Ivoire, formation continue</span>
     </div>
@@ -70,7 +71,7 @@
   <div class="profile__in">
     <button class="profile__close press" type="button" id="pClose" aria-label="Fermer la fiche"><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><path d="M3 3l8 8M11 3l-8 8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></button>
     <div class="profile__side" id="pSide">
-      <video class="profile__portrait" id="pImg" muted loop playsinline preload="metadata"></video>
+      <video class="profile__portrait" id="pImg" muted loop playsinline preload="none"></video>
       <div class="profile__scene" id="pScene"><p id="pSceneHint">Glissez pour manipuler</p></div>
     </div>
     <div class="profile__body">
@@ -156,8 +157,8 @@
   <h2 id="h-tools">Créer ses propres outils, la renaissance de la production</h2>
   <p class="lede">De Vinci inventait ses instruments. Le maître maçon façonne sa terre. Aujourd'hui, chacun peut bâtir les outils de son métier.</p>
   <div class="tools__pair">
-    <figure><div class="card3d" data-tilt><img src="assets/img/vinci.webp" alt="Autoportrait de Léonard de Vinci à la sanguine" loading="lazy" width="898" height="1400"></div><figcaption class="accent">Léonard de Vinci</figcaption></figure>
-    <figure><div class="card3d" data-tilt><img src="assets/img/macon.webp" alt="Un maître maçon devant une case en terre au toit de chaume" loading="lazy" width="896" height="1152"></div><figcaption class="accent">Maître maçon</figcaption></figure>
+    <figure><div class="card3d" data-tilt><img src="assets/img/vinci.webp" alt="Autoportrait de Léonard de Vinci à la sanguine" loading="lazy" width="898" height="1400"></div><figcaption class="accent ink">Léonard de Vinci</figcaption></figure>
+    <figure><div class="card3d" data-tilt><img src="assets/img/macon.webp" alt="Un maître maçon devant une case en terre au toit de chaume" loading="lazy" width="896" height="1152"></div><figcaption class="accent ink">Maître maçon</figcaption></figure>
   </div>
 </section>
 
@@ -198,7 +199,7 @@
       <h2 id="h-auto">Automatiser le processus</h2>
       <p class="lede">Douze pièces du projet, reliées par un même modèle. Touchez une pièce pour voir ce qu'elle devient.</p>
       <figure class="loop loop--team" data-loop>
-        <video muted loop playsinline preload="metadata" poster="assets/img/atelier-plans.webp" aria-label="Deux architectes penchés sur un grand plan ; leurs mains suivent un tracé à côté des maquettes d'étude.">
+        <video muted loop playsinline preload="none" poster="assets/img/atelier-plans.webp" aria-label="Deux architectes penchés sur un grand plan ; leurs mains suivent un tracé à côté des maquettes d'étude.">
           <source src="assets/video/atelier-plans.mp4" type="video/mp4">
         </video>
         <button class="loop__toggle press" type="button" aria-label="Mettre en pause"></button>
@@ -364,9 +365,9 @@
   <span class="chapter">05</span>
   <h2 id="h-eth">Responsabilité, signature, confiance</h2>
   <div class="ethic__rules">
-    <div class="rule"><b class="accent">signe</b><h3>Signature humaine</h3><p>Un architecte signe et répond du livrable, quel que soit l'outil.</p></div>
-    <div class="rule"><b class="accent">trace</b><h3>Traçabilité</h3><p>On sait ce que l'IA a produit, ce qui a été vérifié, et par qui.</p></div>
-    <div class="rule"><b class="accent">données</b><h3>Données protégées</h3><p>Les données clients restent hors du cloud public par défaut.</p></div>
+    <div class="rule"><b class="accent ink">signe</b><h3>Signature humaine</h3><p>Un architecte signe et répond du livrable, quel que soit l'outil.</p></div>
+    <div class="rule"><b class="accent ink">trace</b><h3>Traçabilité</h3><p>On sait ce que l'IA a produit, ce qui a été vérifié, et par qui.</p></div>
+    <div class="rule"><b class="accent ink">données</b><h3>Données protégées</h3><p>Les données clients restent hors du cloud public par défaut.</p></div>
   </div>
   <ol class="questions">
     <li><span>01</span>Qui signe ? Qui est responsable du livrable ?</li>
@@ -383,7 +384,7 @@
       <span class="chapter" style="color:var(--banco)">06</span>
       <h2 id="h-close" class="sr-only">Conclusion et démo live</h2>
       <blockquote>Le pouvoir revient à celui qui identifie le besoin et construit ses outils.</blockquote>
-      <span class="close__sign accent" aria-hidden="true">l'architecte, artisan digital</span>
+      <span class="close__sign accent ink" aria-hidden="true">l'architecte, artisan digital</span>
     </div>
     <div class="copy">
       <p class="lede" style="color:var(--lime)">Place à la démo live interactive, puis aux questions.</p>
@@ -422,6 +423,162 @@
   <img src="assets/img/oaci.png" alt="Ordre des Architectes de Côte d'Ivoire" width="215" height="83">
   <span>Atelier pratique, session 2. OACI, 9 octobre 2026.</span>
 </footer>
+
+<script type="module">
+/* ═══════════════ Motion layer ═══════════════
+   Entrance, scroll reveals and a few scroll-linked details. Kept apart from the
+   Three.js module below so it runs straight away, even when the CDN is slow or
+   unreachable. Everything here is decoration : without it, or with reduced
+   motion, the page is simply static. */
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+const EASE = 'cubic-bezier(0.23, 1, 0.32, 1)';
+const RISE = [{ opacity: 0, translate: '0 20px', filter: 'blur(5px)' }, { opacity: 1, translate: '0 0', filter: 'blur(0)' }];
+
+/* Signature words are inked in : a soft-edged mask slides off them, left to right. */
+const MASK = { 'mask-image': 'linear-gradient(90deg, #000 45%, transparent 55%)', 'mask-size': '250% 100%', 'mask-repeat': 'no-repeat' };
+function ink(el, delay = 0, duration = 1400) {
+  const props = Object.entries(MASK).flatMap(([k, v]) => [[k, v], ['-webkit-' + k, v]]);
+  props.forEach(([k, v]) => el.style.setProperty(k, v));
+  const a = el.animate([{ maskPosition: '100% 0', webkitMaskPosition: '100% 0' }, { maskPosition: '0 0', webkitMaskPosition: '0 0' }],
+    { duration, delay, easing: 'cubic-bezier(0.65, 0, 0.35, 1)', fill: 'backwards' });
+  const clear = () => props.forEach(([k]) => el.style.removeProperty(k));
+  a.finished.then(clear, clear);
+}
+
+/* Hero : the opening lines settle in one after the other, then the signature is inked. */
+(function enter() {
+  $$('[data-enter]').forEach((el, i) => {
+    el.classList.add('is-in');
+    if (reduce) return;
+    if (el.dataset.enter === 'ink') ink(el, 480);
+    else el.animate(RISE, { duration: 950, delay: 60 + i * 90, easing: EASE, fill: 'backwards' });
+  });
+})();
+
+/* Bar : one pill glides to the current chapter, a hairline tracks the reading progress. */
+(function bar() {
+  const bar = $$('.bar')[0], nav = $$('nav', bar)[0];
+  const pill = document.createElement('span'), line = document.createElement('span');
+  pill.className = 'bar__pill'; line.className = 'bar__progress';
+  pill.setAttribute('aria-hidden', 'true'); line.setAttribute('aria-hidden', 'true');
+  nav.prepend(pill); nav.classList.add('has-pill'); bar.append(line);
+  let placed = false;
+  function place() {
+    const a = $$('a[aria-current="true"]', nav)[0];
+    pill.style.opacity = a ? 1 : 0;
+    if (!a) return;
+    if (!placed) pill.style.transition = 'none'; // the first time, appear in place rather than slide in from the corner
+    pill.style.width = a.offsetWidth + 'px'; pill.style.height = a.offsetHeight + 'px';
+    pill.style.transform = `translate(${a.offsetLeft}px, ${a.offsetTop}px)`;
+    if (!placed) { pill.offsetWidth; pill.style.transition = ''; placed = true; }
+  }
+  new MutationObserver(place).observe(nav, { subtree: true, attributeFilter: ['aria-current'] });
+  new ResizeObserver(place).observe(nav);
+  document.fonts?.ready.then(place);
+
+  let queued = false;
+  const progress = () => {
+    queued = false;
+    const max = document.documentElement.scrollHeight - innerHeight;
+    line.style.transform = `scaleX(${max > 0 ? Math.min(1, scrollY / max) : 0})`;
+  };
+  addEventListener('scroll', () => { if (!queued) { queued = true; requestAnimationFrame(progress); } }, { passive: true });
+  addEventListener('resize', progress);
+  progress();
+})();
+
+/* Images drift a little slower than the page inside their frames. */
+(function parallax() {
+  if (reduce) return;
+  const items = $$('.card3d img, .loop--team video'), on = new Set();
+  let queued = false;
+  const paint = () => {
+    queued = false;
+    for (const el of on) {
+      const r = el.parentElement.getBoundingClientRect();
+      const p = (r.top + r.height / 2 - innerHeight / 2) / (innerHeight / 2 + r.height / 2); // -1 … 1 across the viewport
+      el.style.translate = `0 ${(-p * 4).toFixed(2)}%`;
+    }
+  };
+  const ask = () => { if (!queued && on.size) { queued = true; requestAnimationFrame(paint); } };
+  const io = new IntersectionObserver(es => { es.forEach(e => (e.isIntersecting ? on.add(e.target) : on.delete(e.target))); ask(); });
+  items.forEach(el => { el.style.scale = '1.1'; io.observe(el); });
+  addEventListener('scroll', ask, { passive: true });
+  addEventListener('resize', ask);
+})();
+
+/* Scroll reveals : blocks rise a few pixels into place as they come into view,
+   siblings that arrive together follow one another, headings come in word by
+   word and signature words are inked. Set up once the page script has built
+   its own blocks (speakers, questions) : module scripts all run before
+   DOMContentLoaded. */
+const REVEAL = [
+  'main > section:not(.hero) .chapter', 'main > section:not(.hero) h2:not(.sr-only)', 'main > section:not(.hero) .lede',
+  '.speakers__grid > .spk', '.daily__list > li', '.lex__terms', '.lex__panel',
+  '.formula', '.builder__row', '.prompt-out', '.tools__pair > figure', '.ink',
+  '.layer-info', '.roles', '.stack', '.loop', '.hub', '.diff__head .toggle', '.chart', '.prod__head .toggle', '.graph', '.lab',
+  '.case__by', '.topics > span', '.pipe__steps > li', '.pipe__stage', '.chain', '.chain > li', '.tabs',
+  '.ethic__rules > .rule', '.questions > li', '.close blockquote', '.qr', '.close__team', '.qa__item',
+];
+const PANES = '.spk, .lex__panel, .tools__pair > figure, .stack, .loop, .hub, .chart, .graph, .pipe__stage, .tabs, .qr';
+function words(el) {
+  if (!el.words) {
+    el.words = [];
+    for (const node of [...el.childNodes]) {
+      if (node.nodeType !== Node.TEXT_NODE) { el.words.push(node); continue; }
+      const frag = document.createDocumentFragment();
+      for (const w of node.textContent.split(/(\s+)/)) {
+        if (!w) continue;
+        const prev = el.words.at(-1);
+        // French punctuation stays with its word (espace insécable), never alone on a line
+        if (/^[?!:;»]+$/.test(w) && prev?.parentNode === frag && frag.lastChild?.nodeType === Node.TEXT_NODE) {
+          frag.lastChild.remove(); prev.textContent += ' ' + w; continue;
+        }
+        if (/^\s+$/.test(w)) { frag.append(w); continue; }
+        const s = document.createElement('span'); s.className = 'word'; s.textContent = w;
+        frag.append(s); el.words.push(s);
+      }
+      node.replaceWith(frag);
+    }
+  }
+  return el.words;
+}
+function play(el, delay) {
+  el.classList.remove('rv-wait', 'draw-wait');
+  if (el.matches('.chain')) return; // its line draws itself in CSS
+  if (el.matches('.ink')) return ink(el, delay + 120);
+  const parts = el.matches('h2, blockquote') ? words(el) : [el];
+  const frames = el.matches(PANES) ? RISE.map(({ filter, ...f }) => f) : RISE; // no blur on large or 3D panes
+  parts.forEach((p, k) => p.animate(frames, { duration: 900, delay: delay + k * 45, easing: EASE, fill: 'backwards' }));
+}
+document.addEventListener('DOMContentLoaded', () => {
+  if (reduce) return;
+  const pending = new Set();
+  const io = new IntersectionObserver(entries => {
+    entries.filter(e => e.isIntersecting).map(e => e.target)
+      .sort((a, b) => (a.compareDocumentPosition(b) & Node.DOCUMENT_POSITION_FOLLOWING ? -1 : 1))
+      .forEach((el, i) => { io.unobserve(el); pending.delete(el); play(el, Math.min(i, 6) * 80); });
+  }, { rootMargin: '0px 0px -8% 0px' });
+  for (const el of new Set(REVEAL.flatMap(s => $$(s)))) {
+    if (el.getBoundingClientRect().top < innerHeight * 0.92) continue; // already on screen : leave it as it is
+    el.classList.add(el.matches('.chain') ? 'draw-wait' : 'rv-wait');
+    io.observe(el); pending.add(el);
+  }
+  // A block flung past between two frames is never seen intersecting : once scrolling
+  // settles, show what went by and play what is on screen.
+  let idle = 0;
+  const sweep = () => {
+    for (const el of pending) {
+      const r = el.getBoundingClientRect();
+      if (r.top > innerHeight) continue;
+      io.unobserve(el); pending.delete(el);
+      if (r.bottom < 0) el.classList.remove('rv-wait', 'draw-wait'); else play(el, 0);
+    }
+  };
+  addEventListener('scroll', () => { clearTimeout(idle); if (pending.size) idle = setTimeout(sweep, 160); }, { passive: true });
+});
+</script>
 
 <script type="module">
 import * as THREE from 'three';
@@ -468,7 +625,8 @@ class Spring {
 const ticker = (() => {
   const jobs = new Set(); let running = false, last = 0;
   function frame(t) {
-    const dt = Math.min(0.05, (t - last) / 1000 || 0.016); last = t;
+    // the first frame's timestamp can precede wake() : never step backwards
+    const dt = Math.min(0.05, Math.max(0, (t - last) / 1000)) || 0.016; last = t;
     let busy = false;
     for (const job of jobs) if (job(dt, t / 1000)) busy = true;
     if (busy) requestAnimationFrame(frame); else running = false;
@@ -510,7 +668,72 @@ function tracker() {
     reset() { s = []; },
   };
 }
-const onVisible = (el, cb, threshold = 0) => new IntersectionObserver(([e]) => cb(e.isIntersecting), { threshold }).observe(el);
+// Entries can queue up during a fast scroll : the last one is the current state.
+const onVisible = (el, cb, threshold = 0) => new IntersectionObserver(es => cb(es[es.length - 1].isIntersecting), { threshold }).observe(el);
+
+/* Text that changes in place settles in instead of jumping. */
+function swapText(el, text) {
+  if (el.textContent === text) return;
+  el.textContent = text;
+  if (!reduce) el.animate([{ opacity: 0.2, translate: '0 0.3em', filter: 'blur(3px)' }, { opacity: 1, translate: '0 0', filter: 'blur(0)' }], { duration: 380, easing: 'cubic-bezier(0.23, 1, 0.32, 1)' });
+}
+
+/* ═══════════════ Looping clips ═══════════════
+   <video loop> restarts by seeking back to 0. On a server without byte-range
+   support (python -m http.server, some previews) that seek fails and the clip
+   freezes on its last frame, so each short clip is first loaded whole into
+   memory. A light watchdog also restarts a clip that ended or stalled anyway,
+   and resumes one the browser paused on its own. */
+const clip = (() => {
+  const blobs = new Map(), live = new Set();
+  const load = url => {
+    if (!blobs.has(url)) blobs.set(url, /^https?:$/.test(location.protocol)
+      ? fetch(url).then(r => (r.ok ? r.blob() : Promise.reject(r.status))).then(b => URL.createObjectURL(b), () => url)
+      : Promise.resolve(url)); // opened from the disk : file URLs seek fine
+    return blobs.get(url);
+  };
+  let timer = 0;
+  const watch = () => { timer = live.size ? setTimeout(watch, 1000) : 0; live.forEach(c => c.check()); };
+  document.addEventListener('visibilitychange', () => live.forEach(c => c.kick()));
+  return (v, url) => {
+    let want = false, src = url, attached = null, last = -1, still = 0, retries = 0;
+    v.loop = true;
+    const kick = () => {
+      if (!want || document.hidden || !v.paused || attached !== src || retries > 3) return;
+      retries++; v.play().catch(() => {});
+    };
+    const c = {
+      kick,
+      check() { // called every second while the clip should be playing
+        if (document.hidden) return;
+        if (v.paused) { still = 0; return kick(); }
+        if (v.currentTime !== last) { last = v.currentTime; still = 0; retries = 0; return; }
+        if (v.readyState < 2 && !v.currentTime) return; // still loading its first frame
+        still++;
+        if (still === 3) v.currentTime = 0; // frozen : start over
+        else if (still >= 6) { still = 0; v.load(); v.play().catch(() => {}); } // still frozen : reload the clip
+      },
+    };
+    v.addEventListener('ended', () => { if (want) { v.currentTime = 0; v.play().catch(() => {}); } });
+    v.addEventListener('pause', () => setTimeout(kick, 250));
+    async function attach() {
+      const target = src, u = await load(target);
+      if (target !== src || attached === target) return;
+      attached = target;
+      v.querySelectorAll('source').forEach(s => s.remove());
+      v.src = u; retries = 0; kick();
+    }
+    return {
+      source(u) { if (u !== src) { src = u; attached = null; v.pause(); if (want) attach(); } },
+      play(on) {
+        want = on; retries = 0;
+        if (!on) { live.delete(c); v.pause(); return; }
+        live.add(c); if (!timer) watch();
+        if (attached === src) kick(); else attach();
+      },
+    };
+  };
+})();
 
 /* ═══════════════ Hero : animated motif ═══════════════
    A lattice of small chevrons, like hatching on a plan. A slow wave runs
@@ -518,25 +741,29 @@ const onVisible = (el, cb, threshold = 0) => new IntersectionObserver(([e]) => c
 (function motif() {
   const cvs = $('#pattern'), ctx = cvs.getContext('2d'), hero = cvs.parentElement;
   const GAP = 30;
-  let W = 0, H = 0, dpr = 1, cells = [], visible = true;
-  const ptr = { x: -1e4, y: -1e4, tx: -1e4, ty: -1e4 };
+  let W = 0, H = 0, dpr = 1, cells = [], visible = true, lastT = 0;
+  // s : how strongly the pointer pulls, eased in and out instead of the pointer sweeping in from a corner
+  const ptr = { x: -1e4, y: -1e4, tx: -1e4, ty: -1e4, s: 0, ts: 0 };
+  const wrap = a => Math.atan2(Math.sin(a), Math.cos(a)); // shortest turn, so a chevron never spins round
   function resize() {
     dpr = Math.min(devicePixelRatio, 2); W = hero.clientWidth; H = hero.clientHeight;
     cvs.width = W * dpr; cvs.height = H * dpr; ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     cells = [];
     for (let y = GAP / 2; y < H; y += GAP) for (let x = GAP / 2 + ((y / GAP) % 2 ? GAP / 2 : 0); x < W; x += GAP) cells.push({ x, y, a: 0 });
-    draw(0);
+    draw(lastT);
   }
   function draw(t) {
+    const dt = lastT ? Math.min(0.05, Math.max(0, t - lastT)) : 1 / 60; lastT = t;
+    const follow = 1 - Math.pow(0.88, dt * 60), turn = 1 - Math.pow(0.9, dt * 60); // same feel at any frame rate
     ctx.clearRect(0, 0, W, H);
-    ptr.x += (ptr.tx - ptr.x) * 0.12; ptr.y += (ptr.ty - ptr.y) * 0.12;
+    ptr.x += (ptr.tx - ptr.x) * follow; ptr.y += (ptr.ty - ptr.y) * follow; ptr.s += (ptr.ts - ptr.s) * follow * 0.5;
     const buckets = [[], [], []];
     for (const c of cells) {
       const dx = ptr.x - c.x, dy = ptr.y - c.y, d = Math.hypot(dx, dy);
-      const near = Math.max(0, 1 - d / 220);
+      const near = Math.max(0, 1 - d / 220) * ptr.s;
       const wave = Math.sin(c.x * 0.012 + c.y * 0.008 - t * 0.6) * 0.5;
-      const target = near > 0 ? Math.atan2(dy, dx) - Math.PI / 2 : wave;
-      c.a += (target * near + wave * (1 - near) - c.a) * 0.1;
+      const goal = near > 0 ? wave + wrap(Math.atan2(dy, dx) - Math.PI / 2 - wave) * near : wave;
+      c.a += wrap(goal - c.a) * turn;
       buckets[near > 0.55 ? 2 : near > 0.15 ? 1 : 0].push(c);
     }
     const alpha = [0.13, 0.28, 0.55];
@@ -554,8 +781,11 @@ const onVisible = (el, cb, threshold = 0) => new IntersectionObserver(([e]) => c
   }
   new ResizeObserver(resize).observe(hero);
   if (reduce) return;
-  hero.addEventListener('pointermove', e => { const r = hero.getBoundingClientRect(); ptr.tx = e.clientX - r.left; ptr.ty = e.clientY - r.top; });
-  hero.addEventListener('pointerleave', () => { ptr.tx = ptr.ty = -1e4; });
+  hero.addEventListener('pointermove', e => {
+    const r = hero.getBoundingClientRect(); ptr.tx = e.clientX - r.left; ptr.ty = e.clientY - r.top; ptr.ts = 1;
+    if (ptr.s < 0.02) { ptr.x = ptr.tx; ptr.y = ptr.ty; }
+  });
+  hero.addEventListener('pointerleave', () => { ptr.ts = 0; });
   let raf = 0;
   const loop = t => { draw(t / 1000); raf = visible && !document.hidden ? requestAnimationFrame(loop) : 0; };
   const start = () => { if (!raf && visible && !document.hidden) raf = requestAnimationFrame(loop); };
@@ -670,14 +900,18 @@ const towerApi = (function tower() {
   const yaw = new Spring(0, { response: 0.45, damping: 0.8 });
   const pitch = new Spring(0, { response: 0.4, damping: 1 });
   const explode = new Spring(0, { response: 0.5, damping: 1 });
-  let W = 1, H = 1, current = 0, hovered = null;
+  // a slight lean toward the pointer, added on top of the snapped rotation
+  const leanX = new Spring(0, { response: 1.1, damping: 1 }), leanY = new Spring(0, { response: 1.1, damping: 1 });
+  let W = 1, H = 1, current = 0, hovered = null, shown = true, labelW = [];
   const v3 = new THREE.Vector3();
 
   function layout() {
     floors.forEach((g, i) => { g.position.y = i * FLOOR_H + explode.value * i * 0.5 + g.userData.lift.value + g.userData.drop.value; });
     roof.position.y = N * FLOOR_H + explode.value * N * 0.5 + roof.userData.drop.value;
-    tower.rotation.y = yaw.value; tilt.rotation.x = pitch.value;
+    tower.rotation.y = yaw.value + leanX.value; tilt.rotation.x = pitch.value + leanY.value;
   }
+  // widths are measured once (and again on resize / font load), never inside the frame loop
+  const measureLabels = () => { labelW = labels.map(l => l.offsetWidth); };
   function placeLabels() {
     tilt.updateMatrixWorld(true);
     floors.forEach((g, i) => {
@@ -687,26 +921,42 @@ const towerApi = (function tower() {
         const sx = (v3.x + 1) / 2 * W, sy = (1 - v3.y) / 2 * H;
         if (!best || sx > best[0]) best = [sx, sy];
       }
-      labels[i].style.transform = `translate(${Math.min(best[0] + 6, W - labels[i].offsetWidth - 4)}px, ${best[1] - 12}px)`;
-      labels[i].style.opacity = g.userData.drop.value > 0.5 ? 0 : 1;
+      labels[i].style.transform = `translate(${Math.min(best[0] + 6, W - labelW[i] - 4).toFixed(1)}px, ${(best[1] - 12).toFixed(1)}px)`;
+      labels[i].style.opacity = clamp(1 - g.userData.drop.value / 1.5, 0, 1).toFixed(2);
     });
   }
-  function render() { layout(); renderer.render(scene, cam); placeLabels(); }
+  // Off screen, springs still settle but nothing is drawn : no WebGL work while reading further down.
+  function render() { layout(); if (!shown) return; renderer.render(scene, cam); placeLabels(); }
   function resize() {
     W = stage.clientWidth; H = stage.clientHeight;
     renderer.setSize(W, H, false);
     const a = W / H, view = 7.9;
     cam.left = -view * a; cam.right = view * a; cam.top = view; cam.bottom = -view;
     cam.zoom = a < 0.8 ? 0.92 : 1.05;
-    cam.updateProjectionMatrix(); run(); render();
+    cam.updateProjectionMatrix(); measureLabels(); run(); render();
   }
-  const springs = () => [yaw, pitch, explode, roof.userData.drop, ...floors.flatMap(g => [g.userData.lift, g.userData.drop])];
+  const springs = () => [yaw, pitch, explode, leanX, leanY, roof.userData.drop, ...floors.flatMap(g => [g.userData.lift, g.userData.drop])];
   const run = animateSprings(springs, render);
   new ResizeObserver(resize).observe(stage);
+  document.fonts?.ready.then(() => { measureLabels(); render(); });
 
   floors.forEach((g, i) => setTimeout(() => { g.userData.drop.to(0); run(); }, 250 + i * 70));
   setTimeout(() => { roof.userData.drop.to(0); run(); }, 250 + N * 70);
-  addEventListener('scroll', () => { explode.to(clamp(scrollY / (innerHeight * 0.8), 0, 1)); run(); }, { passive: true });
+  const spread = () => {
+    const e = clamp(scrollY / (innerHeight * 0.8), 0, 1);
+    if (e !== explode.target) { explode.to(e); run(); }
+  };
+  addEventListener('scroll', () => { if (shown) spread(); }, { passive: true });
+  onVisible(stage, v => { shown = v; if (v) { spread(); render(); } });
+  if (finePointer && !reduce) {
+    const hero = stage.parentElement;
+    hero.addEventListener('pointermove', e => {
+      if (drag) return;
+      const r = hero.getBoundingClientRect();
+      leanX.to(((e.clientX - r.left) / r.width - 0.5) * 0.14); leanY.to(((e.clientY - r.top) / r.height - 0.5) * 0.05); run();
+    });
+    hero.addEventListener('pointerleave', () => { leanX.to(0); leanY.to(0); run(); });
+  }
 
   function highlight() {
     floors.forEach((g, i) => {
@@ -806,7 +1056,7 @@ const SPEAKERS = [
     b.type = 'button'; b.className = 'spk'; b.setAttribute('aria-haspopup', 'dialog');
     b.innerHTML = `
       <div class="spk__frame">
-        <video muted loop playsinline preload="metadata" poster="${s.img}" aria-hidden="true"><source src="${s.vid}" type="video/mp4"></video>
+        <video muted loop playsinline preload="none" poster="${s.img}" aria-hidden="true"><source src="${s.vid}" type="video/mp4"></video>
         <span class="spk__badge">${s.facts[2][1]}</span>
         <span class="spk__open" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 14 14"><path d="M7 2v10M2 7h10" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></span>
       </div>
@@ -815,8 +1065,8 @@ const SPEAKERS = [
     b.addEventListener('click', () => profile.open(i, b));
     grid.append(b);
     tilt($('.spk__frame', b), 10);
-    const v = $('video', b);
-    onVisible(b, on => { if (on && !reduce) v.play().catch(() => {}); else v.pause(); }, 0.3);
+    const c = clip($('video', b), s.vid);
+    onVisible(b, on => c.play(on && !reduce), 0.3);
   });
 })();
 
@@ -835,14 +1085,15 @@ $$('[data-tilt]').forEach(el => tilt(el));
 
 /* Profile sheet with a small 3D scene per speaker */
 const profile = (function () {
-  const dlg = $('#profile'), sceneEl = $('#pScene');
+  const dlg = $('#profile'), sceneEl = $('#pScene'), pv = $('#pImg');
+  const portrait = clip(pv, SPEAKERS[0].vid);
   let idx = 0, opener = null, three = null;
 
   function fill(i) {
     const s = SPEAKERS[i]; idx = i;
     $('#pName').textContent = s.name; $('#pRole').textContent = s.role; $('#pBio').textContent = s.bio;
-    const pv = $('#pImg'); pv.poster = s.img; pv.src = s.vid; pv.setAttribute('aria-label', `Portrait animé de ${s.name}`);
-    if (!reduce) pv.play().catch(() => {});
+    pv.poster = s.img; pv.setAttribute('aria-label', `Portrait animé de ${s.name}`);
+    portrait.source(s.vid); portrait.play(!reduce);
     $('#pFacts').innerHTML = s.facts.map(([k, v]) => `<li><span>${k}</span><span>${v}</span></li>`).join('');
     $('#pTopics').innerHTML = s.topics.map(t => `<span>${t}</span>`).join('');
     $('#pLink').href = s.link; $('#pSceneHint').textContent = s.hint;
@@ -855,7 +1106,7 @@ const profile = (function () {
   }
   function close() {
     if (!dlg.open) return;
-    const done = () => { dlg.close(); three?.stop(); $('#pImg').pause(); opener?.focus(); };
+    const done = () => { dlg.close(); three?.stop(); portrait.play(false); opener?.focus(); };
     if (reduce) return done();
     dlg.animate([{ opacity: 1, transform: 'none' }, { opacity: 0, transform: 'translateY(10px) scale(0.98)' }], { duration: 160, easing: 'cubic-bezier(0.23, 1, 0.32, 1)' }).onfinish = done;
   }
@@ -869,11 +1120,13 @@ const profile = (function () {
   const side = $('#pSide'); let sd = null;
   side.addEventListener('pointerdown', e => { if (e.pointerType === 'mouse' || e.target.closest('#pScene')) return; sd = { y: e.clientY, t: performance.now() }; });
   side.addEventListener('pointermove', e => { if (!sd) return; const d = Math.max(0, e.clientY - sd.y); dlg.style.transform = `translateY(${rubberband(d, 600, 0.9)}px)`; });
+  const settle = () => dlg.animate([{ transform: dlg.style.transform || 'none' }, { transform: 'none' }], { duration: 220, easing: 'cubic-bezier(0.32, 0.72, 0, 1)' }).onfinish = () => (dlg.style.transform = '');
   side.addEventListener('pointerup', e => {
     if (!sd) return; const d = e.clientY - sd.y, v = d / (performance.now() - sd.t); sd = null;
     if (d > 120 || v > 0.11) { dlg.style.transform = ''; close(); }
-    else dlg.animate([{ transform: dlg.style.transform }, { transform: 'none' }], { duration: 220, easing: 'cubic-bezier(0.32, 0.72, 0, 1)' }).onfinish = () => (dlg.style.transform = '');
+    else settle();
   });
+  side.addEventListener('pointercancel', () => { if (sd) { sd = null; settle(); } }); // the browser took the gesture : spring back
   return { open };
 })();
 
@@ -947,10 +1200,12 @@ function miniScene(host) {
     if (!d) return; vt.push(e.clientX, 0); const dx = (e.clientX - d.x) * 0.012;
     if (kind === 'render') sunA.snap(d.s + dx); else rot.snap(d.r + dx); draw();
   });
-  host.addEventListener('pointerup', () => {
+  const release = () => {
     if (!d) return; const v = vt.velocity().x * 0.012;
     const s = kind === 'render' ? sunA : rot; s.to(s.value + project(v, 0.99), v); d = null; run();
-  });
+  };
+  host.addEventListener('pointerup', release);
+  host.addEventListener('pointercancel', release); // otherwise a cancelled drag keeps following the mouse
   return { show, resize, stop() {} };
 }
 
@@ -1716,7 +1971,7 @@ const parti3d = (function () {
   }
   function frame(now) {
     raf = 0; drawing = true;
-    const raw = Math.min(0.25, (now - last) / 1000), dt = Math.min(0.05, raw); last = now; const t = now / 1000;
+    const raw = Math.min(0.25, Math.max(0, (now - last) / 1000)), dt = Math.min(0.05, raw); last = now; const t = now / 1000;
     stepTweens(raw); // real time, so transitions finish on time even on a slow GPU
     controls.autoRotate = !reduce && now > autoAt && !tweens.size;
     controls.autoRotateSpeed = 0.35;
@@ -1817,10 +2072,10 @@ const parti3d = (function () {
   const ICON_PAUSE = '<svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><rect x="2" y="1.5" width="2.6" height="9" rx="1" fill="currentColor"/><rect x="7.4" y="1.5" width="2.6" height="9" rx="1" fill="currentColor"/></svg>';
   const ICON_PLAY = '<svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M3 1.8v8.4a.6.6 0 0 0 .9.5l6.6-4.2a.6.6 0 0 0 0-1L3.9 1.3a.6.6 0 0 0-.9.5Z" fill="currentColor"/></svg>';
   $$('[data-loop]').forEach(fig => {
-    const v = $('video', fig), btn = $('.loop__toggle', fig);
+    const v = $('video', fig), btn = $('.loop__toggle', fig), c = clip(v, $('source', v).getAttribute('src'));
     let userPaused = reduce, visible = false;
     const sync = () => {
-      if (visible && !userPaused) v.play().catch(() => {}); else v.pause();
+      c.play(visible && !userPaused);
       btn.innerHTML = userPaused ? ICON_PLAY : ICON_PAUSE;
       btn.setAttribute('aria-label', userPaused ? 'Lire la boucle' : 'Mettre en pause');
     };
@@ -1851,7 +2106,7 @@ const parti3d = (function () {
   function setActive(l) {
     if (l === active) return; active = l;
     plates.forEach((p, k) => lifts[k].to(+p.dataset.l === l ? 34 : 0));
-    $('#layerTitle').textContent = info[l][0]; $('#layerText').textContent = info[l][1]; run();
+    swapText($('#layerTitle'), info[l][0]); swapText($('#layerText'), info[l][1]); run();
   }
   // Upper plates hide lower ones on screen, so pick by pointer height instead.
   root.addEventListener('pointermove', e => {
@@ -1871,21 +2126,49 @@ const parti3d = (function () {
     ['Permis', 'Le dossier se prépare.'], ['Devis', 'Les quantités viennent du modèle.'], ['Données', 'Programme et normes.'],
     ['Réunion', 'Les décisions reviennent au brief.'], ['Chantier', 'Les écarts sont relevés.'], ['Client', 'Les validations restent tracées.'],
   ];
-  const root = $('#hub'), svg = $('#hubLines'), lines = [], btns = [];
+  const root = $('#hub'), svg = $('#hubLines'), lines = [], btns = [], spots = [];
+  let active = -1;
   nodes.forEach(([name, line], i) => {
     const a = (i / nodes.length) * Math.PI * 2 - Math.PI / 2, x = 50 + Math.cos(a) * 43, y = 50 + Math.sin(a) * 43;
     const l = document.createElementNS(SVGNS, 'line');
     l.setAttribute('x1', '50%'); l.setAttribute('y1', '50%'); l.setAttribute('x2', x + '%'); l.setAttribute('y2', y + '%');
-    svg.append(l); lines.push(l);
+    svg.append(l); lines.push(l); spots.push([x, y]);
     const b = document.createElement('button');
     b.className = 'node'; b.type = 'button'; b.textContent = name; b.style.left = x + '%'; b.style.top = y + '%'; b.setAttribute('aria-pressed', 'false');
     const on = () => {
+      if (active === i) return; active = i;
       btns.forEach((o, k) => o.setAttribute('aria-pressed', k === i)); lines.forEach((o, k) => o.classList.toggle('on', k === i));
-      $('#hubTitle').textContent = name; $('#hubText').textContent = line;
+      swapText($('#hubTitle'), name); swapText($('#hubText'), line);
+      if (!reduce) { // the link draws itself out from the core to the piece
+        const len = l.getTotalLength();
+        l.animate([{ strokeDasharray: len, strokeDashoffset: len }, { strokeDasharray: len, strokeDashoffset: 0 }], { duration: 420, easing: 'cubic-bezier(0.23, 1, 0.32, 1)' });
+      }
     };
     b.addEventListener('pointerenter', on); b.addEventListener('focus', on); b.addEventListener('click', on);
     root.append(b); btns.push(b);
   });
+
+  /* While the hub is on screen, the model quietly sends an update to one piece at a time. */
+  if (reduce) return;
+  const dot = document.createElement('span');
+  dot.className = 'hub__pulse'; dot.setAttribute('aria-hidden', 'true'); root.append(dot);
+  let visible = false, timer = 0, k = 0;
+  function pulse() {
+    timer = 0;
+    if (!visible) return;
+    if (!document.hidden) {
+      do k = (k + 5) % nodes.length; while (k === active); // 5 and 12 are coprime : every piece gets its turn
+      const s = root.clientWidth, dx = (spots[k][0] - 50) / 100 * s, dy = (spots[k][1] - 50) / 100 * s;
+      dot.animate([
+        { translate: `${dx * 0.52}px ${dy * 0.52}px`, opacity: 0, scale: 0.5 },
+        { opacity: 1, offset: 0.2 },
+        { translate: `${dx * 0.86}px ${dy * 0.86}px`, opacity: 0, scale: 1 },
+      ], { duration: 1100, easing: 'cubic-bezier(0.33, 0, 0.2, 1)' });
+      btns[k].animate([{ scale: 1 }, { scale: 1.06 }, { scale: 1 }], { duration: 520, delay: 860, easing: 'ease-out' });
+    }
+    timer = setTimeout(pulse, 2000);
+  }
+  onVisible(root, v => { visible = v; if (v && !timer) timer = setTimeout(pulse, 700); });
 })();
 
 /* ═══════════════ Segmented toggle with a draggable thumb ═══════════════ */
@@ -1933,19 +2216,28 @@ function segmented(root, initial, onChange) {
     return { el, h, ai, x: new Spring(h[0], { response: 0.55 + i * 0.04, damping: 0.86 }), y: new Spring(1 - h[1], { response: 0.55 + i * 0.04, damping: 0.86 }) };
   });
   [...pts].sort((a, b) => a.ai - b.ai).forEach((p, k) => (p.slot = k));
-  const place = () => { const W = chart.clientWidth, H = chart.clientHeight; pts.forEach(p => (p.el.style.transform = `translate(${p.x.value * W - 6}px, ${p.y.value * H - 10}px)`)); };
+  let W = 0, H = 0;
+  // Near the right edge (phones), the label goes on the left of its dot instead of running off the chart.
+  const flip = p => { const f = p.x.target * W + p.w > W - 4; p.el.dataset.flip = f; return f; };
+  const place = () => pts.forEach(p => {
+    const x = p.x.value * W, y = p.y.value * H - 10;
+    p.el.style.transform = `translate(${p.el.dataset.flip === 'true' ? x - p.w + 6 : x - 6}px, ${y}px)`;
+  });
+  const measure = () => { W = chart.clientWidth; H = chart.clientHeight; pts.forEach(p => { p.el.dataset.flip = false; p.w = p.el.offsetWidth; flip(p); }); place(); };
   const run = animateSprings(() => pts.flatMap(p => [p.x, p.y]), place);
   function view(v) {
     pts.forEach(p => {
       if (v === 0) { p.x.to(p.h[0] * 0.9 + 0.03); p.y.to(1 - (p.h[1] * 0.9 + 0.04)); }
       else { p.x.to(0.04 + p.ai * 0.82); p.y.to(p.slot % 2 ? 0.58 : 0.4); }
+      flip(p);
     });
     $('#axHuman').setAttribute('opacity', v ? 0 : 1); $('#axAI').setAttribute('opacity', v ? 1 : 0);
     $('#noteL').style.opacity = $('#noteR').style.opacity = v ? 1 : 0;
-    $('#diffLede').textContent = v ? "Pour l'IA, un seul axe compte : le déterminisme." : 'Pour un humain, elle monte avec la taille et la complexité.';
+    swapText($('#diffLede'), v ? "Pour l'IA, un seul axe compte : le déterminisme." : 'Pour un humain, elle monte avec la taille et la complexité.');
     run();
   }
-  new ResizeObserver(place).observe(chart);
+  new ResizeObserver(measure).observe(chart);
+  document.fonts?.ready.then(measure);
   segmented($('#diffToggle'), 0, view);
 })();
 
@@ -2128,14 +2420,17 @@ function segmented(root, initial, onChange) {
 (function pipeline() {
   const tabs = $$('#pipe [role="tab"]'), layers = $$('#pipeStage .pipe__layer'), cap = $('#pipeCap');
   const caps = ['Esquisse à la main', "Rendu généré par l'IA depuis l'esquisse", "Boucle vidéo générée par l'IA", 'Planche de présentation'];
-  let cur = 0;
+  const vid = layers.find(l => l.tagName === 'VIDEO'), loop = clip(vid, $('source', vid).getAttribute('src'));
+  let cur = 0, seen = false;
+  const syncVideo = () => loop.play(seen && layers[cur] === vid && !reduce);
   function sel(i, focus) {
     cur = (i + tabs.length) % tabs.length;
     tabs.forEach((t, k) => { t.setAttribute('aria-selected', k === cur); t.tabIndex = k === cur ? 0 : -1; });
-    layers.forEach((l, k) => { l.dataset.on = k === cur; if (l.tagName === 'VIDEO') { if (k === cur && !reduce) l.play().catch(() => {}); else l.pause(); } });
-    cap.textContent = caps[cur];
+    layers.forEach((l, k) => { l.dataset.on = k === cur; });
+    syncVideo(); swapText(cap, caps[cur]);
     if (focus) tabs[cur].focus();
   }
+  onVisible($('#pipeStage'), v => { seen = v; syncVideo(); }, 0.2);
   tabs.forEach((t, i) => {
     t.addEventListener('click', () => sel(i));
     t.addEventListener('keydown', e => {
@@ -2155,9 +2450,16 @@ function segmented(root, initial, onChange) {
 /* ═══════════════ Tabs (cas pratique Gaston) ═══════════════ */
 (function tabs() {
   const list = $$('#caseTabs [role="tab"]');
+  let cur = 0;
   const sel = (i, focus) => {
     list.forEach((t, k) => { t.setAttribute('aria-selected', k === i); t.tabIndex = k === i ? 0 : -1; $('#' + t.getAttribute('aria-controls')).hidden = k !== i; });
     if (focus) list[i].focus();
+    if (i !== cur && !reduce) { // the new panel's lines settle in one after the other
+      [...$('#' + list[i].getAttribute('aria-controls')).children].forEach((c, k) => c.animate(
+        [{ opacity: 0, translate: `${i > cur ? 14 : -14}px 0` }, { opacity: 1, translate: '0 0' }],
+        { duration: 420, delay: k * 50, easing: 'cubic-bezier(0.23, 1, 0.32, 1)', fill: 'backwards' }));
+    }
+    cur = i;
   };
   list.forEach((t, i) => {
     t.addEventListener('click', () => sel(i));
@@ -2220,21 +2522,23 @@ function segmented(root, initial, onChange) {
   function draw(t, dt) {
     ctx.clearRect(0, 0, W, H);
     ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+    // one font for every glyph, sized by scale : setting ctx.font per glyph is costly
+    ctx.font = 'italic 40px "Instrument Serif", Georgia, serif';
     for (const g of glyphs) {
       g.y -= g.v * dt; if (g.y < -40) { g.y = H + 40; g.x = Math.random() * W; }
       const dx = g.x - ptr.x, dy = g.y - ptr.y, d = Math.hypot(dx, dy), near = Math.max(0, 1 - d / 170);
-      g.vx += (dx / (d || 1)) * near * 260 * dt; g.vx *= 0.92; g.x += g.vx * dt + Math.sin(t * 0.8 + g.ph) * 0.25;
+      g.vx += (dx / (d || 1)) * near * 260 * dt; g.vx *= Math.pow(0.92, dt * 60); g.x += g.vx * dt + Math.sin(t * 0.8 + g.ph) * 0.25;
       g.ans += ((near > 0.25 ? 1 : 0) - g.ans) * Math.min(1, dt * 6);
-      const alpha = 0.1 + g.ans * 0.5;
-      ctx.save(); ctx.translate(g.x, g.y); ctx.rotate(Math.sin(t + g.ph) * 0.25 * (1 - g.ans)); ctx.scale(1 + g.ans * 0.35, 1 + g.ans * 0.35);
-      ctx.font = `italic ${g.s}px "Instrument Serif", Georgia, serif`;
+      const alpha = 0.1 + g.ans * 0.5, k = (g.s / 40) * (1 + g.ans * 0.35);
+      ctx.save(); ctx.translate(g.x, g.y); ctx.rotate(Math.sin(t + g.ph) * 0.25 * (1 - g.ans)); ctx.scale(k, k);
       ctx.fillStyle = g.ans > 0.5 ? `rgba(142, 59, 29, ${alpha})` : `rgba(43, 32, 26, ${alpha})`;
       ctx.fillText(g.ans > 0.5 ? '!' : '?', 0, 0); ctx.restore();
     }
     sparks = sparks.filter(p => (p.life -= dt * 1.4) > 0);
     for (const p of sparks) {
       p.vy += 160 * dt; p.x += p.vx * dt; p.y += p.vy * dt;
-      ctx.font = `italic ${p.s}px "Instrument Serif", Georgia, serif`; ctx.fillStyle = `rgba(180, 98, 63, ${p.life})`; ctx.fillText('!', p.x, p.y);
+      ctx.save(); ctx.translate(p.x, p.y); ctx.scale(p.s / 40, p.s / 40);
+      ctx.fillStyle = `rgba(180, 98, 63, ${p.life})`; ctx.fillText('!', 0, 0); ctx.restore();
     }
     // typing, in the same clock
     if (!reduce) {
@@ -2249,7 +2553,7 @@ function segmented(root, initial, onChange) {
     }
   }
   function frame(now) {
-    const dt = Math.min(0.05, (now - last) / 1000 || 0.016); last = now;
+    const dt = Math.min(0.05, Math.max(0, (now - last) / 1000)) || 0.016; last = now;
     draw(now / 1000, dt);
     raf = visible && !document.hidden ? requestAnimationFrame(frame) : 0;
   }
