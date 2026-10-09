@@ -18,3 +18,5 @@ Ouvrir `site/index.html` dans un navigateur (connexion internet requise pour Thr
 Les informations des intervenants se modifient dans le bloc `SPEAKERS` du script de `index.html`.
 La maquette 3D de la partie 02 se règle dans le bloc `parti3d` (programmes, façades, ambiances, intentions, points de vue).
 Les questions-réponses de la partie 07 sont dans le bloc `qa`.
+La partie 08 renvoie à la page « Liens utiles » : une page à part dans le même `index.html`, ouverte par l'adresse `#liens` (https://cnoa-presentation-ia.pages.dev/#liens). Ses liens se modifient dans le bloc `links-page` du HTML.
+QR codes : `site/assets/img/qr-site.png` et `.svg` (la présentation), `qr-liens.png` et `.svg` (la page des liens).

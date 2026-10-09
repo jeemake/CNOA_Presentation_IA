@@ -10,7 +10,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@300;400;500;600&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
 <link rel="icon" href="assets/img/oaci.png">
 <link rel="stylesheet" href="style.css">
-<script>if (!matchMedia('(prefers-reduced-motion: reduce)').matches) document.documentElement.classList.add('motion');</script>
+<script>if (!matchMedia('(prefers-reduced-motion: reduce)').matches) document.documentElement.classList.add('motion'); if (location.hash === '#liens') document.documentElement.classList.add('links-open');</script>
 <script src="assets/3d/parti-assets.js"></script>
 <script type="importmap">
 { "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js", "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/" } }
@@ -30,6 +30,7 @@
     <a href="#deontologie"><span>05</span>Déontologie</a>
     <a href="#cloture"><span>06</span>Démo</a>
     <a href="#questions"><span>07</span>Q&amp;R</a>
+    <a href="#ressources"><span>08</span>Liens</a>
   </nav>
 </header>
 
@@ -423,11 +424,132 @@
   </div>
 </section>
 
+<!-- ═════════ 08 Liens utiles ═════════ -->
+<section id="ressources" class="res" aria-labelledby="h-res">
+  <div class="split">
+    <div class="copy">
+      <span class="chapter">08</span>
+      <h2 id="h-res">Liens utiles</h2>
+      <p class="lede">Un podcast, des cours gratuits, les assistants à installer et un guide pour bien rédiger ses demandes : de quoi démarrer après l'atelier.</p>
+      <ol class="res__list">
+        <li><span>01</span>À écouter en premier : le podcast de Gaston Koffi</li>
+        <li><span>02</span>Comprendre les bases</li>
+        <li><span>03</span>Les assistants à installer</li>
+        <li><span>04</span>Bien rédiger ses demandes</li>
+      </ol>
+      <a class="res__open press" href="#liens">Ouvrir les liens utiles<svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><path d="m5 2 5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+    </div>
+    <figure class="res__qr">
+      <img src="assets/img/qr-liens.png" alt="QR code vers la page des liens utiles" width="684" height="684" loading="lazy">
+      <figcaption><b>Gardez les liens</b>Scannez pour les retrouver sur votre téléphone.</figcaption>
+    </figure>
+  </div>
+</section>
+
 </main>
 <footer>
   <img src="assets/img/oaci.png" alt="Ordre des Architectes de Côte d'Ivoire" width="215" height="83">
   <span>Atelier pratique, session 2. OACI, 9 octobre 2026.</span>
 </footer>
+
+<!-- ═════════ Liens utiles : une page à part, ouverte par #liens ═════════ -->
+<div class="links-page" id="liens" role="region" aria-labelledby="h-links" tabindex="-1">
+  <header class="links__bar">
+    <a class="bar__mark accent" href="#accueil"><img src="assets/img/oaci.png" alt="" width="215" height="83">Architecte augmenté</a>
+    <a class="links__back press" href="#ressources" id="linksBack"><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><path d="M9 2 4 7l5 5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Retour à la présentation</a>
+  </header>
+  <div class="links__in">
+    <div class="links__intro">
+      <span class="chapter">Après l'atelier</span>
+      <h1 id="h-links"><span>Commencer avec l'IA en agence d'architecture</span><span class="links__sign accent">liens et tutos</span></h1>
+      <p class="lede">Des ressources pour démarrer après l'atelier « L'architecte comme artisan augmenté » (OACI, 9 octobre 2026). En français quand elles existent ; celles qui ne sont disponibles qu'en anglais portent la mention <abbr class="lk__en" title="En anglais">EN</abbr>.</p>
+      <p class="small">Liens vérifiés le 9 octobre 2026. Ils s'ouvrent dans un nouvel onglet.</p>
+    </div>
+<section class="links__part" aria-labelledby="h-l1">
+  <div class="links__head"><span class="chapter">01</span><h2 id="h-l1">À écouter en premier : le podcast de Gaston Koffi</h2></div>
+  <div class="links__body">
+    <article class="pod">
+      <a class="pod__media" href="https://www.youtube.com/watch?v=bYosA7PesSg" target="_blank" rel="noopener" aria-label="Regarder l'épisode sur YouTube">
+        <img src="assets/img/gaston.webp" alt="" width="496" height="504" loading="lazy">
+        <span class="pod__play" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 12 12"><path d="M3 1.8v8.4a.6.6 0 0 0 .9.5l6.6-4.2a.6.6 0 0 0 0-1L3.9 1.3a.6.6 0 0 0-.9.5Z" fill="currentColor"/></svg></span>
+      </a>
+      <div class="pod__body">
+        <p class="pod__show">54 Façades, épisode 5</p>
+        <h3>« L'IA va-t-elle remplacer les architectes ? La réponse d'un BIM Manager »</h3>
+        <p class="small">Avec Gaston Koffi, ingénieur BTP, responsable BIM chez Koffi &amp; Diabaté Architectes, Abidjan et Cotonou.</p>
+        <ul class="pod__links">
+          <li><a class="lk lk--row" href="https://www.youtube.com/watch?v=bYosA7PesSg" target="_blank" rel="noopener"><span class="lk__title">Vidéo YouTube</span><span class="lk__host">youtube.com<svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M3.5 8.5l5-5M4.5 3.5h4v4" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a></li>
+          <li><a class="lk lk--row" href="https://www.54facades.com/podcast/l-ia-va-t-elle-remplacer-les-architectes" target="_blank" rel="noopener"><span class="lk__title">Page de l&#x27;épisode</span><span class="lk__host">54facades.com<svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M3.5 8.5l5-5M4.5 3.5h4v4" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a></li>
+          <li><a class="lk lk--row" href="https://www.youtube.com/@54facades" target="_blank" rel="noopener"><span class="lk__title">Chaîne 54 Façades</span><span class="lk__desc">Architecture et urbanisme en Afrique.</span><span class="lk__host">youtube.com/@54facades<svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M3.5 8.5l5-5M4.5 3.5h4v4" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a></li>
+        </ul>
+      </div>
+    </article>
+    <h3 class="links__sub">Autre podcast en français sur le sujet</h3>
+    <div class="lk-grid">
+      <a class="lk" href="https://podcast.ausha.co/decodeur/125-l-ia-dans-l-architecture-menace-ou-opportunite" target="_blank" rel="noopener"><span class="lk__title">Décodeur, épisode 125</span><span class="lk__desc">« L&#x27;IA dans l&#x27;architecture : menace ou opportunité ? »</span><span class="lk__host">podcast.ausha.co<svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M3.5 8.5l5-5M4.5 3.5h4v4" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
+    </div>
+  </div>
+</section>
+<section class="links__part" aria-labelledby="h-l2">
+  <div class="links__head"><span class="chapter">02</span><h2 id="h-l2">Comprendre les bases</h2><p class="lede">Gratuit, en français.</p></div>
+  <div class="links__body">
+    <div class="lk-grid">
+      <a class="lk" href="https://openclassrooms.com/fr/courses/6417031-objectif-ia-initiez-vous-a-l-intelligence-artificielle" target="_blank" rel="noopener"><span class="lk__title">Objectif IA</span><span class="lk__desc">OpenClassrooms et Institut Montaigne. Environ 5 h pour comprendre ce qu&#x27;est l&#x27;IA, sans technique. Certificat gratuit.</span><span class="lk__host">openclassrooms.com<svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M3.5 8.5l5-5M4.5 3.5h4v4" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
+      <a class="lk" href="https://www.elementsofai.fr/" target="_blank" rel="noopener"><span class="lk__title">Elements of AI</span><span class="lk__desc">Cours de référence de l&#x27;université d&#x27;Helsinki, en français.</span><span class="lk__host">elementsofai.fr<svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M3.5 8.5l5-5M4.5 3.5h4v4" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
+      <a class="lk" href="https://learn.microsoft.com/fr-fr/training/paths/get-started-ai-apps-agents/" target="_blank" rel="noopener"><span class="lk__title">Microsoft Learn : débuter avec l&#x27;IA</span><span class="lk__desc">Parcours gratuits en français, utile si l&#x27;agence est sous Microsoft 365.</span><span class="lk__host">learn.microsoft.com<svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M3.5 8.5l5-5M4.5 3.5h4v4" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
+      <a class="lk" href="https://academy.claude.com/courses/ai-fluency-framework-foundations" target="_blank" rel="noopener"><span class="lk__title">Claude Academy : AI Fluency <abbr class="lk__en" title="En anglais">EN</abbr></span><span class="lk__desc">Court cours gratuit pour bien travailler avec une IA : déléguer, décrire, vérifier.</span><span class="lk__host">academy.claude.com<svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M3.5 8.5l5-5M4.5 3.5h4v4" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
+      <a class="lk" href="https://academy.openai.com/" target="_blank" rel="noopener"><span class="lk__title">OpenAI Academy <abbr class="lk__en" title="En anglais">EN</abbr></span><span class="lk__desc">Tutoriels vidéo gratuits pour ChatGPT.</span><span class="lk__host">academy.openai.com<svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M3.5 8.5l5-5M4.5 3.5h4v4" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
+    </div>
+    <h3 class="links__sub">Chaînes YouTube francophones pour suivre l'actualité de l'IA</h3>
+    <div class="lk-grid">
+      <a class="lk" href="https://www.youtube.com/@Underscore_" target="_blank" rel="noopener"><span class="lk__title">Underscore_</span><span class="lk__desc">Tech et IA, vulgarisation.</span><span class="lk__host">youtube.com/@Underscore_<svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M3.5 8.5l5-5M4.5 3.5h4v4" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
+      <a class="lk" href="https://www.youtube.com/@DefendIntelligence" target="_blank" rel="noopener"><span class="lk__title">Defend Intelligence</span><span class="lk__desc">Actualité et outils IA.</span><span class="lk__host">youtube.com/@DefendIntelligence<svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M3.5 8.5l5-5M4.5 3.5h4v4" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
+      <a class="lk" href="https://www.youtube.com/@MachineLearnia" target="_blank" rel="noopener"><span class="lk__title">Machine Learnia</span><span class="lk__desc">Plus technique, pour aller plus loin.</span><span class="lk__host">youtube.com/@MachineLearnia<svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M3.5 8.5l5-5M4.5 3.5h4v4" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
+    </div>
+  </div>
+</section>
+<section class="links__part" aria-labelledby="h-l3">
+  <div class="links__head"><span class="chapter">03</span><h2 id="h-l3">Les assistants à installer</h2><p class="lede">Un compte suffit pour commencer. Prenez une offre payante dès que l'usage est régulier : les offres payantes et équipe donnent de meilleures garanties sur les données.</p></div>
+  <div class="links__body">
+    <div class="lk-grid">
+            <div class="lk lk--group">
+        <a class="lk__main" href="https://claude.ai" target="_blank" rel="noopener"><span class="lk__title">Claude</span><span class="lk__desc">Anthropic. L'assistant utilisé dans le cas pratique de Gaston.</span><span class="lk__host">claude.ai<svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M3.5 8.5l5-5M4.5 3.5h4v4" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
+        <ul class="lk__subs">
+          <li><a href="https://claude.com/download" target="_blank" rel="noopener">Applications de bureau<svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M3.5 8.5l5-5M4.5 3.5h4v4" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
+          <li><a href="https://support.claude.com/fr/" target="_blank" rel="noopener">Centre d'aide en français<svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M3.5 8.5l5-5M4.5 3.5h4v4" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
+          <li><a href="https://claude.com/claude-for-microsoft-365" target="_blank" rel="noopener">Claude dans Excel, Word et PowerPoint<svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M3.5 8.5l5-5M4.5 3.5h4v4" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
+        </ul>
+      </div>
+      <a class="lk" href="https://chatgpt.com" target="_blank" rel="noopener"><span class="lk__title">ChatGPT</span><span class="lk__desc">OpenAI.</span><span class="lk__host">chatgpt.com<svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M3.5 8.5l5-5M4.5 3.5h4v4" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
+      <a class="lk" href="https://chat.mistral.ai" target="_blank" rel="noopener"><span class="lk__title">Le Chat</span><span class="lk__desc">Mistral, éditeur français.</span><span class="lk__host">chat.mistral.ai<svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M3.5 8.5l5-5M4.5 3.5h4v4" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
+      <a class="lk" href="https://gemini.google.com" target="_blank" rel="noopener"><span class="lk__title">Gemini</span><span class="lk__desc">Google.</span><span class="lk__host">gemini.google.com<svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M3.5 8.5l5-5M4.5 3.5h4v4" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
+      <a class="lk" href="https://notebooklm.google.com" target="_blank" rel="noopener"><span class="lk__title">NotebookLM</span><span class="lk__desc">Google. Pour interroger ses propres documents (PLU, normes, cahiers des charges) avec les sources citées.</span><span class="lk__host">notebooklm.google.com<svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M3.5 8.5l5-5M4.5 3.5h4v4" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
+      <a class="lk" href="https://www.perplexity.ai" target="_blank" rel="noopener"><span class="lk__title">Perplexity</span><span class="lk__desc">Recherche web avec sources.</span><span class="lk__host">perplexity.ai<svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M3.5 8.5l5-5M4.5 3.5h4v4" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
+      <a class="lk" href="https://support.microsoft.com/fr-fr/microsoft-365-copilot/" target="_blank" rel="noopener"><span class="lk__title">Microsoft 365 Copilot</span><span class="lk__desc">Aide en français.</span><span class="lk__host">support.microsoft.com<svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M3.5 8.5l5-5M4.5 3.5h4v4" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
+    </div>
+  </div>
+</section>
+<section class="links__part" aria-labelledby="h-l4">
+  <div class="links__head"><span class="chapter">04</span><h2 id="h-l4">Bien rédiger ses demandes</h2><p class="lede">Les prompts.</p></div>
+  <div class="links__body">
+    <div class="method">
+      <p class="small">Méthode vue à l'atelier</p>
+      <p class="formula"><span>Intention</span><i>+</i><span>contraintes</span><i>+</i><span>critères de visa</span></p>
+      <p>Donnez le contexte (site, climat, programme, budget), le format attendu (tableau, CCTP, notice) et la façon dont vous allez vérifier le résultat.</p>
+    </div>
+    <div class="lk-grid">
+      <a class="lk" href="https://platform.claude.com/docs/fr/build-with-claude/prompt-engineering/overview" target="_blank" rel="noopener"><span class="lk__title">Guide du prompt engineering de Claude</span><span class="lk__desc">En français.</span><span class="lk__host">platform.claude.com<svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M3.5 8.5l5-5M4.5 3.5h4v4" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
+      <a class="lk" href="https://academy.claude.com/tutorials" target="_blank" rel="noopener"><span class="lk__title">Tutoriels Claude Academy <abbr class="lk__en" title="En anglais">EN</abbr></span><span class="lk__desc">Pas à pas, pour s&#x27;exercer.</span><span class="lk__host">academy.claude.com<svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M3.5 8.5l5-5M4.5 3.5h4v4" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
+    </div>
+  </div>
+</section>
+    <footer class="links__foot">
+      <img src="assets/img/oaci.png" alt="Ordre des Architectes de Côte d'Ivoire" width="215" height="83">
+      <span>Atelier pratique, session 2. OACI, 9 octobre 2026.</span>
+      <a class="links__back press" href="#ressources">Retour à la présentation</a>
+    </footer>
+  </div>
+</div>
 
 <script type="module">
 /* ═══════════════ Motion layer ═══════════════
@@ -525,8 +647,9 @@ const REVEAL = [
   '.layer-info', '.roles', '.stack', '.loop', '.hub', '.diff__head .toggle', '.chart', '.prod__head .toggle', '.graph', '.lab',
   '.case__by', '.topics > span', '.pipe__steps > li', '.pipe__stage', '.chain', '.chain > li', '.tabs',
   '.ethic__rules > .rule', '.questions > li', '.close blockquote', '.qr', '.close__team', '.qa__item',
+  '.res__list > li', '.res__open', '.res__qr',
 ];
-const PANES = '.spk, .lex__panel, .tools__pair > figure, .stack, .loop, .hub, .chart, .graph, .pipe__stage, .tabs, .qr';
+const PANES = '.spk, .lex__panel, .tools__pair > figure, .stack, .loop, .hub, .chart, .graph, .pipe__stage, .tabs, .qr, .res__qr';
 function words(el) {
   if (!el.words) {
     el.words = [];
@@ -2680,7 +2803,7 @@ function segmented(root, initial, onChange) {
 /* ═══════════════ Nav : current chapter, mirrored on the tower ═══════════════ */
 (function nav() {
   const links = $$('.bar nav a');
-  const ids = ['accueil', 'intervenants', 'lexique', 'parti', 'agence', 'production', 'cas-pratiques', 'deontologie', 'cloture', 'questions'];
+  const ids = ['accueil', 'intervenants', 'lexique', 'parti', 'agence', 'production', 'cas-pratiques', 'deontologie', 'cloture', 'questions', 'ressources'];
   const io = new IntersectionObserver(ens => ens.forEach(en => {
     if (!en.isIntersecting) return;
     const id = en.target.id;
@@ -2689,6 +2812,40 @@ function segmented(root, initial, onChange) {
   }), { rootMargin: '-45% 0px -50% 0px' });
   ids.forEach(id => io.observe(document.getElementById(id)));
   onVisible($('#cloture'), v => { if (v) $('#cloture').classList.add('is-in'); }, 0.15);
+})();
+</script>
+<script>
+/* ═══════════════ Liens utiles : a page of its own, opened by #liens ═══════════════
+   It lies over the presentation, which keeps its layout (and its 3D scenes their size)
+   underneath, inert. A plain script : it works even when the 3D library cannot load. */
+(function links() {
+  const root = document.documentElement, page = document.getElementById('liens');
+  const behind = [...document.querySelectorAll('body > header, main, body > footer')];
+  const title = document.title;
+  let open = null, fromInside = false;
+  function sync() {
+    const want = location.hash === '#liens';
+    if (want === open) return;
+    open = want;
+    root.classList.toggle('links-open', want);
+    behind.forEach(el => (el.inert = want));
+    document.title = want ? 'Liens utiles · ' + title : title;
+    if (!want) { fromInside = false; return; }
+    page.scrollTop = 0; page.focus({ preventScroll: true });
+    if (!root.classList.contains('motion')) return;
+    page.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 320, easing: 'ease-out' });
+    [...page.querySelectorAll('.links__intro > *, .links__part')].forEach((el, k) => el.animate(
+      [{ opacity: 0, translate: '0 22px' }, { opacity: 1, translate: '0 0' }],
+      { duration: 800, delay: 80 + Math.min(k, 7) * 70, easing: 'cubic-bezier(0.23, 1, 0.32, 1)', fill: 'backwards' }));
+  }
+  addEventListener('hashchange', e => {
+    if (location.hash === '#liens' && new URL(e.oldURL).hash !== '#liens') fromInside = true;
+    sync();
+  });
+  // Opened from the presentation : going back restores the exact place it was opened from.
+  page.querySelectorAll('.links__back').forEach(a => a.addEventListener('click', e => { if (fromInside) { e.preventDefault(); history.back(); } }));
+  addEventListener('keydown', e => { if (open && e.key === 'Escape') page.querySelector('.links__back').click(); });
+  sync();
 })();
 </script>
 </body>
