@@ -10,7 +10,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@300;400;500;600&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
 <link rel="icon" href="assets/img/oaci.png">
 <link rel="stylesheet" href="style.css">
-<script>if (!matchMedia('(prefers-reduced-motion: reduce)').matches) document.documentElement.classList.add('motion');</script>
+<script>if (!matchMedia('(prefers-reduced-motion: reduce)').matches) document.documentElement.classList.add('motion'); if (location.hash === '#liens') document.documentElement.classList.add('links-open');</script>
 <script src="assets/3d/parti-assets.js"></script>
 <script type="importmap">
 { "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js", "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/" } }
@@ -30,6 +30,7 @@
     <a href="#deontologie"><span>05</span>Déontologie</a>
     <a href="#cloture"><span>06</span>Démo</a>
     <a href="#questions"><span>07</span>Q&amp;R</a>
+    <a href="#ressources"><span>08</span>Liens</a>
   </nav>
 </header>
 
@@ -227,9 +228,14 @@
   </div>
   <div class="chart" id="chart">
     <svg aria-hidden="true">
+      <defs>
+        <linearGradient id="aiGrad" gradientUnits="userSpaceOnUse" x1="2%" y1="0" x2="98%" y2="0">
+          <stop offset="0" stop-color="var(--laterite)"/><stop offset="1" stop-color="var(--ink)"/>
+        </linearGradient>
+      </defs>
       <g id="axHuman">
-        <line class="axis" x1="50%" y1="2%" x2="50%" y2="98%"/>
-        <line class="axis" x1="2%" y1="50%" x2="98%" y2="50%"/>
+        <line class="axis" pathLength="1" x1="50%" y1="98%" x2="50%" y2="2%"/>
+        <line class="axis" pathLength="1" x1="2%" y1="50%" x2="98%" y2="50%"/>
         <line class="guide" x1="6%" y1="94%" x2="94%" y2="6%"/>
         <text class="axlabel" x="51%" y="4%">Grand</text>
         <text class="axlabel" x="51%" y="98%">Petit</text>
@@ -237,7 +243,7 @@
         <text class="axlabel" x="98%" y="48%" text-anchor="end">Complexe</text>
       </g>
       <g id="axAI" opacity="0">
-        <line class="axis" x1="2%" y1="50%" x2="98%" y2="50%"/>
+        <line class="axis axis--ai" pathLength="1" x1="2%" y1="50%" x2="98%" y2="50%"/>
         <text class="axlabel" x="2%" y="24%" style="fill:var(--laterite)">Déterministe : automatisable</text>
         <text class="axlabel" x="98%" y="24%" text-anchor="end" style="fill:var(--ink)">Ambigu : goût et jugement</text>
       </g>
@@ -418,11 +424,132 @@
   </div>
 </section>
 
+<!-- ═════════ 08 Liens utiles ═════════ -->
+<section id="ressources" class="res" aria-labelledby="h-res">
+  <div class="split">
+    <div class="copy">
+      <span class="chapter">08</span>
+      <h2 id="h-res">Liens utiles</h2>
+      <p class="lede">Un podcast, des cours gratuits, les assistants à installer et un guide pour bien rédiger ses demandes : de quoi démarrer après l'atelier.</p>
+      <ol class="res__list">
+        <li><span>01</span>À écouter en premier : le podcast de Gaston Koffi</li>
+        <li><span>02</span>Comprendre les bases</li>
+        <li><span>03</span>Les assistants à installer</li>
+        <li><span>04</span>Bien rédiger ses demandes</li>
+      </ol>
+      <a class="res__open press" href="#liens">Ouvrir les liens utiles<svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><path d="m5 2 5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+    </div>
+    <figure class="res__qr">
+      <img src="assets/img/qr-liens.png" alt="QR code vers la page des liens utiles" width="684" height="684" loading="lazy">
+      <figcaption><b>Gardez les liens</b>Scannez pour les retrouver sur votre téléphone.</figcaption>
+    </figure>
+  </div>
+</section>
+
 </main>
 <footer>
   <img src="assets/img/oaci.png" alt="Ordre des Architectes de Côte d'Ivoire" width="215" height="83">
   <span>Atelier pratique, session 2. OACI, 9 octobre 2026.</span>
 </footer>
+
+<!-- ═════════ Liens utiles : une page à part, ouverte par #liens ═════════ -->
+<div class="links-page" id="liens" role="region" aria-labelledby="h-links" tabindex="-1">
+  <header class="links__bar">
+    <a class="bar__mark accent" href="#accueil"><img src="assets/img/oaci.png" alt="" width="215" height="83">Architecte augmenté</a>
+    <a class="links__back press" href="#ressources" id="linksBack"><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><path d="M9 2 4 7l5 5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Retour à la présentation</a>
+  </header>
+  <div class="links__in">
+    <div class="links__intro">
+      <span class="chapter">Après l'atelier</span>
+      <h1 id="h-links"><span>Commencer avec l'IA en agence d'architecture</span><span class="links__sign accent">liens et tutos</span></h1>
+      <p class="lede">Des ressources pour démarrer après l'atelier « L'architecte comme artisan augmenté » (OACI, 9 octobre 2026). En français quand elles existent ; celles qui ne sont disponibles qu'en anglais portent la mention <abbr class="lk__en" title="En anglais">EN</abbr>.</p>
+      <p class="small">Liens vérifiés le 9 octobre 2026. Ils s'ouvrent dans un nouvel onglet.</p>
+    </div>
+<section class="links__part" aria-labelledby="h-l1">
+  <div class="links__head"><span class="chapter">01</span><h2 id="h-l1">À écouter en premier : le podcast de Gaston Koffi</h2></div>
+  <div class="links__body">
+    <article class="pod">
+      <a class="pod__media" href="https://www.youtube.com/watch?v=bYosA7PesSg" target="_blank" rel="noopener" aria-label="Regarder l'épisode sur YouTube">
+        <img src="assets/img/gaston.webp" alt="" width="496" height="504" loading="lazy">
+        <span class="pod__play" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 12 12"><path d="M3 1.8v8.4a.6.6 0 0 0 .9.5l6.6-4.2a.6.6 0 0 0 0-1L3.9 1.3a.6.6 0 0 0-.9.5Z" fill="currentColor"/></svg></span>
+      </a>
+      <div class="pod__body">
+        <p class="pod__show">54 Façades, épisode 5</p>
+        <h3>« L'IA va-t-elle remplacer les architectes ? La réponse d'un BIM Manager »</h3>
+        <p class="small">Avec Gaston Koffi, ingénieur BTP, responsable BIM chez Koffi &amp; Diabaté Architectes, Abidjan et Cotonou.</p>
+        <ul class="pod__links">
+          <li><a class="lk lk--row" href="https://www.youtube.com/watch?v=bYosA7PesSg" target="_blank" rel="noopener"><span class="lk__title">Vidéo YouTube</span><span class="lk__host">youtube.com<svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M3.5 8.5l5-5M4.5 3.5h4v4" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a></li>
+          <li><a class="lk lk--row" href="https://www.54facades.com/podcast/l-ia-va-t-elle-remplacer-les-architectes" target="_blank" rel="noopener"><span class="lk__title">Page de l&#x27;épisode</span><span class="lk__host">54facades.com<svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M3.5 8.5l5-5M4.5 3.5h4v4" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a></li>
+          <li><a class="lk lk--row" href="https://www.youtube.com/@54facades" target="_blank" rel="noopener"><span class="lk__title">Chaîne 54 Façades</span><span class="lk__desc">Architecture et urbanisme en Afrique.</span><span class="lk__host">youtube.com/@54facades<svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M3.5 8.5l5-5M4.5 3.5h4v4" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a></li>
+        </ul>
+      </div>
+    </article>
+    <h3 class="links__sub">Autre podcast en français sur le sujet</h3>
+    <div class="lk-grid">
+      <a class="lk" href="https://podcast.ausha.co/decodeur/125-l-ia-dans-l-architecture-menace-ou-opportunite" target="_blank" rel="noopener"><span class="lk__title">Décodeur, épisode 125</span><span class="lk__desc">« L&#x27;IA dans l&#x27;architecture : menace ou opportunité ? »</span><span class="lk__host">podcast.ausha.co<svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M3.5 8.5l5-5M4.5 3.5h4v4" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
+    </div>
+  </div>
+</section>
+<section class="links__part" aria-labelledby="h-l2">
+  <div class="links__head"><span class="chapter">02</span><h2 id="h-l2">Comprendre les bases</h2><p class="lede">Gratuit, en français.</p></div>
+  <div class="links__body">
+    <div class="lk-grid">
+      <a class="lk" href="https://openclassrooms.com/fr/courses/6417031-objectif-ia-initiez-vous-a-l-intelligence-artificielle" target="_blank" rel="noopener"><span class="lk__title">Objectif IA</span><span class="lk__desc">OpenClassrooms et Institut Montaigne. Environ 5 h pour comprendre ce qu&#x27;est l&#x27;IA, sans technique. Certificat gratuit.</span><span class="lk__host">openclassrooms.com<svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M3.5 8.5l5-5M4.5 3.5h4v4" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
+      <a class="lk" href="https://www.elementsofai.fr/" target="_blank" rel="noopener"><span class="lk__title">Elements of AI</span><span class="lk__desc">Cours de référence de l&#x27;université d&#x27;Helsinki, en français.</span><span class="lk__host">elementsofai.fr<svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M3.5 8.5l5-5M4.5 3.5h4v4" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
+      <a class="lk" href="https://learn.microsoft.com/fr-fr/training/paths/get-started-ai-apps-agents/" target="_blank" rel="noopener"><span class="lk__title">Microsoft Learn : débuter avec l&#x27;IA</span><span class="lk__desc">Parcours gratuits en français, utile si l&#x27;agence est sous Microsoft 365.</span><span class="lk__host">learn.microsoft.com<svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M3.5 8.5l5-5M4.5 3.5h4v4" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
+      <a class="lk" href="https://academy.claude.com/courses/ai-fluency-framework-foundations" target="_blank" rel="noopener"><span class="lk__title">Claude Academy : AI Fluency <abbr class="lk__en" title="En anglais">EN</abbr></span><span class="lk__desc">Court cours gratuit pour bien travailler avec une IA : déléguer, décrire, vérifier.</span><span class="lk__host">academy.claude.com<svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M3.5 8.5l5-5M4.5 3.5h4v4" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
+      <a class="lk" href="https://academy.openai.com/" target="_blank" rel="noopener"><span class="lk__title">OpenAI Academy <abbr class="lk__en" title="En anglais">EN</abbr></span><span class="lk__desc">Tutoriels vidéo gratuits pour ChatGPT.</span><span class="lk__host">academy.openai.com<svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M3.5 8.5l5-5M4.5 3.5h4v4" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
+    </div>
+    <h3 class="links__sub">Chaînes YouTube francophones pour suivre l'actualité de l'IA</h3>
+    <div class="lk-grid">
+      <a class="lk" href="https://www.youtube.com/@Underscore_" target="_blank" rel="noopener"><span class="lk__title">Underscore_</span><span class="lk__desc">Tech et IA, vulgarisation.</span><span class="lk__host">youtube.com/@Underscore_<svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M3.5 8.5l5-5M4.5 3.5h4v4" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
+      <a class="lk" href="https://www.youtube.com/@DefendIntelligence" target="_blank" rel="noopener"><span class="lk__title">Defend Intelligence</span><span class="lk__desc">Actualité et outils IA.</span><span class="lk__host">youtube.com/@DefendIntelligence<svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M3.5 8.5l5-5M4.5 3.5h4v4" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
+      <a class="lk" href="https://www.youtube.com/@MachineLearnia" target="_blank" rel="noopener"><span class="lk__title">Machine Learnia</span><span class="lk__desc">Plus technique, pour aller plus loin.</span><span class="lk__host">youtube.com/@MachineLearnia<svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M3.5 8.5l5-5M4.5 3.5h4v4" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
+    </div>
+  </div>
+</section>
+<section class="links__part" aria-labelledby="h-l3">
+  <div class="links__head"><span class="chapter">03</span><h2 id="h-l3">Les assistants à installer</h2><p class="lede">Un compte suffit pour commencer. Prenez une offre payante dès que l'usage est régulier : les offres payantes et équipe donnent de meilleures garanties sur les données.</p></div>
+  <div class="links__body">
+    <div class="lk-grid">
+            <div class="lk lk--group">
+        <a class="lk__main" href="https://claude.ai" target="_blank" rel="noopener"><span class="lk__title">Claude</span><span class="lk__desc">Anthropic. L'assistant utilisé dans le cas pratique de Gaston.</span><span class="lk__host">claude.ai<svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M3.5 8.5l5-5M4.5 3.5h4v4" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
+        <ul class="lk__subs">
+          <li><a href="https://claude.com/download" target="_blank" rel="noopener">Applications de bureau<svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M3.5 8.5l5-5M4.5 3.5h4v4" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
+          <li><a href="https://support.claude.com/fr/" target="_blank" rel="noopener">Centre d'aide en français<svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M3.5 8.5l5-5M4.5 3.5h4v4" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
+          <li><a href="https://claude.com/claude-for-microsoft-365" target="_blank" rel="noopener">Claude dans Excel, Word et PowerPoint<svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M3.5 8.5l5-5M4.5 3.5h4v4" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
+        </ul>
+      </div>
+      <a class="lk" href="https://chatgpt.com" target="_blank" rel="noopener"><span class="lk__title">ChatGPT</span><span class="lk__desc">OpenAI.</span><span class="lk__host">chatgpt.com<svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M3.5 8.5l5-5M4.5 3.5h4v4" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
+      <a class="lk" href="https://chat.mistral.ai" target="_blank" rel="noopener"><span class="lk__title">Le Chat</span><span class="lk__desc">Mistral, éditeur français.</span><span class="lk__host">chat.mistral.ai<svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M3.5 8.5l5-5M4.5 3.5h4v4" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
+      <a class="lk" href="https://gemini.google.com" target="_blank" rel="noopener"><span class="lk__title">Gemini</span><span class="lk__desc">Google.</span><span class="lk__host">gemini.google.com<svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M3.5 8.5l5-5M4.5 3.5h4v4" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
+      <a class="lk" href="https://notebooklm.google.com" target="_blank" rel="noopener"><span class="lk__title">NotebookLM</span><span class="lk__desc">Google. Pour interroger ses propres documents (PLU, normes, cahiers des charges) avec les sources citées.</span><span class="lk__host">notebooklm.google.com<svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M3.5 8.5l5-5M4.5 3.5h4v4" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
+      <a class="lk" href="https://www.perplexity.ai" target="_blank" rel="noopener"><span class="lk__title">Perplexity</span><span class="lk__desc">Recherche web avec sources.</span><span class="lk__host">perplexity.ai<svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M3.5 8.5l5-5M4.5 3.5h4v4" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
+      <a class="lk" href="https://support.microsoft.com/fr-fr/microsoft-365-copilot/" target="_blank" rel="noopener"><span class="lk__title">Microsoft 365 Copilot</span><span class="lk__desc">Aide en français.</span><span class="lk__host">support.microsoft.com<svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M3.5 8.5l5-5M4.5 3.5h4v4" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
+    </div>
+  </div>
+</section>
+<section class="links__part" aria-labelledby="h-l4">
+  <div class="links__head"><span class="chapter">04</span><h2 id="h-l4">Bien rédiger ses demandes</h2><p class="lede">Les prompts.</p></div>
+  <div class="links__body">
+    <div class="method">
+      <p class="small">Méthode vue à l'atelier</p>
+      <p class="formula"><span>Intention</span><i>+</i><span>contraintes</span><i>+</i><span>critères de visa</span></p>
+      <p>Donnez le contexte (site, climat, programme, budget), le format attendu (tableau, CCTP, notice) et la façon dont vous allez vérifier le résultat.</p>
+    </div>
+    <div class="lk-grid">
+      <a class="lk" href="https://platform.claude.com/docs/fr/build-with-claude/prompt-engineering/overview" target="_blank" rel="noopener"><span class="lk__title">Guide du prompt engineering de Claude</span><span class="lk__desc">En français.</span><span class="lk__host">platform.claude.com<svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M3.5 8.5l5-5M4.5 3.5h4v4" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
+      <a class="lk" href="https://academy.claude.com/tutorials" target="_blank" rel="noopener"><span class="lk__title">Tutoriels Claude Academy <abbr class="lk__en" title="En anglais">EN</abbr></span><span class="lk__desc">Pas à pas, pour s&#x27;exercer.</span><span class="lk__host">academy.claude.com<svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M3.5 8.5l5-5M4.5 3.5h4v4" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
+    </div>
+  </div>
+</section>
+    <footer class="links__foot">
+      <img src="assets/img/oaci.png" alt="Ordre des Architectes de Côte d'Ivoire" width="215" height="83">
+      <span>Atelier pratique, session 2. OACI, 9 octobre 2026.</span>
+      <a class="links__back press" href="#ressources">Retour à la présentation</a>
+    </footer>
+  </div>
+</div>
 
 <script type="module">
 /* ═══════════════ Motion layer ═══════════════
@@ -520,8 +647,9 @@ const REVEAL = [
   '.layer-info', '.roles', '.stack', '.loop', '.hub', '.diff__head .toggle', '.chart', '.prod__head .toggle', '.graph', '.lab',
   '.case__by', '.topics > span', '.pipe__steps > li', '.pipe__stage', '.chain', '.chain > li', '.tabs',
   '.ethic__rules > .rule', '.questions > li', '.close blockquote', '.qr', '.close__team', '.qa__item',
+  '.res__list > li', '.res__open', '.res__qr',
 ];
-const PANES = '.spk, .lex__panel, .tools__pair > figure, .stack, .loop, .hub, .chart, .graph, .pipe__stage, .tabs, .qr';
+const PANES = '.spk, .lex__panel, .tools__pair > figure, .stack, .loop, .hub, .chart, .graph, .pipe__stage, .tabs, .qr, .res__qr';
 function words(el) {
   if (!el.words) {
     el.words = [];
@@ -628,7 +756,10 @@ const ticker = (() => {
     // the first frame's timestamp can precede wake() : never step backwards
     const dt = Math.min(0.05, Math.max(0, (t - last) / 1000)) || 0.016; last = t;
     let busy = false;
-    for (const job of jobs) if (job(dt, t / 1000)) busy = true;
+    for (const job of jobs) {
+      // a job that throws is dropped : left in, it would stop the clock and freeze every other animation
+      try { if (job(dt, t / 1000)) busy = true; } catch (err) { jobs.delete(job); console.error(err); }
+    }
     if (busy) requestAnimationFrame(frame); else running = false;
   }
   return {
@@ -645,7 +776,7 @@ function animateSprings(springs, draw) {
     const off = ticker.add(dt => {
       let busy = false;
       for (const s of springs()) if (!s.settled) { s.step(dt); busy = true; }
-      draw();
+      try { draw(); } catch (err) { console.error(err); } // the springs still settle, and can be run again
       if (!busy) { on = false; off(); }
       return busy;
     });
@@ -2219,15 +2350,18 @@ function segmented(root, initial, onChange) {
 
 /* ═══════════════ Difficulté : two views, one dataset ═══════════════ */
 (function difficulty() {
-  const chart = $('#chart');
+  const chart = $('#chart'), axH = $('#axHuman'), axA = $('#axAI'), notes = [$('#noteL'), $('#noteR')];
+  const OUT = 'cubic-bezier(0.23, 1, 0.32, 1)', POP = 'cubic-bezier(0.34, 1.56, 0.64, 1)';
   const pts = [
     ['kiosk', 'Kiosque de quartier', [0.12, 0.1], 0.14], ['entrepot', 'Entrepôt', [0.18, 0.82], 0.04],
     ['lotissement', 'Maison de lotissement', [0.3, 0.34], 0.26], ['hopital', 'Hôpital', [0.78, 0.74], 0.5],
     ['aeroport', 'Aéroport', [0.9, 0.94], 0.7], ['mesure', 'Maison sur mesure', [0.72, 0.22], 0.92],
   ].map(([k, label, h, ai], i) => {
     const el = document.createElement('div');
-    el.className = 'pt'; el.dataset.k = k; el.innerHTML = `<i></i><span>${label}</span>`; chart.append(el);
-    return { el, h, ai, x: new Spring(h[0], { response: 0.55 + i * 0.04, damping: 0.86 }), y: new Spring(1 - h[1], { response: 0.55 + i * 0.04, damping: 0.86 }) };
+    el.className = 'pt'; el.dataset.k = k; el.style.setProperty('--k', i);
+    // the outer box is placed by the springs, the inner one floats and pops on its own
+    el.innerHTML = `<span class="pt__in"><i></i><span>${label}</span></span>`; chart.append(el);
+    return { el, inner: el.firstElementChild, h, ai, x: new Spring(h[0], { response: 0.55 + i * 0.04, damping: 0.86 }), y: new Spring(1 - h[1], { response: 0.55 + i * 0.04, damping: 0.86 }) };
   });
   [...pts].sort((a, b) => a.ai - b.ai).forEach((p, k) => (p.slot = k));
   let W = 0, H = 0;
@@ -2239,20 +2373,57 @@ function segmented(root, initial, onChange) {
   });
   const measure = () => { W = chart.clientWidth; H = chart.clientHeight; pts.forEach(p => { p.el.dataset.flip = false; p.w = p.el.offsetWidth; flip(p); }); place(); };
   const run = animateSprings(() => pts.flatMap(p => [p.x, p.y]), place);
+
+  /* The axes draw themselves, their labels settle in after them. */
+  function drawAxes(g, delay = 0) {
+    if (reduce) return;
+    $$('line[pathLength]', g).forEach((l, k) => l.animate(
+      [{ strokeDasharray: '1', strokeDashoffset: 1 }, { strokeDasharray: '1', strokeDashoffset: 0 }],
+      { duration: 900, delay: delay + k * 140, easing: OUT, fill: 'backwards' }));
+    $$('.guide', g).forEach(l => l.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 700, delay: delay + 380, fill: 'backwards' }));
+    $$('text', g).forEach((t, k) => t.animate([{ opacity: 0, transform: 'translateY(6px)' }, { opacity: 1, transform: 'none' }],
+      { duration: 600, delay: delay + 260 + k * 70, easing: OUT, fill: 'backwards' }));
+  }
+
+  /* Switching views : the points leave one after the other, in reading order of the new view. */
+  let current = -1, timers = [];
   function view(v) {
-    pts.forEach(p => {
-      if (v === 0) { p.x.to(p.h[0] * 0.9 + 0.03); p.y.to(1 - (p.h[1] * 0.9 + 0.04)); }
-      else { p.x.to(0.04 + p.ai * 0.82); p.y.to(p.slot % 2 ? 0.58 : 0.4); }
-      flip(p);
+    const first = current === -1; current = v;
+    timers.forEach(clearTimeout); timers = [];
+    const order = [...pts].sort((a, b) => (v ? a.ai - b.ai : a.h[0] + a.h[1] - b.h[0] - b.h[1]));
+    order.forEach((p, k) => {
+      const go = () => {
+        if (v === 0) { p.x.to(p.h[0] * 0.9 + 0.03); p.y.to(1 - (p.h[1] * 0.9 + 0.04)); }
+        else { const rows = W < 600 ? [0.45, 0.56, 0.385, 0.63, 0.32, 0.7] : [0.4, 0.58]; p.x.to(0.04 + p.ai * 0.82); p.y.to(rows[p.slot % rows.length]); } // one row each on phones : labels never overlap
+        flip(p); run();
+        if (first) return;
+        if (reduce) p.inner.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 260, easing: 'ease-out' }); // a crossfade, no travel
+        else p.inner.animate([{ scale: 1 }, { scale: 1.12, offset: 0.35 }, { scale: 1 }], { duration: 650, easing: OUT });
+      };
+      if (first || reduce) go(); else timers.push(setTimeout(go, k * 60));
     });
-    $('#axHuman').setAttribute('opacity', v ? 0 : 1); $('#axAI').setAttribute('opacity', v ? 1 : 0);
-    $('#noteL').style.opacity = $('#noteR').style.opacity = v ? 1 : 0;
+    axH.setAttribute('opacity', v ? 0 : 1); axA.setAttribute('opacity', v ? 1 : 0);
+    if (!first) drawAxes(v ? axA : axH, 80);
+    notes.forEach((n, k) => {
+      n.style.opacity = v ? 1 : 0;
+      if (v && !first && !reduce) n.animate([{ opacity: 0, translate: '0 14px' }, { opacity: 1, translate: '0 0' }], { duration: 700, delay: 320 + k * 110, easing: OUT, fill: 'backwards' });
+    });
     swapText($('#diffLede'), v ? "Pour l'IA, un seul axe compte : le déterminisme." : 'Pour un humain, elle monte avec la taille et la complexité.');
-    run();
   }
   new ResizeObserver(measure).observe(chart);
   document.fonts?.ready.then(measure);
   segmented($('#diffToggle'), 0, view);
+
+  /* First time on screen : axes first, then the projects pop in, from the smallest to the largest. */
+  if (reduce) return;
+  chart.classList.add('chart--wait');
+  new IntersectionObserver((es, io) => {
+    if (!es.some(e => e.isIntersecting)) return;
+    io.disconnect(); chart.classList.remove('chart--wait');
+    drawAxes(current ? axA : axH, 150);
+    [...pts].sort((a, b) => a.x.target - a.y.target - (b.x.target - b.y.target)).forEach((p, k) =>
+      p.inner.animate([{ opacity: 0, scale: 0.3 }, { opacity: 1, scale: 1 }], { duration: 720, delay: 520 + k * 100, easing: POP, fill: 'backwards' }));
+  }, { threshold: 0.3 }).observe(chart);
 })();
 
 /* ═══════════════ Production : force-directed graph (Obsidian-like) ═══════════════ */
@@ -2308,81 +2479,129 @@ function segmented(root, initial, onChange) {
     ['aMetre', 'eco'], ['aCctp', 'ent'], ['aConf', 'ctrl'], ['aPermis', 'mairie'], ['aPlan', 'opc'], ['aPlan', 'ent'],
     ['aRendu', 'promo'], ['aRendu', 'immo'], ['aClient', 'mo'], ['aClient', 'syndic'], ['collab', 'model'],
   ];
-  const VIEWS = [{ nodes: PEOPLE, edges: E_BEFORE }, { nodes: [...PEOPLE, ...AI], edges: E_AFTER }];
+  const VIEWS = [PEOPLE, [...PEOPLE, ...AI]];
+  const isAI = id => id === 'model' || /^a[A-Z]/.test(id);
+  // Every link of the "now" view : before, those touching the AI simply have an end missing.
+  const edges = E_AFTER.map(([a, b]) => ({ a, b, ai: isAI(a) || isAI(b), archi: a === 'archi' || b === 'archi', seed: Math.random() }));
+  const INFO = ['Architecte', 'Au centre du projet, il signe et arbitre.'];
 
-  let W = 0, H = 0, dpr = 1, nodes = new Map(), edges = [], view = 1, energy = 1, visible = false;
-  let hover = null, dragN = null;
+  let W = 0, H = 0, dpr = 1, energy = 1, visible = false, now = 0, focusAmt = 0;
+  let hover = null, dragN = null, lastFocus = null;
+  const nodes = new Map();
   const legend = $('#gLegend');
-  legend.innerHTML = Object.values(KIND).map(k => `<span><i style="background:${k.color}"></i>${k.label}</span>`).join('');
+  legend.innerHTML = Object.entries(KIND).map(([kind, k]) => `<span data-kind="${kind}"><i style="background:${k.color}"></i>${k.label}</span>`).join('');
+  const lerp = (a, b, t) => a + (b - a) * t;
+  const back = x => 1 + 2.7 * (x - 1) ** 3 + 1.7 * (x - 1) ** 2; // a node pops in with a slight overshoot
+  const live = n => !n.gone && now >= n.born;
 
+  /* A node is born out of its parent (agents out of the project model, everyone else out of the
+     architect) and, when it leaves, is drawn back into it. Arrivals and departures are staggered,
+     so the first time the graph comes on screen, the whole network unfolds from the architect. */
   function setView(v) {
-    view = v;
-    const { nodes: list, edges: el } = VIEWS[v], keep = new Set(list.map(n => n.id));
-    const archi = nodes.get('archi');
+    const list = VIEWS[v], keep = new Set(list.map(n => n.id));
+    let k = 0;
     list.forEach((n, i) => {
-      if (!nodes.has(n.id)) {
-        const a = (i / list.length) * Math.PI * 2;
-        const ox = archi ? archi.x : W / 2, oy = archi ? archi.y : H / 2;
-        nodes.set(n.id, { ...n, x: ox + Math.cos(a) * 30, y: oy + Math.sin(a) * 30, vx: 0, vy: 0, alpha: 0, gone: false });
-      } else nodes.get(n.id).gone = false;
+      const o = nodes.get(n.id);
+      if (o) { if (o.gone) { o.gone = false; o.born = now; } return; }
+      const from = n.kind === 'agent' ? 'model' : 'archi', p = nodes.get(from) || nodes.get('archi');
+      const ang = (i / list.length) * Math.PI * 2;
+      nodes.set(n.id, {
+        ...n, from, ang, x: (p ? p.x : W / 2) + Math.cos(ang) * 30, y: (p ? p.y : H / 2) + Math.sin(ang) * 30, vx: 0, vy: 0,
+        alpha: 0, gone: false, born: n.kind === 'archi' || reduce ? now : now + 0.1 + k++ * 0.07, d: 1, s: 1, phase: Math.random() * Math.PI * 2,
+      });
     });
-    nodes.forEach(n => { if (!keep.has(n.id)) n.gone = true; });
-    edges = el.map(([a, b]) => ({ a, b, ai: a.startsWith('a') && a !== 'archi' || b.startsWith('a') && b !== 'archi' || a === 'model' || b === 'model' }));
+    [...nodes.values()].filter(n => !keep.has(n.id) && !n.gone).reverse() // the agents first, the model last
+      .forEach((n, j) => { n.gone = true; n.goneAt = now + (reduce ? 0 : j * 0.05); });
+    $$('span', legend).forEach(s => s.classList.toggle('is-off', !v && (s.dataset.kind === 'model' || s.dataset.kind === 'agent')));
     energy = 1; wake();
   }
 
-  function stepSim(dt) {
-    const list = [...nodes.values()];
-    const cx = W / 2, cy = H / 2, k = Math.min(W, H);
+  function stepSim() {
+    const list = [...nodes.values()], on = list.filter(live);
+    const cx = W / 2, cy = H / 2, k = Math.min(W, H), small = W < 600;
     for (const n of list) { n.fx = 0; n.fy = 0; }
-    for (let i = 0; i < list.length; i++) for (let j = i + 1; j < list.length; j++) {
-      const a = list[i], b = list[j]; if (a.gone || b.gone) continue;
+    for (let i = 0; i < on.length; i++) for (let j = i + 1; j < on.length; j++) {
+      const a = on[i], b = on[j];
       let dx = b.x - a.x, dy = b.y - a.y, d2 = dx * dx + dy * dy + 0.01, d = Math.sqrt(d2);
-      const f = (k * k * (W < 600 ? 0.012 : 0.018)) / d2; dx /= d; dy /= d;
+      const f = (k * k * (small ? 0.012 : 0.018)) / d2; dx /= d; dy /= d;
       a.fx -= dx * f; a.fy -= dy * f; b.fx += dx * f; b.fy += dy * f;
     }
     for (const e of edges) {
-      const a = nodes.get(e.a), b = nodes.get(e.b); if (!a || !b) continue;
-      const rest = (a.kind === 'archi' || b.kind === 'archi') ? k * 0.26 : e.ai ? k * 0.16 : k * 0.2;
+      const a = nodes.get(e.a), b = nodes.get(e.b); if (!a || !b || !live(a) || !live(b)) continue;
+      const rest = e.archi ? k * 0.26 : e.ai ? k * 0.16 : k * 0.2;
       const dx = b.x - a.x, dy = b.y - a.y, d = Math.hypot(dx, dy) || 1, f = (d - rest) * 0.02;
       a.fx += dx / d * f; a.fy += dy / d * f; b.fx -= dx / d * f; b.fy -= dy / d * f;
     }
-    let e = 0;
+    let sum = 0;
     for (const n of list) {
-      n.alpha += ((n.gone ? 0 : 1) - n.alpha) * 0.12;
+      const shown = n.gone ? now < n.goneAt : now >= n.born;
+      n.alpha += ((shown ? 1 : 0) - n.alpha) * (reduce ? 1 : 0.12);
       if (n.kind === 'archi') { n.x += (cx - n.x) * 0.2; n.y += (cy - n.y) * 0.2; n.vx = n.vy = 0; continue; } // always centred
+      if (!live(n)) { // waiting to be born next to its parent, or leaving and drawn back into it
+        const p = nodes.get(n.from) || nodes.get('archi');
+        if (p && !n.gone) { n.x = p.x + Math.cos(n.ang) * 30; n.y = p.y + Math.sin(n.ang) * 30; }
+        else if (p && now >= n.goneAt) { n.x = lerp(n.x, p.x, 0.1); n.y = lerp(n.y, p.y, 0.1); }
+        n.vx = n.vy = 0; continue;
+      }
       if (n === dragN) continue;
       n.fx += (cx - n.x) * 0.004; n.fy += (cy - n.y) * 0.004;
+      if (!reduce) { n.fx += Math.cos(now * 0.5 + n.phase) * 0.1; n.fy += Math.sin(now * 0.37 + n.phase * 1.3) * 0.1; } // a slow drift : the network breathes
       n.vx = (n.vx + n.fx) * 0.82; n.vy = (n.vy + n.fy) * 0.82;
-      n.x = clamp(n.x + n.vx, 40, W - 40); n.y = clamp(n.y + n.vy, 96, H - (W < 600 ? 120 : 56));
-      e += Math.abs(n.vx) + Math.abs(n.vy);
+      n.x = clamp(n.x + n.vx, 40, W - 40); n.y = clamp(n.y + n.vy, 96, H - (small ? 120 : 56));
+      sum += Math.abs(n.vx) + Math.abs(n.vy);
     }
-    for (const [id, n] of nodes) if (n.gone && n.alpha < 0.02) nodes.delete(id);
-    energy = e / Math.max(1, list.length);
+    for (const [id, n] of nodes) if (n.gone && now >= n.goneAt && n.alpha < 0.02) nodes.delete(id);
+    energy = sum / Math.max(1, on.length);
   }
 
   function neighbours(id) { const s = new Set([id]); edges.forEach(e => { if (e.a === id) s.add(e.b); if (e.b === id) s.add(e.a); }); return s; }
   function draw() {
     ctx.clearRect(0, 0, W, H);
-    const focus = hover || dragN, near = focus ? neighbours(focus.id) : null;
+    const focus = hover || dragN, small = W < 600;
+    if (focus) lastFocus = focus;
+    // hovering eases in and out : the rest of the graph dims, the node's links light up
+    focusAmt = reduce ? (focus ? 1 : 0) : lerp(focusAmt, focus ? 1 : 0, 0.2);
+    const near = lastFocus ? neighbours(lastFocus.id) : null, fade = near ? focusAmt : 0;
+    for (const n of nodes.values()) {
+      n.d = lerp(1, near && !near.has(n.id) ? 0.25 : 1, fade);
+      n.s = reduce ? (n === focus ? 1.2 : 1) : lerp(n.s, n === focus ? 1.2 : 1, 0.25);
+    }
     for (const e of edges) {
       const a = nodes.get(e.a), b = nodes.get(e.b); if (!a || !b) continue;
-      const lit = near && near.has(a.id) && near.has(b.id) && (a === focus || b === focus);
-      const base = e.ai ? 'rgba(180,98,63,' : 'rgba(247,244,238,';
-      ctx.strokeStyle = base + (lit ? 0.85 : near ? 0.06 : e.ai ? 0.42 : 0.16) * Math.min(a.alpha, b.alpha) + ')';
-      ctx.lineWidth = lit ? 1.8 : e.ai ? 1.3 : 1;
-      ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke();
+      const t = Math.min(a.alpha, b.alpha); if (t < 0.01) continue;
+      const lit = a === lastFocus || b === lastFocus, base = e.ai ? 0.42 : 0.16;
+      const op = lit ? lerp(base, 0.85, fade) : base * (1 - 0.75 * fade);
+      // a link grows out of the end already there, and shrinks back into it
+      const [p, q] = a.alpha >= b.alpha ? [a, b] : [b, a], g = t * t * (3 - 2 * t);
+      ctx.strokeStyle = (e.ai ? 'rgba(180,98,63,' : 'rgba(247,244,238,') + op * t + ')';
+      ctx.lineWidth = lit && fade > 0.5 ? 1.8 : e.ai ? 1.3 : 1;
+      ctx.beginPath(); ctx.moveTo(p.x, p.y); ctx.lineTo(lerp(p.x, q.x, g), lerp(p.y, q.y, g)); ctx.stroke();
+      // exchanges travel along the links : the agents' quick and bright, the architect's slower
+      if (reduce || t < 0.9 || !(e.ai || e.archi)) continue;
+      const [s0, s1] = e.ai || e.seed < 0.5 ? [a, b] : [b, a], u = (now * (e.ai ? 0.42 : 0.16) + e.seed) % 1;
+      const w = Math.sin(Math.PI * u) * (lit ? 1 : 1 - 0.8 * fade) * t;
+      ctx.fillStyle = e.ai ? `rgba(233,183,158,${0.95 * w})` : `rgba(247,244,238,${0.45 * w})`;
+      ctx.beginPath(); ctx.arc(lerp(s0.x, s1.x, u), lerp(s0.y, s1.y, u), e.ai ? 2.4 : 1.8, 0, Math.PI * 2); ctx.fill();
     }
     for (const n of nodes.values()) {
-      const K = KIND[n.kind], dim = near && !near.has(n.id) ? 0.25 : 1, r = K.r * (n === focus ? 1.2 : 1);
-      ctx.globalAlpha = n.alpha * dim;
-      if (n.kind === 'agent' || n.kind === 'archi') { ctx.fillStyle = n.kind === 'agent' ? 'rgba(180,98,63,0.22)' : 'rgba(247,244,238,0.12)'; ctx.beginPath(); ctx.arc(n.x, n.y, r * 1.9, 0, Math.PI * 2); ctx.fill(); }
+      if (n.alpha < 0.01) continue;
+      const K = KIND[n.kind], r = K.r * n.s * (n.gone ? n.alpha : back(Math.min(1, n.alpha)));
+      ctx.globalAlpha = n.alpha * n.d;
+      if (!reduce && (n.kind === 'archi' || n.kind === 'model')) { // a slow pulse from the centre of the project, and from its data
+        const ph = (now / (n.kind === 'archi' ? 2.8 : 2.2) + (n.kind === 'model' ? 0.5 : 0)) % 1;
+        ctx.strokeStyle = n.kind === 'archi' ? `rgba(247,244,238,${0.35 * (1 - ph)})` : `rgba(159,176,143,${0.7 * (1 - ph)})`;
+        ctx.lineWidth = 1.5; ctx.beginPath(); ctx.arc(n.x, n.y, r * (1.15 + ph * 1.4), 0, Math.PI * 2); ctx.stroke();
+      }
+      if (n.kind === 'agent' || n.kind === 'archi') {
+        const glow = reduce ? 1.9 : 1.9 + 0.2 * Math.sin(now * 2.2 + n.phase);
+        ctx.fillStyle = n.kind === 'agent' ? 'rgba(180,98,63,0.22)' : 'rgba(247,244,238,0.12)'; ctx.beginPath(); ctx.arc(n.x, n.y, r * glow, 0, Math.PI * 2); ctx.fill();
+      }
       ctx.fillStyle = K.color; ctx.beginPath(); ctx.arc(n.x, n.y, r, 0, Math.PI * 2); ctx.fill();
-      const big = n.kind === 'archi' || n.kind === 'agent' || n.kind === 'model', small = W < 600;
+      const big = n.kind === 'archi' || n.kind === 'agent' || n.kind === 'model';
       ctx.font = `${big ? 500 : 400} ${small ? 10.5 : 12}px Hanken Grotesk, sans-serif`;
       ctx.textAlign = 'center'; ctx.fillStyle = n.kind === 'agent' ? '#E9B79E' : 'rgba(247,244,238,0.9)';
       if (n.kind === 'archi') { ctx.font = '500 13px Hanken Grotesk, sans-serif'; ctx.fillStyle = COL.ink; ctx.fillText('Architecte', n.x, n.y + 4.5); }
-      else if (!small || big || n === focus || (near && near.has(n.id))) ctx.fillText(n.label, n.x, n.y + r + (small ? 12 : 15));
+      else if (!small || big || n === focus || (near && fade > 0.5 && near.has(n.id))) ctx.fillText(n.label, n.x, n.y + r + (small ? 12 : 15));
     }
     ctx.globalAlpha = 1;
   }
@@ -2391,8 +2610,9 @@ function segmented(root, initial, onChange) {
   function wake() {
     if (looping || !visible) return; looping = true;
     const off = ticker.add(dt => {
-      stepSim(dt); draw();
-      const busy = visible && (energy > 0.02 || dragN || [...nodes.values()].some(n => Math.abs(n.alpha - (n.gone ? 0 : 1)) > 0.02));
+      now += dt; stepSim(); draw();
+      // with motion on, the graph keeps living while it is on screen ; without, it stops once settled
+      const busy = visible && (!reduce || energy > 0.02 || dragN || [...nodes.values()].some(n => Math.abs(n.alpha - (live(n) ? 1 : 0)) > 0.02));
       if (!busy) { looping = false; off(); }
       return busy;
     });
@@ -2401,24 +2621,25 @@ function segmented(root, initial, onChange) {
     dpr = Math.min(devicePixelRatio, 2); const oldW = W || wrap.clientWidth, oldH = H || wrap.clientHeight;
     W = wrap.clientWidth; H = wrap.clientHeight; cvs.width = W * dpr; cvs.height = H * dpr; ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     nodes.forEach(n => { n.x *= W / oldW; n.y *= H / oldH; });
-    if (reduce) { for (let i = 0; i < 400; i++) stepSim(0.016); }
+    if (reduce) { for (let i = 0; i < 400; i++) stepSim(); }
     draw(); wake();
   }
 
   const at = e => { const r = cvs.getBoundingClientRect(); return { x: e.clientX - r.left, y: e.clientY - r.top }; };
-  const hit = p => { let best = null, bd = 1e9; nodes.forEach(n => { if (n.gone) return; const d = Math.hypot(n.x - p.x, n.y - p.y); if (d < KIND[n.kind].r + 12 && d < bd) { bd = d; best = n; } }); return best; };
-  function info(n) { $('#gTitle').textContent = n ? n.label : 'Architecte'; $('#gText').textContent = n ? n.text : 'Au centre du projet, il signe et arbitre.'; }
+  const hit = p => { let best = null, bd = 1e9; nodes.forEach(n => { if (!live(n)) return; const d = Math.hypot(n.x - p.x, n.y - p.y); if (d < KIND[n.kind].r + 12 && d < bd) { bd = d; best = n; } }); return best; };
+  function info(n) { swapText($('#gTitle'), n ? n.label : INFO[0]); swapText($('#gText'), n ? n.text : INFO[1]); }
+  const redraw = () => { if (!looping) draw(); };
   cvs.addEventListener('pointermove', e => {
     const p = at(e);
     if (dragN) { dragN.x = clamp(p.x, 30, W - 30); dragN.y = clamp(p.y, 30, H - 30); energy = 1; wake(); return; }
-    const n = hit(p); if (n !== hover) { hover = n; info(n); draw(); }
+    const n = hit(p); if (n !== hover) { hover = n; info(n); redraw(); }
     cvs.style.cursor = n ? 'grab' : 'default';
   });
-  cvs.addEventListener('pointerleave', () => { if (!dragN) { hover = null; info(null); draw(); } });
+  cvs.addEventListener('pointerleave', () => { if (!dragN) { hover = null; info(null); redraw(); } });
   cvs.addEventListener('pointerdown', e => {
     const n = hit(at(e)); if (!n) return;
     hover = n; info(n);
-    if (n.kind === 'archi') { draw(); return; }
+    if (n.kind === 'archi') { redraw(); return; }
     dragN = n; cvs.setPointerCapture(e.pointerId); e.preventDefault(); wake();
   });
   const drop = () => { if (dragN) { dragN.vx = dragN.vy = 0; dragN = null; energy = 1; wake(); } };
@@ -2582,7 +2803,7 @@ function segmented(root, initial, onChange) {
 /* ═══════════════ Nav : current chapter, mirrored on the tower ═══════════════ */
 (function nav() {
   const links = $$('.bar nav a');
-  const ids = ['accueil', 'intervenants', 'lexique', 'parti', 'agence', 'production', 'cas-pratiques', 'deontologie', 'cloture', 'questions'];
+  const ids = ['accueil', 'intervenants', 'lexique', 'parti', 'agence', 'production', 'cas-pratiques', 'deontologie', 'cloture', 'questions', 'ressources'];
   const io = new IntersectionObserver(ens => ens.forEach(en => {
     if (!en.isIntersecting) return;
     const id = en.target.id;
@@ -2591,6 +2812,40 @@ function segmented(root, initial, onChange) {
   }), { rootMargin: '-45% 0px -50% 0px' });
   ids.forEach(id => io.observe(document.getElementById(id)));
   onVisible($('#cloture'), v => { if (v) $('#cloture').classList.add('is-in'); }, 0.15);
+})();
+</script>
+<script>
+/* ═══════════════ Liens utiles : a page of its own, opened by #liens ═══════════════
+   It lies over the presentation, which keeps its layout (and its 3D scenes their size)
+   underneath, inert. A plain script : it works even when the 3D library cannot load. */
+(function links() {
+  const root = document.documentElement, page = document.getElementById('liens');
+  const behind = [...document.querySelectorAll('body > header, main, body > footer')];
+  const title = document.title;
+  let open = null, fromInside = false;
+  function sync() {
+    const want = location.hash === '#liens';
+    if (want === open) return;
+    open = want;
+    root.classList.toggle('links-open', want);
+    behind.forEach(el => (el.inert = want));
+    document.title = want ? 'Liens utiles · ' + title : title;
+    if (!want) { fromInside = false; return; }
+    page.scrollTop = 0; page.focus({ preventScroll: true });
+    if (!root.classList.contains('motion')) return;
+    page.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 320, easing: 'ease-out' });
+    [...page.querySelectorAll('.links__intro > *, .links__part')].forEach((el, k) => el.animate(
+      [{ opacity: 0, translate: '0 22px' }, { opacity: 1, translate: '0 0' }],
+      { duration: 800, delay: 80 + Math.min(k, 7) * 70, easing: 'cubic-bezier(0.23, 1, 0.32, 1)', fill: 'backwards' }));
+  }
+  addEventListener('hashchange', e => {
+    if (location.hash === '#liens' && new URL(e.oldURL).hash !== '#liens') fromInside = true;
+    sync();
+  });
+  // Opened from the presentation : going back restores the exact place it was opened from.
+  page.querySelectorAll('.links__back').forEach(a => a.addEventListener('click', e => { if (fromInside) { e.preventDefault(); history.back(); } }));
+  addEventListener('keydown', e => { if (open && e.key === 'Escape') page.querySelector('.links__back').click(); });
+  sync();
 })();
 </script>
 </body>
