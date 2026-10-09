@@ -1,6 +1,6 @@
 # L'IA en agence d'architecture — OACI
 
-Site interactif de la présentation « L'architecte comme artisan augmenté », atelier pratique (session 2) de l'Ordre des Architectes de Côte d'Ivoire, 9 octobre 2026.
+Site interactif de la présentation « L'architecte augmenté », atelier pratique (session 2) de l'Ordre des Architectes de Côte d'Ivoire, 9 octobre 2026.
 
 Intervenants : Ange Djoké, Jean-Marc Don Mello, Gaston Koffi.
 
